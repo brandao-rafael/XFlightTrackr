@@ -4,13 +4,14 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:x_flight_trackr/models/trackr_location.dart';
 
 class TrackrMapPage extends StatefulWidget {
   final double lat;
   final double lng;
   final double mag;
 
-  const TrackrMapPage({
+  TrackrMapPage({
     super.key,
     required this.lat,
     required this.lng,
@@ -23,6 +24,7 @@ class TrackrMapPage extends StatefulWidget {
 
 class _TrackrMapPageState extends State<TrackrMapPage> {
   Uint8List? customMarker;
+
   Future<Uint8List?> getBytesFromAsset() async {
     ByteData data = await rootBundle.load('lib/assets/icons/airplane_icon.png');
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
