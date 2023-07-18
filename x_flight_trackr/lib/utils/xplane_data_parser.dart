@@ -21,8 +21,8 @@ class XPlaneDataParser {
     return byteData.getFloat64(0, Endian.little);
   }
 
-  List<dynamic> parseDATA() {
-    List<dynamic> parsedData = [];
+  List<double> parseDATA() {
+    List<double> parsedData = [];
 
     if (parseASCIIString(0, 4) == 'DATA') {
       // parsedData['dataRowIndex'] = parse32BitInt(5);

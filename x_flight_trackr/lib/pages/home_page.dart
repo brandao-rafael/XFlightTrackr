@@ -13,11 +13,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<dynamic> allData = [];
+  List<double> allData = [];
 
   void _init(Datagram datagram) {
     var xpc = XPlaneDataParser(datagram.data);
-    List<dynamic> parsedData;
+    List<double> parsedData;
     parsedData = xpc.parseDATA();
     setState(() {
       allData = parsedData;
@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
             lat: allData.isNotEmpty ? allData[18] : 0.0,
             lng: allData.isNotEmpty ? allData[19] : 0.0,
             mag: allData.isNotEmpty ? allData[9] : 0.0,
+            data: allData,
           );
         },
       ),
