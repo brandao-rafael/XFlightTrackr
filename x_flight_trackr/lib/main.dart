@@ -56,8 +56,9 @@ class _MyAppState extends State<MyApp> {
           }
           snapshot.data!.listen(_init);
           return TrackrMapPage(
-            lat: allData[9] ?? 0.0,
-            lng: allData[10] ?? 0.0,
+            lat: allData.length > 20 ? allData[18] : 0.0,
+            lng: allData.length > 20 ? allData[19] : 0.0,
+            mag: allData.length > 20 ? allData[9] : 0.0,
           );
         },
       ),

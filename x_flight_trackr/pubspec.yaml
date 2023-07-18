@@ -24,7 +24,7 @@ flutter:
 
   assets:
     - .env
-  #   - images/a_dot_burr.jpeg
+    - lib/assets/icons/airplane_icon.png
   #   - images/a_dot_ham.jpeg
 
   # fonts:
