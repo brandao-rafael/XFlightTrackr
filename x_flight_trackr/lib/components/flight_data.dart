@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_flight_trackr/components/air_plane_main_data.dart';
 import 'package:x_flight_trackr/components/gear_display.dart';
 import 'package:x_flight_trackr/components/local_time.dart';
 
@@ -19,56 +20,7 @@ class FlightData extends StatelessWidget {
           child: Column(
             children: [
               LocalTime(decimalHours: data[6]),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Airspeed',
-                      ),
-                      Text(
-                        '${data[9].toStringAsFixed(0)} kt',
-                      ),
-                      Text(
-                        '.mach: ${data[18].toStringAsFixed(2)}',
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: 1,
-                    height: 50,
-                    color: Colors.white,
-                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                  ),
-                  Column(
-                    children: [
-                      const Text(
-                        'Heading',
-                        textAlign: TextAlign.center,
-                      ),
-                      Text('${data[57].toStringAsFixed(0)}°'),
-                    ],
-                  ),
-                  Container(
-                    width: 1,
-                    height: 50,
-                    color: Colors.white,
-                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                  ),
-                  Column(
-                    children: [
-                      const Text(
-                        'Altitude',
-                        textAlign: TextAlign.center,
-                      ),
-                      Text('${(data[77]).toStringAsFixed(0)} ft'),
-                    ],
-                  )
-                ],
-              ),
+              AirPlaneMainData(data: data),
               Container(
                   color: Colors.white,
                   child: GearDisplay(gearPosition: data[135]))
