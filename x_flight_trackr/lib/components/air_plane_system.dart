@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_flight_trackr/components/flaps_display.dart';
 import 'package:x_flight_trackr/components/gear_display.dart';
 
 class AirPlaneSystem extends StatelessWidget {
@@ -11,6 +12,7 @@ class AirPlaneSystem extends StatelessWidget {
     return Row(
       children: [
         GearDisplay(gearPosition: data[135]),
+        FlapsDisplay(handflapsPosition: data[39], flapsPosition: data[40]),
       ],
     );
   }
