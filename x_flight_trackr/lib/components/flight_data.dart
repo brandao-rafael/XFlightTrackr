@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/components/gear_display.dart';
+import 'package:x_flight_trackr/components/local_time.dart';
 
 class FlightData extends StatelessWidget {
   final List<double> data;
 
   const FlightData({required this.data, super.key});
-
-  String decimalHoursToHoursAndMinutes(double decimalHours) {
-    int hours = decimalHours.toInt();
-    int minutes = ((decimalHours - hours) * 60).round();
-
-    return '$hours:$minutes';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +18,7 @@ class FlightData extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Text(decimalHoursToHoursAndMinutes(data[6])),
+              LocalTime(decimalHours: data[6]),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
