@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/components/air_plane_main_data.dart';
-import 'package:x_flight_trackr/components/gear_display.dart';
+import 'package:x_flight_trackr/components/air_plane_system.dart';
 import 'package:x_flight_trackr/components/local_time.dart';
 
 class FlightData extends StatelessWidget {
@@ -21,9 +21,7 @@ class FlightData extends StatelessWidget {
             children: [
               LocalTime(decimalHours: data[6]),
               AirPlaneMainData(data: data),
-              Container(
-                  color: Colors.white,
-                  child: GearDisplay(gearPosition: data[135]))
+              AirPlaneSystem(data: data),
             ],
           )),
     );
