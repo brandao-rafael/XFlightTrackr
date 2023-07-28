@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
-class FlapsDisplay extends StatelessWidget {
-  final double handflapsPosition;
-  final double flapsPosition;
-  const FlapsDisplay(
+class BarDisplay extends StatelessWidget {
+  final String title;
+  final double handsPosition;
+  final double realPosition;
+  const BarDisplay(
       {super.key,
-      required this.handflapsPosition,
-      required this.flapsPosition});
+      required this.handsPosition,
+      required this.realPosition,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text('Flaps'),
+        Text(title),
         Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
@@ -23,12 +26,12 @@ class FlapsDisplay extends StatelessWidget {
             ),
             Container(
               color: Colors.amber,
-              height: handflapsPosition * 50,
+              height: handsPosition * 50,
               width: 10,
             ),
             Container(
               color: Colors.green,
-              height: flapsPosition * 50,
+              height: realPosition * 50,
               width: 10,
             )
           ],
