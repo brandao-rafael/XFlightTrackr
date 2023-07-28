@@ -43,9 +43,9 @@ class _HomePageState extends State<HomePage> {
           }
           snapshot.data!.listen(_init);
           return TrackrMapPage(
-            lat: allData.isNotEmpty ? allData[18] : 0.0,
-            lng: allData.isNotEmpty ? allData[19] : 0.0,
-            mag: allData.isNotEmpty ? allData[9] : 0.0,
+            lat: allData.isNotEmpty ? allData[72] : 0.0,
+            lng: allData.isNotEmpty ? allData[73] : 0.0,
+            mag: allData.isNotEmpty ? allData[57] : 0.0,
             data: allData,
           );
         },

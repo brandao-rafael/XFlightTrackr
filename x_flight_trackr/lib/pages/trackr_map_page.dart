@@ -36,6 +36,13 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
         .asUint8List();
   }
 
+  String decimalHoursToHoursAndMinutes(double decimalHours) {
+    int hours = decimalHours.toInt();
+    int minutes = ((decimalHours - hours) * 60).round();
+
+    return '$hours:$minutes';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -56,6 +63,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
       body: Stack(
         children: [
           GoogleMap(
+            zoomControlsEnabled: false,
             initialCameraPosition: CameraPosition(
               target: LatLng(widget.lat, widget.lng),
             ),
@@ -70,21 +78,87 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
               ),
             },
           ),
-          Positioned(
-            top: 0,
-            child: Container(
-                color: const Color.fromRGBO(255, 255, 255, 0.498),
-                padding: const EdgeInsets.all(8.0),
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    Text('Airspeed: ${widget.data[0].toStringAsFixed(0)} kias'),
-                    Text('Altitude: ${widget.data[23].toStringAsFixed(0)} ft'),
-                    Text('Heading: ${widget.data[9].toStringAsFixed(0)}°')
-                  ],
-                )),
-          )
+          if (widget.data.isNotEmpty)
+            Positioned(
+              bottom: 0,
+              child: Container(
+                  color: const ui.Color.fromARGB(125, 0, 0, 0),
+                  padding: const EdgeInsets.all(8.0),
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Text(decimalHoursToHoursAndMinutes(widget.data[6])),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Airspeed',
+                              ),
+                              Text(
+                                '${widget.data[9].toStringAsFixed(0)} kt',
+                              ),
+                              Text(
+                                '.mach: ${widget.data[18].toStringAsFixed(2)}',
+                              ),
+                            ],
+                          ),
+                          Container(
+                            width: 1,
+                            height: 50,
+                            color: Colors.white,
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                          ),
+                          Column(
+                            children: [
+                              const Text(
+                                'Heading',
+                                textAlign: TextAlign.center,
+                              ),
+                              Text('${widget.data[57].toStringAsFixed(0)}°'),
+                            ],
+                          ),
+                          Container(
+                            width: 1,
+                            height: 50,
+                            color: Colors.white,
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                          ),
+                          Column(
+                            children: [
+                              const Text(
+                                'Altitude',
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                  '${(widget.data[77]).toStringAsFixed(0)} ft'),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  )),
+            )
+          else
+            Positioned(
+              bottom: 0,
+              child: Container(
+                  color: const Color.fromRGBO(255, 255, 255, 0.498),
+                  padding: const EdgeInsets.all(8.0),
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Column(
+                    children: [
+                      Text('Airspeed: 0 kias'),
+                      Text('Altitude: 0 ft'),
+                      Text('Heading: 0°')
+                    ],
+                  )),
+            )
         ],
       ),
     );
