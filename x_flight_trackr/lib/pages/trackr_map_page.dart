@@ -36,6 +36,16 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
         .asUint8List();
   }
 
+  MaterialColor getGearColor() {
+    if (widget.data[135] == 1) {
+      return Colors.green;
+    } else if (widget.data[135] == 0) {
+      return Colors.red;
+    } else {
+      return Colors.amber;
+    }
+  }
+
   String decimalHoursToHoursAndMinutes(double decimalHours) {
     int hours = decimalHours.toInt();
     int minutes = ((decimalHours - hours) * 60).round();
@@ -72,7 +82,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
                 markerId: const MarkerId('1'),
                 position: LatLng(widget.lat, widget.lng),
                 rotation: widget.mag - 90,
-                icon: customMarker!.isNotEmpty
+                icon: customMarker != null && customMarker!.isNotEmpty
                     ? BitmapDescriptor.fromBytes(customMarker!)
                     : BitmapDescriptor.defaultMarker,
               ),
@@ -84,7 +94,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
               child: Container(
                   color: const ui.Color.fromARGB(125, 0, 0, 0),
                   padding: const EdgeInsets.all(8.0),
-                  height: 100,
+                  height: 200,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
@@ -140,6 +150,45 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
                           )
                         ],
                       ),
+                      Container(
+                        color: Colors.white,
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text('Gear'),
+                                Container(
+                                  height: 20,
+                                  margin: const EdgeInsets.all(2),
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                      color: getGearColor(),
+                                      shape: BoxShape.circle),
+                                ),
+                                Row(children: [
+                                  Container(
+                                    height: 20,
+                                    margin: const EdgeInsets.all(2),
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        color: getGearColor(),
+                                        shape: BoxShape.circle),
+                                  ),
+                                  Container(
+                                    height: 20,
+                                    margin: const EdgeInsets.all(2),
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        color: getGearColor(),
+                                        shape: BoxShape.circle),
+                                  ),
+                                ])
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   )),
             )
@@ -151,13 +200,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
                   padding: const EdgeInsets.all(8.0),
                   height: 100,
                   width: MediaQuery.of(context).size.width,
-                  child: const Column(
-                    children: [
-                      Text('Airspeed: 0 kias'),
-                      Text('Altitude: 0 ft'),
-                      Text('Heading: 0°')
-                    ],
-                  )),
+                  child: const Text('No data available')),
             )
         ],
       ),
