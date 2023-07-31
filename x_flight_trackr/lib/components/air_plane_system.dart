@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/components/bar_display.dart';
 import 'package:x_flight_trackr/components/gear_display.dart';
-import 'package:x_flight_trackr/components/pitch_roll_display.dart';
+import 'package:x_flight_trackr/components/wheel_brakes_display.dart';
 
 class AirPlaneSystem extends StatelessWidget {
   final List<double> data;
@@ -21,6 +21,7 @@ class AirPlaneSystem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GearDisplay(gearPosition: data[135]),
+          WheelBrakesDisplay(wheelBrakes: data[46]),
           BarDisplay(
             title: 'Flaps',
             handsPosition: data[39],
@@ -36,7 +37,6 @@ class AirPlaneSystem extends StatelessWidget {
             handsPosition: data[117],
             realPosition: data[126],
           ),
-          PitRollDisplay(pitch: data[54], roll: data[55]),
         ],
       ),
     );

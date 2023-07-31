@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:x_flight_trackr/components/pitch_roll_display.dart';
+import 'package:x_flight_trackr/components/vertical_line.dart';
 
 class AirPlaneMainData extends StatelessWidget {
   final List<double> data;
@@ -25,12 +27,7 @@ class AirPlaneMainData extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          width: 1,
-          height: 50,
-          color: Colors.white,
-          margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        ),
+        const VerticalLine(),
         Column(
           children: [
             const Text(
@@ -40,12 +37,7 @@ class AirPlaneMainData extends StatelessWidget {
             Text('${data[57].toStringAsFixed(0)}°'),
           ],
         ),
-        Container(
-          width: 1,
-          height: 50,
-          color: Colors.white,
-          margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        ),
+        const VerticalLine(),
         Column(
           children: [
             const Text(
@@ -54,7 +46,9 @@ class AirPlaneMainData extends StatelessWidget {
             ),
             Text('${(data[77]).toStringAsFixed(0)} ft'),
           ],
-        )
+        ),
+        const VerticalLine(),
+        PitRollDisplay(pitch: data[54], roll: data[55]),
       ],
     );
   }

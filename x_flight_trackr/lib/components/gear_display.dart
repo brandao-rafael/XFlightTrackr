@@ -24,7 +24,7 @@ class GearDisplay extends StatelessWidget {
           children: [
             const Text('Gear'),
             Container(
-              height: 20,
+              height: 22,
               margin: const EdgeInsets.all(2),
               width: 20,
               decoration:
@@ -32,14 +32,14 @@ class GearDisplay extends StatelessWidget {
             ),
             Row(children: [
               Container(
-                height: 20,
+                height: 22,
                 margin: const EdgeInsets.all(2),
                 width: 20,
                 decoration: BoxDecoration(
                     color: getGearColor(), shape: BoxShape.circle),
               ),
               Container(
-                height: 20,
+                height: 22,
                 margin: const EdgeInsets.all(2),
                 width: 20,
                 decoration: BoxDecoration(

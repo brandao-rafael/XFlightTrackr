@@ -19,7 +19,7 @@ class SelectMapType extends StatelessWidget {
           children: [
             TextButton.icon(
               onPressed: () => setMapType(MapType.normal),
-              icon: const Icon(Icons.map),
+              icon: const Icon(Icons.map_outlined),
               label: const Text('Normal'),
             ),
             TextButton.icon(
@@ -34,7 +34,7 @@ class SelectMapType extends StatelessWidget {
             ),
             TextButton.icon(
               onPressed: () => setMapType(MapType.hybrid),
-              icon: const Icon(Icons.map_outlined),
+              icon: const Icon(Icons.map),
               label: const Text(
                 'Hybrid',
               ),
