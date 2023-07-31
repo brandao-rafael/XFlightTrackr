@@ -15,7 +15,7 @@ class WheelBrakesDisplay extends StatelessWidget {
           margin: const EdgeInsets.all(2),
           width: 20,
           decoration: BoxDecoration(
-            color: wheelBrakes.toInt() == 1 ? Colors.red : Colors.green,
+            color: wheelBrakes.toInt() == 1 ? Colors.green : Colors.red,
           ),
           child: Text(
             wheelBrakes.toInt() == 1 ? 'ON' : 'OFF',

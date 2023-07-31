@@ -32,7 +32,7 @@ class BarDisplay extends StatelessWidget {
                   height: (handsPosition * 50) > 50 ? 50 : handsPosition * 50,
                   width: 10,
                   child: const Text(
-                    'R',
+                    'H',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
@@ -42,7 +42,7 @@ class BarDisplay extends StatelessWidget {
                   height: (realPosition * 50) > 50 ? 50 : realPosition * 50,
                   width: 10,
                   child: const Text(
-                    'H',
+                    'R',
                     style: TextStyle(color: Colors.greenAccent),
                   ),
                 )
