@@ -20,19 +20,31 @@ class BarDisplay extends StatelessWidget {
           alignment: AlignmentDirectional.bottomCenter,
           children: [
             Container(
-              color: Colors.white,
+              color: Colors.white70,
               height: 50,
-              width: 10,
+              width: 20,
             ),
-            Container(
-              color: Colors.yellow,
-              height: handsPosition * 50,
-              width: 10,
-            ),
-            Container(
-              color: Colors.green,
-              height: realPosition * 50,
-              width: 10,
+            Row(
+              children: [
+                Container(
+                  color: Colors.blue[100],
+                  alignment: AlignmentDirectional.center,
+                  height: (handsPosition * 50) > 50 ? 50 : handsPosition * 50,
+                  width: 10,
+                  child: const Text(
+                    'R',
+                  ),
+                ),
+                Container(
+                  color: Colors.green,
+                  alignment: AlignmentDirectional.center,
+                  height: (realPosition * 50) > 50 ? 50 : realPosition * 50,
+                  width: 10,
+                  child: const Text(
+                    'H',
+                  ),
+                )
+              ],
             )
           ],
         )
