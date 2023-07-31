@@ -11,7 +11,7 @@ class GearDisplay extends StatelessWidget {
     } else if (gearPosition == 0) {
       return Colors.red;
     } else {
-      return Colors.amber;
+      return Colors.yellow;
     }
   }
 

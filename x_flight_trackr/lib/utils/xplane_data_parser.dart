@@ -25,7 +25,6 @@ class XPlaneDataParser {
     List<double> parsedData = [];
 
     if (parseASCIIString(0, 4) == 'DATA') {
-      // parsedData['dataRowIndex'] = parse32BitInt(5);
       List<double> values = [];
       for (int i = 0; i < (data.length - 9) ~/ 4; i++) {
         values.add(parse32BitFloat(9 + i * 4));

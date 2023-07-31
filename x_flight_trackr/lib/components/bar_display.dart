@@ -25,7 +25,7 @@ class BarDisplay extends StatelessWidget {
               width: 10,
             ),
             Container(
-              color: Colors.amber,
+              color: Colors.yellow,
               height: handsPosition * 50,
               width: 10,
             ),
