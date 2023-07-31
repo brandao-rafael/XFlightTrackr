@@ -51,7 +51,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trackr Map'),
+        title: const Text('XTrackr Map'),
         centerTitle: true,
       ),
       body: Stack(

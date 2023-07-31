@@ -33,6 +33,7 @@ class BarDisplay extends StatelessWidget {
                   width: 10,
                   child: const Text(
                     'R',
+                    style: TextStyle(color: Colors.blue),
                   ),
                 ),
                 Container(
@@ -42,6 +43,7 @@ class BarDisplay extends StatelessWidget {
                   width: 10,
                   child: const Text(
                     'H',
+                    style: TextStyle(color: Colors.greenAccent),
                   ),
                 )
               ],
