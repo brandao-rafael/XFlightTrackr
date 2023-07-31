@@ -31,6 +31,11 @@ class _HomePageState extends State<HomePage> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all(Colors.blueAccent[700]),
+          ),
+        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.lightBlue,
           foregroundColor: Colors.white,

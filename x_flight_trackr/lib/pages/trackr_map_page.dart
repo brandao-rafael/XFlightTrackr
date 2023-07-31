@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:x_flight_trackr/components/flight_data.dart';
+import 'package:x_flight_trackr/components/select_map_type.dart';
 
 class TrackrMapPage extends StatefulWidget {
   final double lat;
@@ -26,6 +27,7 @@ class TrackrMapPage extends StatefulWidget {
 
 class _TrackrMapPageState extends State<TrackrMapPage> {
   Uint8List? customMarker;
+  MapType _currentMapType = MapType.terrain;
 
   Future<Uint8List?> getBytesFromAsset() async {
     ByteData data = await rootBundle.load('lib/assets/icons/airplane_icon.png');
@@ -35,6 +37,12 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
         ?.buffer
         .asUint8List();
+  }
+
+  void setMapType(MapType type) {
+    setState(() {
+      _currentMapType = type;
+    });
   }
 
   @override
@@ -57,6 +65,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
       body: Stack(
         children: [
           GoogleMap(
+            mapType: _currentMapType,
             zoomControlsEnabled: false,
             initialCameraPosition: CameraPosition(
               target: LatLng(widget.lat, widget.lng),
@@ -72,6 +81,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
               ),
             },
           ),
+          SelectMapType(setMapType: setMapType),
           if (widget.data.isNotEmpty)
             FlightData(data: widget.data)
           else

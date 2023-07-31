@@ -14,7 +14,9 @@ class AirPlaneSystem extends StatelessWidget {
       color: Colors.black12,
       padding: const EdgeInsets.all(10),
       width: double.infinity,
-      margin: const EdgeInsets.all(0),
+      margin: const EdgeInsets.only(
+        top: 10,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
