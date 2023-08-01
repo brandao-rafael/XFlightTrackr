@@ -12,6 +12,16 @@ class BarDisplay extends StatelessWidget {
     required this.title,
   }) : super(key: key);
 
+  double _positionToValue(double value) {
+    if (value < 0) {
+      return 0;
+    } else if (value > 1) {
+      return 50;
+    } else {
+      return value * 50;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -61,7 +71,7 @@ class BarDisplay extends StatelessWidget {
     return Container(
       color: color,
       alignment: AlignmentDirectional.center,
-      height: (position * 50) > 50 ? 50 : position * 50,
+      height: _positionToValue(position),
       width: 10,
       child: Text(
         text,
