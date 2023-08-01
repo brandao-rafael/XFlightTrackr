@@ -7,6 +7,12 @@ class AirPlaneMainData extends StatelessWidget {
 
   const AirPlaneMainData({super.key, required this.data});
 
+  // void getDataEnumerated() {
+  //   for (var i = 0; i < data.length; i++) {
+  //     print('$i: ${data[i]}');
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,10 +26,10 @@ class AirPlaneMainData extends StatelessWidget {
               'Airspeed',
             ),
             Text(
-              '${data[9].toStringAsFixed(0)} kt',
+              '${data[27].toStringAsFixed(0)} kt',
             ),
             Text(
-              '.mach: ${data[18].toStringAsFixed(2)}',
+              '.mach: ${data[36].toStringAsFixed(3)}',
             ),
           ],
         ),
@@ -34,7 +40,7 @@ class AirPlaneMainData extends StatelessWidget {
               'Heading',
               textAlign: TextAlign.center,
             ),
-            Text('${data[57].toStringAsFixed(0)}°'),
+            Text('${data[147].toStringAsFixed(0)}°'),
           ],
         ),
         const VerticalLine(),
@@ -44,11 +50,11 @@ class AirPlaneMainData extends StatelessWidget {
               'Altitude',
               textAlign: TextAlign.center,
             ),
-            Text('${(data[77]).toStringAsFixed(0)} ft'),
+            Text('${(data[176]).toStringAsFixed(0)} ft'),
           ],
         ),
         const VerticalLine(),
-        PitRollDisplay(pitch: data[54], roll: data[55]),
+        PitRollDisplay(pitch: data[144], roll: data[145]),
       ],
     );
   }

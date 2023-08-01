@@ -20,7 +20,7 @@ class FlightData extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              LocalTime(decimalHours: data[6]),
+              LocalTime(decimalHours: data[15]),
               const HorizontalLine(),
               AirPlaneMainData(data: data),
               const HorizontalLine(),
