@@ -1,4 +1,4 @@
-# XFlight Trackr - Primeira Versão
+# XFlight Trackr - V1.0.0
 
 ## Visão Geral
 O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetivo fornecer uma experiência aprimorada para os entusiastas da aviação que utilizam o simulador de voo Xplane-11. Esta é a primeira versão da aplicação, na qual você poderá se conectar ao Xplane-11 e acompanhar informações cruciais do voo em andamento, detalhes da aeronave e sua localização em tempo real no mapa.
