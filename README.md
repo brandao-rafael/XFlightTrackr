@@ -6,16 +6,16 @@ O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetiv
 ## Funcionalidades Principais
 Conexão com o simulador de voo Xplane-11 para obter dados em tempo real do voo.
 Exibição das informações principais do voo, como altitude, velocidade, direção, entre outras.
-Visualização dos detalhes da aeronave, incluindo modelo, fabricante e identificação.
 Acompanhamento da localização da aeronave no mapa em tempo real, com opções para escolher o estilo do mapa desejado.
 Próximas Atualizações
 Para as próximas versões do XFlight Trackr, planejamos adicionar as seguintes funcionalidades:
 
-## Controle dos sistemas da aeronave, permitindo maior interatividade durante o voo.
-Conexão com a flightplandatabase para buscar e importar rotas de voo.
-Informações adicionais detalhadas sobre o voo e sistemas da aeronave.
-Comandos do piloto automático para facilitar a configuração durante o voo.
-Como Contribuir
+- Controle dos sistemas da aeronave, permitindo maior interatividade durante o voo.
+- Conexão com a flightplandatabase para buscar e importar rotas de voo.
+- Informações adicionais detalhadas sobre o voo e sistemas da aeronave.
+- Comandos do piloto automático para facilitar a configuração durante o voo.
+
+## Como Contribuir
 Se você é um desenvolvedor Flutter ou tem experiência em aviação e deseja contribuir para o projeto, ficaremos felizes em receber sua ajuda! Basta fazer um fork deste repositório, implementar suas melhorias e enviar um pull request.
 
 ## Instalação
