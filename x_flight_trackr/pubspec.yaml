@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.3.1
   flutter_dotenv: ^5.1.0
+  udp: ^5.0.3
 
 dev_dependencies:
   flutter_test:
@@ -23,7 +24,7 @@ flutter:
 
   assets:
     - .env
-  #   - images/a_dot_burr.jpeg
+    - lib/assets/icons/airplane_icon.png
   #   - images/a_dot_ham.jpeg
 
   # fonts:
