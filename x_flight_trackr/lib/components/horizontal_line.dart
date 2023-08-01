@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HorizontalLine extends StatelessWidget {
-  const HorizontalLine({super.key});
+  const HorizontalLine({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

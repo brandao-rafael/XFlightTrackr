@@ -4,7 +4,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class SelectMapType extends StatelessWidget {
   final void Function(MapType) setMapType;
 
-  const SelectMapType({super.key, required this.setMapType});
+  const SelectMapType({
+    Key? key,
+    required this.setMapType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,31 +20,41 @@ class SelectMapType extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton.icon(
+            _buildTextButton(
               onPressed: () => setMapType(MapType.normal),
-              icon: const Icon(Icons.map_outlined),
-              label: const Text('Normal'),
+              icon: Icons.map_outlined,
+              label: 'Normal',
             ),
-            TextButton.icon(
+            _buildTextButton(
               onPressed: () => setMapType(MapType.satellite),
-              icon: const Icon(Icons.satellite),
-              label: const Text('Satellite'),
+              icon: Icons.satellite,
+              label: 'Satellite',
             ),
-            TextButton.icon(
+            _buildTextButton(
               onPressed: () => setMapType(MapType.terrain),
-              icon: const Icon(Icons.terrain),
-              label: const Text('Terrain'),
+              icon: Icons.terrain,
+              label: 'Terrain',
             ),
-            TextButton.icon(
+            _buildTextButton(
               onPressed: () => setMapType(MapType.hybrid),
-              icon: const Icon(Icons.map),
-              label: const Text(
-                'Hybrid',
-              ),
-            )
+              icon: Icons.map,
+              label: 'Hybrid',
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  TextButton _buildTextButton({
+    required void Function() onPressed,
+    required IconData icon,
+    required String label,
+  }) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label),
     );
   }
 }

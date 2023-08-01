@@ -7,7 +7,10 @@ import 'package:x_flight_trackr/components/local_time.dart';
 class FlightData extends StatelessWidget {
   final List<double> data;
 
-  const FlightData({required this.data, super.key});
+  const FlightData({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

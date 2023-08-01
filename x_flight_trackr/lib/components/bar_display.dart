@@ -4,11 +4,13 @@ class BarDisplay extends StatelessWidget {
   final String title;
   final double handsPosition;
   final double realPosition;
-  const BarDisplay(
-      {super.key,
-      required this.handsPosition,
-      required this.realPosition,
-      required this.title});
+
+  const BarDisplay({
+    Key? key,
+    required this.handsPosition,
+    required this.realPosition,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,38 +21,52 @@ class BarDisplay extends StatelessWidget {
         Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Container(
-              color: Colors.white70,
-              height: 50,
-              width: 20,
-            ),
+            _buildBarContainer(),
             Row(
               children: [
-                Container(
-                  color: Colors.blue[100],
-                  alignment: AlignmentDirectional.center,
-                  height: (handsPosition * 50) > 50 ? 50 : handsPosition * 50,
-                  width: 10,
-                  child: const Text(
-                    'H',
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                _buildIndicatorContainer(
+                  color: Colors.blue[100]!,
+                  text: 'H',
+                  textColor: Colors.blue,
+                  position: handsPosition,
                 ),
-                Container(
+                _buildIndicatorContainer(
                   color: Colors.green,
-                  alignment: AlignmentDirectional.center,
-                  height: (realPosition * 50) > 50 ? 50 : realPosition * 50,
-                  width: 10,
-                  child: const Text(
-                    'R',
-                    style: TextStyle(color: Colors.greenAccent),
-                  ),
-                )
+                  text: 'R',
+                  textColor: Colors.greenAccent,
+                  position: realPosition,
+                ),
               ],
-            )
+            ),
           ],
-        )
+        ),
       ],
+    );
+  }
+
+  Container _buildBarContainer() {
+    return Container(
+      color: Colors.white70,
+      height: 50,
+      width: 20,
+    );
+  }
+
+  Container _buildIndicatorContainer({
+    required Color color,
+    required String text,
+    required Color textColor,
+    required double position,
+  }) {
+    return Container(
+      color: color,
+      alignment: AlignmentDirectional.center,
+      height: (position * 50) > 50 ? 50 : position * 50,
+      width: 10,
+      child: Text(
+        text,
+        style: TextStyle(color: textColor),
+      ),
     );
   }
 }

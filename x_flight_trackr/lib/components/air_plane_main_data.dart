@@ -5,13 +5,10 @@ import 'package:x_flight_trackr/components/vertical_line.dart';
 class AirPlaneMainData extends StatelessWidget {
   final List<double> data;
 
-  const AirPlaneMainData({super.key, required this.data});
-
-  // void getDataEnumerated() {
-  //   for (var i = 0; i < data.length; i++) {
-  //     print('$i: ${data[i]}');
-  //   }
-  // }
+  const AirPlaneMainData({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,42 +16,42 @@ class AirPlaneMainData extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Airspeed',
-            ),
-            Text(
-              '${data[27].toStringAsFixed(0)} kt',
-            ),
-            Text(
-              '.mach: ${data[36].toStringAsFixed(3)}',
-            ),
-          ],
-        ),
+        _buildAirspeedColumn(),
         const VerticalLine(),
-        Column(
-          children: [
-            const Text(
-              'Heading',
-              textAlign: TextAlign.center,
-            ),
-            Text('${data[147].toStringAsFixed(0)}°'),
-          ],
-        ),
+        _buildHeadingColumn(),
         const VerticalLine(),
-        Column(
-          children: [
-            const Text(
-              'Altitude',
-              textAlign: TextAlign.center,
-            ),
-            Text('${(data[176]).toStringAsFixed(0)} ft'),
-          ],
-        ),
+        _buildAltitudeColumn(),
         const VerticalLine(),
         PitRollDisplay(pitch: data[144], roll: data[145]),
+      ],
+    );
+  }
+
+  Column _buildAirspeedColumn() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Text('Airspeed'),
+        Text('${data[27].toStringAsFixed(0)} kt'),
+        Text('.mach: ${data[36].toStringAsFixed(3)}'),
+      ],
+    );
+  }
+
+  Column _buildHeadingColumn() {
+    return Column(
+      children: [
+        const Text('Heading', textAlign: TextAlign.center),
+        Text('${data[147].toStringAsFixed(0)}°'),
+      ],
+    );
+  }
+
+  Column _buildAltitudeColumn() {
+    return Column(
+      children: [
+        const Text('Altitude', textAlign: TextAlign.center),
+        Text('${(data[176]).toStringAsFixed(0)} ft'),
       ],
     );
   }

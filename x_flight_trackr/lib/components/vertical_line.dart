@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VerticalLine extends StatelessWidget {
-  const VerticalLine({super.key});
+  const VerticalLine({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

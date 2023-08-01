@@ -6,7 +6,10 @@ import 'package:x_flight_trackr/components/wheel_brakes_display.dart';
 class AirPlaneSystem extends StatelessWidget {
   final List<double> data;
 
-  const AirPlaneSystem({super.key, required this.data});
+  const AirPlaneSystem({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,31 +17,26 @@ class AirPlaneSystem extends StatelessWidget {
       color: Colors.black12,
       padding: const EdgeInsets.all(10),
       width: double.infinity,
-      margin: const EdgeInsets.only(
-        top: 10,
-      ),
+      margin: const EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GearDisplay(gearPosition: data[585]),
           WheelBrakesDisplay(wheelBrakes: data[118]),
-          BarDisplay(
-            title: 'Flaps',
-            handsPosition: data[111],
-            realPosition: data[112],
-          ),
-          BarDisplay(
-            title: 'Speedbrakes',
-            handsPosition: data[114],
-            realPosition: data[115],
-          ),
-          BarDisplay(
-            title: 'Throttle',
-            handsPosition: data[216],
-            realPosition: data[225],
-          ),
+          _buildBarDisplay('Flaps', data[111], data[112]),
+          _buildBarDisplay('Speedbrakes', data[114], data[115]),
+          _buildBarDisplay('Throttle', data[216], data[225]),
         ],
       ),
+    );
+  }
+
+  BarDisplay _buildBarDisplay(
+      String title, double handsPosition, double realPosition) {
+    return BarDisplay(
+      title: title,
+      handsPosition: handsPosition,
+      realPosition: realPosition,
     );
   }
 }

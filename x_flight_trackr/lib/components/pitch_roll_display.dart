@@ -4,7 +4,11 @@ class PitRollDisplay extends StatelessWidget {
   final double pitch;
   final double roll;
 
-  const PitRollDisplay({super.key, required this.pitch, required this.roll});
+  const PitRollDisplay({
+    Key? key,
+    required this.pitch,
+    required this.roll,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +16,13 @@ class PitRollDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Pitch: ${pitch.toStringAsFixed(0)}°'),
-        Text('Roll: ${roll.toStringAsFixed(0)}°'),
+        _buildDisplayText('Pitch', pitch),
+        _buildDisplayText('Roll', roll),
       ],
     );
+  }
+
+  Text _buildDisplayText(String label, double value) {
+    return Text('$label: ${value.toStringAsFixed(0)}°');
   }
 }
