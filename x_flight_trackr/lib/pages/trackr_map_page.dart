@@ -31,21 +31,21 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
   @override
   void initState() {
     super.initState();
-    _loadCustomMarker();
+    getBytesFromAsset().then((value) {
+      setState(() {
+        _customMarker = value;
+      });
+    });
   }
 
-  Future<void> _loadCustomMarker() async {
+  Future<Uint8List?> getBytesFromAsset() async {
     ByteData data = await rootBundle.load('lib/assets/icons/airplane_icon.png');
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
         targetWidth: 128);
     ui.FrameInfo fi = await codec.getNextFrame();
-    Uint8List? markerBytes =
-        (await fi.image.toByteData(format: ui.ImageByteFormat.png))
-            ?.buffer
-            .asUint8List();
-    setState(() {
-      _customMarker = markerBytes;
-    });
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        ?.buffer
+        .asUint8List();
   }
 
   void _setMapType(MapType type) {
@@ -93,13 +93,12 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
         : Positioned(
             bottom: 0,
             child: Container(
-              alignment: AlignmentDirectional.topCenter,
-              color: const Color.fromARGB(125, 8, 8, 8),
+              color: const ui.Color.fromARGB(125, 7, 7, 7),
               padding: const EdgeInsets.all(8.0),
-              height: 100,
+              height: 150,
               width: MediaQuery.of(context).size.width,
               child: const Text(
-                  'No data available, please verify your windows defender rules or upd port in Xplane, the port need to be 51000'),
+                  "Data is currently unavailable. If you are in flight, please verify the Windows Defender rules for X-Plane and confirm that the correct port is being used. Within X-Plane, the data output should be set to UDP and the port should be configured to 51000."),
             ),
           );
   }
