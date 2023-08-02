@@ -29,8 +29,9 @@ You will also need to configure the Xplane-11 network to allow external connecti
 - In the General Data Output tab, check all Network via UDP options
     - **Note: if you do not check all the options, Xplane-11 will not send all the data necessary for the operation of XFlight Trackr and may generate errors in the application.**
 - In the Network Configuration tab, check the Send network data output option.
-- In the IP Address field, enter the IP of your local machine.
-    - Note: to find out the IP of your machine, open the terminal and type the ipconfig (windows) or ifconfig (linux / mac) command. The IP of your machine will be the one that is on the same line as the text IPv4 Address.
+- In the IP Address field, enter the IP of your device.
+    - Note: to find out the IP of your device, open the configuration > wifi > network details > IP Address (ipv4).
+    - Make sure your device is connected to the same wifi network as your computer
 - In the Port field, enter the number 51000.
 - Click Done to save the settings.
 
@@ -73,7 +74,8 @@ Será preciso também configurar a rede do Xplane-11 para permitir conexões ext
     - **Observação: se você não marcar todas as opções, o Xplane-11 não enviará todos os dados necessários para o funcionamento do XFlight Trackr podendo gerar erros na aplicação.**
 - Na aba Network Configuration, marque a opção Send network data output.
 - No campo IP Address, coloque o IP da sua máquina local.
-    - Observação: para saber o IP da sua máquina, abra o terminal e digite o comando ipconfig (windows) ou ifconfig (linux/mac). O IP da sua máquina será o que estiver na mesma linha que o texto IPv4 Address.
+    - Observação: para saber o IP do seu dispositivo android vá em configurações > wifi > detalhes da rede > endereço ip (ipv4).
+    - Tenha certeza que seu dispositivo está conectado a mesma rede do computador
 - No campo Port, coloque o número 51000.
 - Click em Done para salvar as configurações.
 
