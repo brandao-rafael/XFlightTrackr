@@ -13,7 +13,7 @@ XFlight Trackr is an application developed in Flutter that aims to provide an im
 - More features coming soon!
 
 ## Installation
-Download the apk in x_flight_trackr/xftrackr.apk and install it on your Android device.
+You can download apk in <a href="https://docs.google.com/uc?export=download&id=18q-MT-Oxd3SU-uivW1lcRm-CDSzMXhYJ" target="_blank">this link</a> or download the xftrackr in the root of this repository and install it on your Android device.
 
 ## Feedback and Support
 Thank you for your interest in our application! If you have any questions, feedback or find any problems, feel free to open an issue in this repository. We will do our best to respond and resolve any issues as quickly as possible.
@@ -37,8 +37,10 @@ You will also need to configure the Xplane-11 network to allow external connecti
 ## How to Contribute
 If you are a Flutter developer or have aviation experience and want to contribute to the project, we will be happy to receive your help! Just fork this repository, implement your improvements and submit a pull request.
 
-We hope you enjoy this first version of XFlight Trackr, apk available at x_flight_trackr/xftrackr.apk. Stay tuned for more updates and improvements soon! Welcome aboard and happy adventures in the virtual skies! 🛫✨
-
+We hope you enjoy this first version of XFlight Trackr, apk available in root of this repo. Stay tuned for more updates and improvements soon! Welcome aboard and happy adventures in the virtual skies! 🛫✨
+<br/>
+<br/>
+<hr/>
 
 </details>
 
@@ -53,7 +55,7 @@ O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetiv
 
 
 ## Instalação
-Faça o download do apk em x_flight_trackr/xftrackr.apk e instale em seu dispositivo Android.
+Você pode baixar o apk <a href="https://docs.google.com/uc?export=download&id=18q-MT-Oxd3SU-uivW1lcRm-CDSzMXhYJ" target="_blank">neste link</a> ou fazer o download do xftrackr na raiz desse repositório e instale em seu dispositivo Android.
 
 ## Feedback e Suporte
 Agradecemos o interesse em nossa aplicação! Se você tiver alguma dúvida, feedback ou encontrar algum problema, sinta-se à vontade para abrir uma issue neste repositório. Faremos o possível para responder e resolver qualquer questão o mais rápido possível.
@@ -73,7 +75,8 @@ Será preciso também configurar a rede do Xplane-11 para permitir conexões ext
     - Observação: para saber o IP da sua máquina, abra o terminal e digite o comando ipconfig (windows) ou ifconfig (linux/mac). O IP da sua máquina será o que estiver na mesma linha que o texto IPv4 Address.
 - No campo Port, coloque o número 51000.
 - Click em Done para salvar as configurações.
+
 ## Como Contribuir
 Se você é um desenvolvedor Flutter ou tem experiência em aviação e deseja contribuir para o projeto, ficaremos felizes em receber sua ajuda! Basta fazer um fork deste repositório, implementar suas melhorias e enviar um pull request.
 
-Esperamos que você goste desta primeira versão do XFlight Trackr, apk disponível em x_flight_trackr/xftrackr.apk. Fique atento para mais atualizações e melhorias em breve! Seja bem-vindo a bordo e boas aventuras nos céus virtuais! 🛫✨
+Esperamos que você goste desta primeira versão do XFlight Trackr, apk disponível na raíz do repositório. Fique atento para mais atualizações e melhorias em breve! Seja bem-vindo a bordo e boas aventuras nos céus virtuais! 🛫✨
