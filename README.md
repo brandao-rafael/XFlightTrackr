@@ -21,7 +21,7 @@ Thank you for your interest in our application! If you have any questions, feedb
 ## Requirements for operation
 
 ### You will need to have Xplane-11 installed on your machine and configured to allow external connections. To do this, follow the steps below:
-You will need to create a firewall rule to allow external connections to Xplane-11. To do this, follow [this step by step](https://www.x-plane.com/kb/allowing-x-plane-through-your-firewall/)
+You will need to create a firewall rule to allow external connections to Xplane-11. To do this, follow <a href="https://www.x-plane.com/kb/allowing-x-plane-through-your-firewall/" target="_blank"> this step by step </a>
 
 You will also need to configure the Xplane-11 network to allow external connections. to do this follow the tutorial below:
 
@@ -61,7 +61,7 @@ Agradecemos o interesse em nossa aplicação! Se você tiver alguma dúvida, fee
 ## Requisitos para o funcionamento
 
 ### Você precisará ter o Xplane-11 instalado em sua máquina e configurado para permitir conexões externas. Para isso, siga os passos abaixo:
-Será preciso criar uma regra de firewall para permitir conexões externas ao Xplane-11. Para isso, siga [esse passo a passo](https://www.x-plane.com/kb/allowing-x-plane-through-your-firewall/)
+Será preciso criar uma regra de firewall para permitir conexões externas ao Xplane-11. Para isso, siga <a href="https://www.x-plane.com/kb/allowing-x-plane-through-your-firewall/" target="_blank"> esse passo a passo </a>
 
 Será preciso também configurar a rede do Xplane-11 para permitir conexões externas. para isso siga o tutotial abaixo:
 
