@@ -1,5 +1,12 @@
 # XFlight Trackr - V1.0.0
 
+<div>
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786.jpeg?raw=true" height="200px" />
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786%20(1).jpeg?raw=true" height="200px" />
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786%20(2).jpeg?raw=true" height="200px" />
+</div>
+
+
 <details>
     <summary>🇺🇸 English</summary>
     
