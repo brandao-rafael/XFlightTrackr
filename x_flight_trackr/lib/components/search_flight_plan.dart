@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:x_flight_trackr/components/flight_plan_form.dart';
+import 'package:x_flight_trackr/pages/flight_plan_result_page.dart';
 import 'package:x_flight_trackr/utils/flight_plan_database.dart';
 
 class SearchFlightPlan extends StatefulWidget {
@@ -13,32 +14,21 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
   final TextEditingController _fromController = TextEditingController();
   final TextEditingController _toController = TextEditingController();
   final FlightPlanDatabase _flightPlanDatabase = FlightPlanDatabase();
+  final _formKey = GlobalKey<FormState>();
   int _quantity = 1;
 
-  Future<void> _launchUrl(String url) async {
-    if (!await launchUrl(Uri.parse(url))) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Could not launch $url'),
-        ),
-      );
-    }
-  }
-
-  bool _validadeState() {
-    if (_fromController.text.isEmpty ||
-        _toController.text.isEmpty ||
-        _toController.text.length < 4 ||
-        _fromController.text.length < 4) {
-      return false;
-    }
-    return true;
+  @override
+  void dispose() {
+    _fromController.dispose();
+    _toController.dispose();
+    super.dispose();
   }
 
   Future<List<Map<String, dynamic>>> _submit() async {
     try {
       var result = await _flightPlanDatabase.searchFlightPlan(
           _fromController.text, _toController.text, _quantity.toString());
+      print(result);
       if (result[0].containsKey('error')) {
         throw Exception('Error in searchFlightPlan');
       }
@@ -63,110 +53,34 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
           context: context,
           builder: (context) => StatefulBuilder(
             builder: (BuildContext context, StateSetter modalState) {
-              return SizedBox(
+              return Container(
                 height: MediaQuery.of(context).size.height * 0.5,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Search Flight Plan',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _launchUrl('https://flightplandatabase.com');
-                          },
-                          child: Image.network(
-                            'https://static.flightplandatabase.com/images/data-banner/light.min.png',
-                            width: 150,
-                          ),
-                        ),
-                      ],
-                    ),
-                    TextField(
-                      controller: _fromController,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: const InputDecoration(
-                        labelText: 'From',
-                        hintText: 'Enter departure airport name or ICAO code',
-                      ),
-                    ),
-                    TextField(
-                      controller: _toController,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: const InputDecoration(
-                        labelText: 'To',
-                        hintText: 'Enter arrival airport name or ICAO code',
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        const Text(
-                          'Select Quantity of Flight Plans',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            IconButton(
-                              color: Colors.red,
-                              onPressed: _quantity > 1
-                                  ? () {
-                                      modalState(() {
-                                        _quantity--;
-                                      });
-                                    }
-                                  : null,
-                              icon: const Icon(Icons.arrow_downward),
-                            ),
-                            Text(
-                              '$_quantity',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
+                child: FlightPlanForm(
+                  formKey: _formKey,
+                  fromController: _fromController,
+                  toController: _toController,
+                  quantity: _quantity,
+                  onQuantityDecrease: _quantity > 1
+                      ? () => modalState(() => _quantity--)
+                      : null,
+                  onQuantityIncrease: _quantity < 3
+                      ? () => modalState(() => _quantity++)
+                      : null,
+                  onSubmit: _formKey.currentState?.validate() ?? false
+                      ? () async {
+                          var result = await _submit();
+                          if (result.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FlightPlanResultPage(
+                                  results: result,
+                                ),
                               ),
-                            ),
-                            IconButton(
-                              color: Colors.green,
-                              onPressed: _quantity < 3
-                                  ? () {
-                                      modalState(() {
-                                        _quantity++;
-                                      });
-                                    }
-                                  : null,
-                              icon: const Icon(Icons.arrow_upward),
-                            ),
-                          ],
-                        ),
-                        TextButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.blueAccent[700]!),
-                            ),
-                            onPressed: _validadeState()
-                                ? () async {
-                                    await _submit();
-                                  }
-                                : null,
-                            child: const Text(
-                              'Search',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
-                            ))
-                      ],
-                    ),
-                  ],
+                            );
+                          }
+                        }
+                      : null,
                 ),
               );
             },
