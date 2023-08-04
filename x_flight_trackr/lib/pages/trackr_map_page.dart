@@ -3,9 +3,12 @@ import 'dart:ui' as ui;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/flight_data.dart';
 import 'package:x_flight_trackr/components/search_flight_plan.dart';
 import 'package:x_flight_trackr/components/select_map_type.dart';
+import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
+import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 
 class TrackrMapPage extends StatefulWidget {
   final double lat;
@@ -39,6 +42,28 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
     });
   }
 
+  List<LatLng> convertPoints(List<List<num>> points) {
+    List<LatLng> latLngList = [];
+    for (var point in points) {
+      double lat = point[0].toDouble();
+      double lng = point[1].toDouble();
+      latLngList.add(LatLng(lat, lng));
+    }
+    return latLngList;
+  }
+
+  List<LatLng> decodePolylines(String polyline) {
+    List<LatLng> latLngList = [];
+    if (polyline == null) {
+      return latLngList; // Return an empty list when the polyline is null
+    }
+
+    final polylinePoints = decodePolyline(polyline);
+    latLngList = convertPoints(polylinePoints);
+
+    return latLngList;
+  }
+
   Future<Uint8List?> getBytesFromAsset() async {
     ByteData data = await rootBundle.load('lib/assets/icons/airplane_icon.png');
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
@@ -57,6 +82,8 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
 
   @override
   Widget build(BuildContext context) {
+    final FlightPlanProvider flightPlanProvider =
+        Provider.of<FlightPlanProvider>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
         title: const Text('XFlight Trackr'),
@@ -80,6 +107,18 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
                     : BitmapDescriptor.defaultMarker,
               ),
             },
+            polylines:
+                flightPlanProvider.selectedFlightPlan['encodedPolyline'] != null
+                    ? <Polyline>{
+                        Polyline(
+                          polylineId: const PolylineId('1'),
+                          color: Colors.red,
+                          width: 3,
+                          points: decodePolylines(flightPlanProvider
+                              .selectedFlightPlan['encodedPolyline']),
+                        ),
+                      }
+                    : <Polyline>{},
           ),
           SelectMapType(setMapType: _setMapType),
           const SearchFlightPlan(),

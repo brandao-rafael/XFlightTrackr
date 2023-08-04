@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/flight_plan_form.dart';
 import 'package:x_flight_trackr/pages/flight_plan_result_page.dart';
+import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
 import 'package:x_flight_trackr/utils/flight_plan_database.dart';
 
 class SearchFlightPlan extends StatefulWidget {
@@ -24,22 +26,25 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
     super.dispose();
   }
 
-  Future<List<Map<String, dynamic>>> _submit() async {
+  Future<void> _submit() async {
     try {
       var result = await _flightPlanDatabase.searchFlightPlan(
           _fromController.text, _toController.text, _quantity.toString());
-      print(result);
+
       if (result[0].containsKey('error')) {
         throw Exception('Error in searchFlightPlan');
       }
-      return result;
+      if (result.isNotEmpty) {
+        final flightPlanProvider =
+            Provider.of<FlightPlanProvider>(context, listen: false);
+        flightPlanProvider.setFlightPlans(result);
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('An error occurred while searching flight plan'),
         ),
       );
-      return [];
     }
   }
 
@@ -53,7 +58,7 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
           context: context,
           builder: (context) => StatefulBuilder(
             builder: (BuildContext context, StateSetter modalState) {
-              return Container(
+              return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: FlightPlanForm(
                   formKey: _formKey,
@@ -68,17 +73,14 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
                       : null,
                   onSubmit: _formKey.currentState?.validate() ?? false
                       ? () async {
-                          var result = await _submit();
-                          if (result.isNotEmpty) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FlightPlanResultPage(
-                                  results: result,
-                                ),
-                              ),
-                            );
-                          }
+                          await _submit();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const FlightPlanResultPage(),
+                            ),
+                          );
                         }
                       : null,
                 ),
