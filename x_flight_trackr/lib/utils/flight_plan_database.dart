@@ -34,4 +34,16 @@ class FlightPlanDatabase {
       ];
     }
   }
+
+  Future<Map> fetchFlightPlan(String id) async {
+    return http
+        .get(Uri.parse('https://api.flightplandatabase.com/plan/$id'))
+        .then((response) {
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        return {'error': 'something went wrong'};
+      }
+    });
+  }
 }

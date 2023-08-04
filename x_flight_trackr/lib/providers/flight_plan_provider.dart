@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_flight_trackr/utils/flight_plan_database.dart';
 
 class FlightPlanProvider with ChangeNotifier {
   List<dynamic> _flightPlans = [];
@@ -12,8 +13,10 @@ class FlightPlanProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedFlightPlan(Map plan) {
-    _selectedFlightPlan = plan;
+  Future<void> setSelectedFlightPlan(Map plan) async {
+    FlightPlanDatabase fpdb = FlightPlanDatabase();
+    var response = await fpdb.fetchFlightPlan('${plan['id']}');
+    _selectedFlightPlan = response;
     notifyListeners();
   }
 }

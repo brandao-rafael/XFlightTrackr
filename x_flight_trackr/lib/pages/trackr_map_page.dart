@@ -54,10 +54,6 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
 
   List<LatLng> decodePolylines(String polyline) {
     List<LatLng> latLngList = [];
-    if (polyline == null) {
-      return latLngList; // Return an empty list when the polyline is null
-    }
-
     final polylinePoints = decodePolyline(polyline);
     latLngList = convertPoints(polylinePoints);
 
@@ -116,6 +112,8 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
                           width: 3,
                           points: decodePolylines(flightPlanProvider
                               .selectedFlightPlan['encodedPolyline']),
+                          geodesic: true,
+                          jointType: JointType.round,
                         ),
                       }
                     : <Polyline>{},
