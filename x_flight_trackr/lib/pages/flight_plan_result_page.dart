@@ -48,18 +48,21 @@ class FlightPlanResultPage extends StatelessWidget {
                         style: TextStyle(color: Colors.grey[600])),
                     Text('Notes: ${flightPlans[index]['notes']}',
                         style: TextStyle(color: Colors.grey[600])),
-                    TextButton(
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blueAccent[700]!,
+                        ),
+                      ),
                       onPressed: () {
                         flightPlanProvider
                             .setSelectedFlightPlan(flightPlans[index]);
                         Navigator.pop(context);
                       },
-                      child: Text(
+                      child: const Text(
                         'Select this flight plan',
                         style: TextStyle(
                           color: Colors.white,
-                          backgroundColor: Colors.blueAccent[700],
-                          height: 2,
                         ),
                       ),
                     )
