@@ -51,15 +51,22 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      icon: const Icon(Icons.flight_takeoff_outlined),
+      icon: const Icon(Icons.airplane_ticket_outlined),
       label: const Text('Search Flight Plan'),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.white54),
+      ),
       onPressed: () {
         showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.white70,
+          shape: const BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.zero)),
+          useSafeArea: true,
           context: context,
           builder: (context) => StatefulBuilder(
             builder: (BuildContext context, StateSetter modalState) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
                 child: FlightPlanForm(
                   formKey: _formKey,
                   fromController: _fromController,
@@ -74,6 +81,7 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
                   onSubmit: _formKey.currentState?.validate() ?? false
                       ? () async {
                           await _submit();
+                          Navigator.pop(context);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

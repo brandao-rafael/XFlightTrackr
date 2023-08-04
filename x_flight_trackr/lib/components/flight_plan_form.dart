@@ -27,28 +27,36 @@ class FlightPlanForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          const FlightPlanHeader(),
-          FlightPlanTextField(
-            controller: fromController,
-            labelText: 'From',
-            hintText: 'Enter departure airport name or ICAO code',
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Form(
+        key: _formKey,
+        child: Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const FlightPlanHeader(),
+              FlightPlanTextField(
+                controller: fromController,
+                labelText: 'From',
+                hintText: 'Enter departure airport name or ICAO code',
+              ),
+              FlightPlanTextField(
+                controller: toController,
+                labelText: 'To',
+                hintText: 'Enter arrival airport name or ICAO code',
+              ),
+              FlightPlanQuantitySelector(
+                quantity: quantity,
+                onDecrease: onQuantityDecrease,
+                onIncrease: onQuantityIncrease,
+              ),
+              FlightPlanSubmitButton(onSubmit: onSubmit),
+            ],
           ),
-          FlightPlanTextField(
-            controller: toController,
-            labelText: 'To',
-            hintText: 'Enter arrival airport name or ICAO code',
-          ),
-          FlightPlanQuantitySelector(
-            quantity: quantity,
-            onDecrease: onQuantityDecrease,
-            onIncrease: onQuantityIncrease,
-          ),
-          FlightPlanSubmitButton(onSubmit: onSubmit),
-        ],
+        ),
       ),
     );
   }

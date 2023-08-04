@@ -118,8 +118,12 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
                       }
                     : <Polyline>{},
           ),
-          SelectMapType(setMapType: _setMapType),
-          const SearchFlightPlan(),
+          Column(
+            children: [
+              SelectMapType(setMapType: _setMapType),
+              const SearchFlightPlan(),
+            ],
+          ),
           _buildFlightDataOrEmptyState(),
         ],
       ),

@@ -13,14 +13,15 @@ class FlightPlanHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
+        Text(
           'Search Flight Plan',
           style: TextStyle(
-            fontSize: 20,
-            color: Colors.black,
+            fontSize: 25,
+            color: Colors.blueAccent[700]!,
+            fontWeight: FontWeight.w300,
           ),
         ),
         InkWell(
