@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart' show rootBundle;
@@ -32,6 +33,7 @@ class TrackrMapPage extends StatefulWidget {
 class _TrackrMapPageState extends State<TrackrMapPage> {
   Uint8List? _customMarker;
   MapType _currentMapType = MapType.terrain;
+  String ip = 'Searching for ip...';
 
   @override
   void initState() {
@@ -136,6 +138,22 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
   }
 
   Widget _buildFlightDataOrEmptyState() {
+    Future<void> viewIps() async {
+      for (var interface in await NetworkInterface.list()) {
+        if (interface.name.contains('wlan')) {
+          setState(() {
+            ip = '${interface.addresses.map((addr) => addr.address)}';
+          });
+        } else {
+          setState(() {
+            ip = 'Ip not found';
+          });
+        }
+      }
+    }
+
+    viewIps();
+
     return widget.data.isNotEmpty
         ? FlightData(data: widget.data)
         : Positioned(
@@ -145,8 +163,8 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
               padding: const EdgeInsets.all(8.0),
               height: 150,
               width: MediaQuery.of(context).size.width,
-              child: const Text(
-                  "Data is currently unavailable. If you are in flight, please verify the Windows Defender rules for X-Plane and confirm that the correct port is being used. Within X-Plane, the data output should be set to UDP and the port should be configured to 51000."),
+              child: Text(
+                  "Data is currently unavailable. If you are in flight, please verify the Windows Defender rules for X-Plane and confirm that the correct ip and port is being used. Your mobile ip is $ip Within X-Plane, the data output should be set to UDP and the port should be configured to 51000."),
             ),
           );
   }
