@@ -26,25 +26,36 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
-    try {
-      var result = await _flightPlanDatabase.searchFlightPlan(
-          _fromController.text, _toController.text, _quantity.toString());
+  Future<void> _submit(ValueNotifier<bool> isLoadingNotifier) async {
+    if (_formKey.currentState?.validate() ?? false) {
+      isLoadingNotifier.value = true;
+      try {
+        var result = await _flightPlanDatabase.searchFlightPlan(
+            _fromController.text, _toController.text, _quantity.toString());
 
-      if (result[0].containsKey('error')) {
-        throw Exception('Error in searchFlightPlan');
+        if (result[0].containsKey('error')) {
+          throw Exception('Error in searchFlightPlan');
+        }
+        if (result.isNotEmpty) {
+          final flightPlanProvider =
+              Provider.of<FlightPlanProvider>(context, listen: false);
+          flightPlanProvider.setFlightPlans(result);
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const FlightPlanResultPage(),
+            ),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('An error occurred while searching flight plan'),
+          ),
+        );
       }
-      if (result.isNotEmpty) {
-        final flightPlanProvider =
-            Provider.of<FlightPlanProvider>(context, listen: false);
-        flightPlanProvider.setFlightPlans(result);
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('An error occurred while searching flight plan'),
-        ),
-      );
+      isLoadingNotifier.value = false;
     }
   }
 
@@ -56,47 +67,45 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.white54),
       ),
-      onPressed: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          backgroundColor: Colors.white,
-          shape: const BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.zero)),
-          useSafeArea: true,
-          context: context,
-          builder: (context) => StatefulBuilder(
-            builder: (BuildContext context, StateSetter modalState) {
-              return SizedBox(
-                child: FlightPlanForm(
-                  formKey: _formKey,
-                  fromController: _fromController,
-                  toController: _toController,
-                  quantity: _quantity,
-                  onQuantityDecrease: _quantity > 1
-                      ? () => modalState(() => _quantity--)
-                      : null,
-                  onQuantityIncrease: _quantity < 3
-                      ? () => modalState(() => _quantity++)
-                      : null,
-                  onSubmit: _formKey.currentState?.validate() ?? false
-                      ? () async {
-                          await _submit();
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const FlightPlanResultPage(),
-                            ),
-                          );
-                        }
-                      : null,
-                ),
-              );
-            },
-          ),
-        );
-      },
+      onPressed: () => _showModalBottomSheet(context),
+    );
+  }
+
+  void _showModalBottomSheet(BuildContext context) {
+    final isLoadingNotifier = ValueNotifier<bool>(false);
+
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const BeveledRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.zero),
+      ),
+      useSafeArea: true,
+      context: context,
+      builder: (context) => ValueListenableBuilder<bool>(
+        valueListenable: isLoadingNotifier,
+        builder: (context, isLoading, child) {
+          return SizedBox(
+            child: isLoading
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: double.infinity,
+                    child: const Center(child: CircularProgressIndicator()),
+                  )
+                : FlightPlanForm(
+                    formKey: _formKey,
+                    fromController: _fromController,
+                    toController: _toController,
+                    quantity: _quantity,
+                    onQuantityDecrease:
+                        _quantity > 1 ? () => _quantity-- : null,
+                    onQuantityIncrease:
+                        _quantity < 3 ? () => _quantity++ : null,
+                    onSubmit: () => _submit(isLoadingNotifier),
+                  ),
+          );
+        },
+      ),
     );
   }
 }
