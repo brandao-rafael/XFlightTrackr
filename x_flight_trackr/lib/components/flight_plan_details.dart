@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:x_flight_trackr/components/horizontal_line.dart';
 
 class FlightPlanDetails extends StatelessWidget {
-  final selectedFlightPlan;
+  final Map<dynamic, dynamic> selectedFlightPlan;
 
   const FlightPlanDetails({super.key, required this.selectedFlightPlan});
 
@@ -14,10 +15,59 @@ class FlightPlanDetails extends StatelessWidget {
       onPressed: () {
         showDialog(
             context: context,
-            builder: (ctx) => selectedFlightPlan != null
+            builder: (ctx) => selectedFlightPlan != {}
                 ? AlertDialog(
                     title: const Text('Flight Plan Details'),
-                    content: const Text('This feature is not yet implemented'),
+                    content: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const HorizontalLine(color: Colors.black),
+                          Text(
+                            'From ${selectedFlightPlan['fromName']} to ${selectedFlightPlan['toName']}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const HorizontalLine(color: Colors.black),
+                          Text(
+                            'Distance: ${selectedFlightPlan['distance'].toStringAsFixed(2)} NM',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            "Max Altitude ${selectedFlightPlan['maxAltitude']} foot's",
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            'Waypoints: ${selectedFlightPlan['waypoints']}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const HorizontalLine(color: Colors.black),
+                          Text(
+                            'Notes: ${selectedFlightPlan['notes']}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          const HorizontalLine(color: Colors.black),
+                          SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Route:',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                ...selectedFlightPlan['route']['nodes']
+                                    .map((node) => Text(
+                                          'Type: ${node['type']}, Ident: ${node['ident']}',
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     actions: [
                       TextButton(
                         onPressed: () {
