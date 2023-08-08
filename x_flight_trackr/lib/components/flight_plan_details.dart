@@ -16,7 +16,8 @@ class FlightPlanDetails extends StatelessWidget {
       onPressed: () {
         showDialog(
             context: context,
-            builder: (ctx) => selectedFlightPlan != {}
+            builder: (ctx) => selectedFlightPlan != {} &&
+                    selectedFlightPlan['fromICAO'] != null
                 ? AlertDialog(
                     titleTextStyle: TextStyle(
                       color: Colors.blueAccent[700]!,
@@ -76,8 +77,9 @@ class FlightPlanDetails extends StatelessWidget {
                     ],
                   )
                 : AlertDialog(
-                    title: const Text('Flight Plan Details'),
-                    content: const Text('No flight plan selected'),
+                    title: Text('Flight Plan Details',
+                        style: TextStyle(color: Colors.blueAccent[700]!)),
+                    content: const BlackText('No flight plan selected'),
                     actions: [
                       TextButton(
                         onPressed: () {
