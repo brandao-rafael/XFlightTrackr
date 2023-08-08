@@ -12,7 +12,7 @@ class FlightPlanDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.white54),
+        backgroundColor: MaterialStateProperty.all(Colors.white70),
       ),
       onPressed: () {
         showDialog(

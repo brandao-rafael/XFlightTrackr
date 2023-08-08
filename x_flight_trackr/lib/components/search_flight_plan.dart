@@ -65,7 +65,7 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
       icon: const Icon(Icons.airplane_ticket_outlined),
       label: const Text('Search Flight Plan'),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.white54),
+        backgroundColor: MaterialStateProperty.all(Colors.white70),
       ),
       onPressed: () => _showModalBottomSheet(context),
     );

@@ -12,7 +12,7 @@ class SelectMapType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white60,
+      color: Colors.white70,
       height: 50,
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
