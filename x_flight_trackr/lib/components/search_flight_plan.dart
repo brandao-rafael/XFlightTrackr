@@ -82,27 +82,41 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
       ),
       useSafeArea: true,
       context: context,
-      builder: (context) => ValueListenableBuilder<bool>(
-        valueListenable: isLoadingNotifier,
-        builder: (context, isLoading, child) {
-          return SizedBox(
-            child: isLoading
-                ? SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: double.infinity,
-                    child: const Center(child: CircularProgressIndicator()),
-                  )
-                : FlightPlanForm(
-                    formKey: _formKey,
-                    fromController: _fromController,
-                    toController: _toController,
-                    quantity: _quantity,
-                    onQuantityDecrease:
-                        _quantity > 1 ? () => _quantity-- : null,
-                    onQuantityIncrease:
-                        _quantity < 3 ? () => _quantity++ : null,
-                    onSubmit: () => _submit(isLoadingNotifier),
-                  ),
+      builder: (context) => StatefulBuilder(
+        builder: (BuildContext context, StateSetter modalState) {
+          return ValueListenableBuilder<bool>(
+            valueListenable: isLoadingNotifier,
+            builder: (context, isLoading, child) {
+              return SizedBox(
+                child: isLoading
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        width: double.infinity,
+                        child: const Center(child: CircularProgressIndicator()),
+                      )
+                    : FlightPlanForm(
+                        formKey: _formKey,
+                        fromController: _fromController,
+                        toController: _toController,
+                        quantity: _quantity,
+                        onQuantityDecrease: _quantity > 1
+                            ? () {
+                                modalState(() {
+                                  _quantity--;
+                                });
+                              }
+                            : null,
+                        onQuantityIncrease: _quantity < 3
+                            ? () {
+                                modalState(() {
+                                  _quantity++;
+                                });
+                              }
+                            : null,
+                        onSubmit: () => _submit(isLoadingNotifier),
+                      ),
+              );
+            },
           );
         },
       ),
