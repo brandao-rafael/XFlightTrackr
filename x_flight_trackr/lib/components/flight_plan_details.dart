@@ -20,6 +20,9 @@ class FlightPlanDetails extends StatelessWidget {
             builder: (ctx) => selectedFlightPlan != {} &&
                     selectedFlightPlan['fromICAO'] != null
                 ? AlertDialog(
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     titleTextStyle: TextStyle(
                       color: Colors.blueAccent[700]!,
                       fontSize: 20,
@@ -32,11 +35,14 @@ class FlightPlanDetails extends StatelessWidget {
                           const HorizontalLine(color: Colors.black),
                           const Center(child: FlightPlanDataBaseLogo()),
                           const HorizontalLine(color: Colors.black),
+                          const SizedBox(height: 10),
                           BlackText(
                               '${selectedFlightPlan['fromICAO']} to ${selectedFlightPlan['toICAO']}'),
                           BlackText(
                               'From: ${selectedFlightPlan['fromName']}\nTo: ${selectedFlightPlan['toName']}'),
+                          const SizedBox(height: 10),
                           const HorizontalLine(color: Colors.black),
+                          const SizedBox(height: 10),
                           BlackText(
                             'Distance: ${selectedFlightPlan['distance'].toStringAsFixed(2)} NM',
                           ),
@@ -46,7 +52,9 @@ class FlightPlanDetails extends StatelessWidget {
                           BlackText(
                             'Waypoints: ${selectedFlightPlan['waypoints']}',
                           ),
+                          const SizedBox(height: 10),
                           const HorizontalLine(color: Colors.black),
+                          const SizedBox(height: 10),
                           BlackText(
                             'Notes: ${selectedFlightPlan['notes']}',
                           ),
@@ -55,10 +63,12 @@ class FlightPlanDetails extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                const SizedBox(height: 10),
                                 const Text(
                                   'Route:',
                                   style: TextStyle(color: Colors.black),
                                 ),
+                                const SizedBox(height: 5),
                                 ...selectedFlightPlan['route']['nodes']
                                     .map((node) => BlackText(
                                           'Type: ${node['type']}, Ident: ${node['ident']}',

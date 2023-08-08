@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:x_flight_trackr/components/black_text.dart';
+import 'package:x_flight_trackr/components/horizontal_line.dart';
 import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
 
 class FlightPlanResultPage extends StatelessWidget {
@@ -17,37 +19,49 @@ class FlightPlanResultPage extends StatelessWidget {
         title: const Text('Flight Plan Results'),
         backgroundColor: Colors.blueAccent[700],
       ),
+      backgroundColor: Colors.blue.shade50,
       body: ListView.builder(
         itemCount: flightPlans.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(
-              '${flightPlans[index]['fromICAO']} to ${flightPlans[index]['toICAO']}',
-              style: const TextStyle(color: Colors.black),
+            title: Column(
+              children: [
+                const HorizontalLine(color: Colors.black),
+                Text(
+                  '${flightPlans[index]['fromICAO']} to ${flightPlans[index]['toICAO']}',
+                  style: TextStyle(color: Colors.blueAccent[700]!),
+                ),
+              ],
             ),
             key: index == 0 ? const Key('first') : Key(index.toString()),
             subtitle: SizedBox(
-              height: 500,
+              // height: 500,
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'from ${flightPlans[index]['fromName']} to ${flightPlans[index]['toName']}',
-                      style: TextStyle(color: Colors.grey[600]),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const HorizontalLine(color: Colors.black),
+                        const SizedBox(height: 20),
+                        BlackText(
+                          'From: ${flightPlans[index]['fromName']}\nTo: ${flightPlans[index]['toName']}',
+                        ),
+                        BlackText(
+                          'Distance: ${flightPlans[index]['distance'].toStringAsFixed(2)} NM',
+                        ),
+                        BlackText(
+                          "Max Altitude ${flightPlans[index]['maxAltitude']} foot's",
+                        ),
+                        BlackText(
+                          'Waypoints: ${flightPlans[index]['waypoints']}',
+                        ),
+                        BlackText(
+                          'Notes: ${flightPlans[index]['notes']}',
+                        ),
+                        const SizedBox(height: 10),
+                      ],
                     ),
-                    Text(
-                      'Distance: ${flightPlans[index]['distance'].toStringAsFixed(2)} NM',
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      "Max Altitude ${flightPlans[index]['maxAltitude']} foot's",
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                    Text('Waypoints: ${flightPlans[index]['waypoints']}',
-                        style: TextStyle(color: Colors.grey[600])),
-                    Text('Notes: ${flightPlans[index]['notes']}',
-                        style: TextStyle(color: Colors.grey[600])),
                     ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
@@ -65,7 +79,7 @@ class FlightPlanResultPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
