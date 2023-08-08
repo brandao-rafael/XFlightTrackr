@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/flight_data.dart';
+import 'package:x_flight_trackr/components/flight_plan_details.dart';
 import 'package:x_flight_trackr/components/search_flight_plan.dart';
 import 'package:x_flight_trackr/components/select_map_type.dart';
 import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
@@ -121,7 +122,11 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
           Column(
             children: [
               SelectMapType(setMapType: _setMapType),
-              const SearchFlightPlan(),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                const SearchFlightPlan(),
+                FlightPlanDetails(
+                    selectedFlightPlan: flightPlanProvider.selectedFlightPlan),
+              ])
             ],
           ),
           _buildFlightDataOrEmptyState(),
