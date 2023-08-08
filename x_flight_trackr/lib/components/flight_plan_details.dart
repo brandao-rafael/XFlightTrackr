@@ -18,20 +18,26 @@ class FlightPlanDetails extends StatelessWidget {
             context: context,
             builder: (ctx) => selectedFlightPlan != {}
                 ? AlertDialog(
-                    title: const Text('Flight Plan Details'),
+                    titleTextStyle: TextStyle(
+                      color: Colors.blueAccent[700]!,
+                      fontSize: 20,
+                    ),
+                    title: const Text('Current Plan Details'),
                     content: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const HorizontalLine(color: Colors.black),
                           BlackText(
-                              'From ${selectedFlightPlan['fromName']} to ${selectedFlightPlan['toName']}'),
+                              '${selectedFlightPlan['fromICAO']} to ${selectedFlightPlan['toICAO']}'),
+                          BlackText(
+                              'From: ${selectedFlightPlan['fromName']}\nTo: ${selectedFlightPlan['toName']}'),
                           const HorizontalLine(color: Colors.black),
                           BlackText(
                             'Distance: ${selectedFlightPlan['distance'].toStringAsFixed(2)} NM',
                           ),
                           BlackText(
-                            "Max Altitude ${selectedFlightPlan['maxAltitude']} foot's",
+                            "Max Altitude ${selectedFlightPlan['maxAltitude']} ft",
                           ),
                           BlackText(
                             'Waypoints: ${selectedFlightPlan['waypoints']}',
