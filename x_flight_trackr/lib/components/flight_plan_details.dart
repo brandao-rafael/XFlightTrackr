@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_flight_trackr/components/black_text.dart';
 import 'package:x_flight_trackr/components/horizontal_line.dart';
 
 class FlightPlanDetails extends StatelessWidget {
@@ -23,27 +24,21 @@ class FlightPlanDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const HorizontalLine(color: Colors.black),
-                          Text(
-                            'From ${selectedFlightPlan['fromName']} to ${selectedFlightPlan['toName']}',
-                            style: const TextStyle(color: Colors.black),
-                          ),
+                          BlackText(
+                              'From ${selectedFlightPlan['fromName']} to ${selectedFlightPlan['toName']}'),
                           const HorizontalLine(color: Colors.black),
-                          Text(
+                          BlackText(
                             'Distance: ${selectedFlightPlan['distance'].toStringAsFixed(2)} NM',
-                            style: const TextStyle(color: Colors.black),
                           ),
-                          Text(
+                          BlackText(
                             "Max Altitude ${selectedFlightPlan['maxAltitude']} foot's",
-                            style: const TextStyle(color: Colors.black),
                           ),
-                          Text(
+                          BlackText(
                             'Waypoints: ${selectedFlightPlan['waypoints']}',
-                            style: const TextStyle(color: Colors.black),
                           ),
                           const HorizontalLine(color: Colors.black),
-                          Text(
+                          BlackText(
                             'Notes: ${selectedFlightPlan['notes']}',
-                            style: const TextStyle(color: Colors.black),
                           ),
                           const HorizontalLine(color: Colors.black),
                           SingleChildScrollView(
@@ -55,11 +50,8 @@ class FlightPlanDetails extends StatelessWidget {
                                   style: TextStyle(color: Colors.black),
                                 ),
                                 ...selectedFlightPlan['route']['nodes']
-                                    .map((node) => Text(
+                                    .map((node) => BlackText(
                                           'Type: ${node['type']}, Ident: ${node['ident']}',
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                          ),
                                         ))
                                     .toList(),
                               ],
