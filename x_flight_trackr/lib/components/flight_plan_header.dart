@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:x_flight_trackr/components/flight_plan_database_logo.dart';
 
 class FlightPlanHeader extends StatelessWidget {
   const FlightPlanHeader({Key? key}) : super(key: key);
@@ -24,15 +25,7 @@ class FlightPlanHeader extends StatelessWidget {
             fontWeight: FontWeight.w300,
           ),
         ),
-        InkWell(
-          onTap: () {
-            _launchUrl('https://flightplandatabase.com');
-          },
-          child: Image.network(
-            'https://static.flightplandatabase.com/images/data-banner/light.min.png',
-            width: 150,
-          ),
-        ),
+        const FlightPlanDataBaseLogo(),
       ],
     );
   }

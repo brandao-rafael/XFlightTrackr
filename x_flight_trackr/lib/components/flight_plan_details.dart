@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/components/black_text.dart';
+import 'package:x_flight_trackr/components/flight_plan_database_logo.dart';
 import 'package:x_flight_trackr/components/horizontal_line.dart';
 
 class FlightPlanDetails extends StatelessWidget {
@@ -28,6 +29,8 @@ class FlightPlanDetails extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const HorizontalLine(color: Colors.black),
+                          const Center(child: FlightPlanDataBaseLogo()),
                           const HorizontalLine(color: Colors.black),
                           BlackText(
                               '${selectedFlightPlan['fromICAO']} to ${selectedFlightPlan['toICAO']}'),

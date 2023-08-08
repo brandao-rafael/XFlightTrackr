@@ -59,7 +59,7 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
       onPressed: () {
         showModalBottomSheet(
           isScrollControlled: true,
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.white,
           shape: const BeveledRectangleBorder(
               borderRadius: BorderRadius.all(Radius.zero)),
           useSafeArea: true,
