@@ -26,37 +26,53 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
     super.dispose();
   }
 
-  Future<void> _submit(ValueNotifier<bool> isLoadingNotifier) async {
+  Future<void> _submit(
+      BuildContext context, ValueNotifier<bool> isLoadingNotifier) async {
     if (_formKey.currentState?.validate() ?? false) {
       isLoadingNotifier.value = true;
       try {
-        var result = await _flightPlanDatabase.searchFlightPlan(
-            _fromController.text, _toController.text, _quantity.toString());
-
-        if (result[0].containsKey('error')) {
-          throw Exception('Error in searchFlightPlan');
-        }
-        if (result.isNotEmpty) {
-          final flightPlanProvider =
-              Provider.of<FlightPlanProvider>(context, listen: false);
-          flightPlanProvider.setFlightPlans(result);
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const FlightPlanResultPage(),
-            ),
-          );
-        }
+        var result = await _searchFlightPlans();
+        _handleSearchResults(context, result);
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('An error occurred while searching flight plan'),
-          ),
-        );
+        _showError(context);
+      } finally {
+        isLoadingNotifier.value = false;
       }
-      isLoadingNotifier.value = false;
     }
+  }
+
+  Future<List<dynamic>> _searchFlightPlans() async {
+    var result = await _flightPlanDatabase.searchFlightPlan(
+        _fromController.text, _toController.text, _quantity.toString());
+
+    if (result.isNotEmpty && result[0].containsKey('error')) {
+      throw Exception('Error in searchFlightPlan');
+    }
+
+    return result;
+  }
+
+  void _handleSearchResults(BuildContext context, List<dynamic> result) {
+    if (result.isNotEmpty) {
+      final flightPlanProvider =
+          Provider.of<FlightPlanProvider>(context, listen: false);
+      flightPlanProvider.setFlightPlans(result);
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const FlightPlanResultPage(),
+        ),
+      );
+    }
+  }
+
+  void _showError(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('An error occurred while searching flight plan'),
+      ),
+    );
   }
 
   @override
@@ -113,7 +129,7 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
                                 });
                               }
                             : null,
-                        onSubmit: () => _submit(isLoadingNotifier),
+                        onSubmit: () => _submit(context, isLoadingNotifier),
                       ),
               );
             },
