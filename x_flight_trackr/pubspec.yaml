@@ -31,6 +31,9 @@ flutter:
     - .env
     - lib/assets/icons/airplane_icon.png
     - lib/assets/icons/logo.png
+    - lib/assets/icons/box_red.png
+    - lib/assets/icons/box_green.png
+    - lib/assets/icons/box_yellow.png
   #   - images/a_dot_ham.jpeg
 
   # fonts:
