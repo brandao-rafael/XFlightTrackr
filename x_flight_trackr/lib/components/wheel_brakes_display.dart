@@ -26,16 +26,24 @@ class WheelBrakesDisplay extends StatelessWidget {
       width: 50,
       child: Stack(
         children: [
-          Image.asset(
-            _isBrakesOn
-                ? 'lib/assets/icons/box_green.png'
-                : 'lib/assets/icons/box_red.png',
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: Image.asset(
+              _isBrakesOn
+                  ? 'lib/assets/icons/box_green.png'
+                  : 'lib/assets/icons/box_red.png',
+              key: ValueKey<bool>(_isBrakesOn), // ensures animation on change
+            ),
           ),
           Center(
-            child: Text(
-              _brakesStatus,
-              style: const TextStyle(
-                fontSize: 10,
+            child: AnimatedOpacity(
+              opacity: 1.0, // 1 for visible, 0 for invisible
+              duration: const Duration(milliseconds: 500),
+              child: Text(
+                _brakesStatus,
+                style: const TextStyle(
+                  fontSize: 10,
+                ),
               ),
             ),
           ),

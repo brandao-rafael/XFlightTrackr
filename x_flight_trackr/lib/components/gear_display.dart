@@ -38,9 +38,13 @@ class GearDisplay extends StatelessWidget {
       height: 22,
       margin: const EdgeInsets.all(2),
       width: 20,
-      child: Image.asset(
-        _gearColor,
-        width: 20,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 500),
+        child: Image.asset(
+          _gearColor,
+          key: ValueKey<String>(_gearColor),
+          width: 20,
+        ),
       ),
     );
   }
