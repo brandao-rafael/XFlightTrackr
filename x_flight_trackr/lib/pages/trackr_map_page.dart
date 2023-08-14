@@ -41,6 +41,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
   @override
   void initState() {
     super.initState();
+    _viewIps();
     _loadCustomMarker();
   }
 
@@ -156,8 +157,6 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
   }
 
   Widget _buildFlightDataOrEmptyState() {
-    _viewIps();
-
     return widget.data.isNotEmpty
         ? FlightData(data: widget.data)
         : Positioned(
@@ -172,11 +171,11 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
         setState(() {
           _ip = '${interface.addresses.map((addr) => addr.address)}';
         });
-      } else {
-        setState(() {
-          _ip = 'Ip not found';
-        });
+        return;
       }
+      setState(() {
+        _ip = 'Ip not found';
+      });
     }
   }
 
