@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/pages/home_page.dart';
-import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
+import 'package:x_flight_trackr/store/flight_plan_store.dart';
+import 'package:x_flight_trackr/store/form_store.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -16,8 +17,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FlightPlanProvider(),
+    return MultiProvider(
+      providers: [
+        Provider(create: (_) => FormStore()),
+        Provider(create: (_) => FlightPlanStore()),
+      ],
       child: const MaterialApp(
         title: _title,
         home: HomePage(),
