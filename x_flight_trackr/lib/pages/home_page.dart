@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/pages/trackr_map_page.dart';
+import 'package:x_flight_trackr/store/flight_plan_store.dart';
 import 'package:x_flight_trackr/utils/udp_utils.dart';
 import 'package:x_flight_trackr/utils/xplane_data_parser.dart';
 
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<double> _allData = [];
+  final flightPlanStore = FlightPlanStore();
 
   void _init(Datagram datagram) {
     var xpc = XPlaneDataParser(datagram.data);
@@ -71,6 +73,7 @@ class _HomePageState extends State<HomePage> {
       lat: _allData.isNotEmpty ? _allData[171] : 0.0,
       lng: _allData.isNotEmpty ? _allData[172] : 0.0,
       mag: _allData.isNotEmpty ? _allData[147] : 0.0,
+      flightPlanStore: flightPlanStore,
       data: _allData,
     );
   }

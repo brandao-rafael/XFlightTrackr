@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
-import 'package:provider/provider.dart';
 
 import 'package:x_flight_trackr/components/flight_data.dart';
 import 'package:x_flight_trackr/components/flight_plan_details.dart';
 import 'package:x_flight_trackr/components/search_flight_plan.dart';
 import 'package:x_flight_trackr/components/select_map_type.dart';
-import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
+import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
 class TrackrMapPage extends StatefulWidget {
   final double lat;
   final double lng;
   final double mag;
+  final FlightPlanStore flightPlanStore;
   final List<double> data;
 
   const TrackrMapPage({
@@ -26,6 +26,7 @@ class TrackrMapPage extends StatefulWidget {
     required this.lng,
     required this.mag,
     required this.data,
+    required this.flightPlanStore,
   }) : super(key: key);
 
   @override
@@ -77,14 +78,12 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final flightPlanProvider =
-        Provider.of<FlightPlanProvider>(context, listen: true);
     return Scaffold(
       appBar: _buildAppBar(),
       body: Stack(
         children: [
-          _buildGoogleMap(flightPlanProvider),
-          _buildOverlays(flightPlanProvider),
+          _buildGoogleMap(widget.flightPlanStore),
+          _buildOverlays(widget.flightPlanStore),
           _buildFlightDataOrEmptyState(),
         ],
       ),
@@ -98,7 +97,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
     );
   }
 
-  GoogleMap _buildGoogleMap(FlightPlanProvider flightPlanProvider) {
+  GoogleMap _buildGoogleMap(FlightPlanStore flightPlanStore) {
     return GoogleMap(
       mapType: _currentMapType,
       zoomControlsEnabled: false,
@@ -106,7 +105,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
         target: LatLng(widget.lat, widget.lng),
       ),
       markers: _buildMarkers(),
-      polylines: _buildPolylines(flightPlanProvider),
+      polylines: _buildPolylines(flightPlanStore),
     );
   }
 
@@ -123,15 +122,15 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
     };
   }
 
-  Set<Polyline> _buildPolylines(FlightPlanProvider flightPlanProvider) {
-    if (flightPlanProvider.selectedFlightPlan['encodedPolyline'] != null) {
+  Set<Polyline> _buildPolylines(FlightPlanStore flightPlanStore) {
+    if (flightPlanStore.selectedFlightPlan['encodedPolyline'] != null) {
       return {
         Polyline(
           polylineId: const PolylineId('1'),
           color: Colors.red,
           width: 3,
           points: decodePolylines(
-              flightPlanProvider.selectedFlightPlan['encodedPolyline']),
+              flightPlanStore.selectedFlightPlan['encodedPolyline']),
           geodesic: true,
           jointType: JointType.round,
         ),
@@ -140,16 +139,16 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
     return {};
   }
 
-  Column _buildOverlays(FlightPlanProvider flightPlanProvider) {
+  Column _buildOverlays(FlightPlanStore flightPlanStore) {
     return Column(
       children: [
         SelectMapType(setMapType: _setMapType),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const SearchFlightPlan(),
+            SearchFlightPlan(store: flightPlanStore),
             FlightPlanDetails(
-                selectedFlightPlan: flightPlanProvider.selectedFlightPlan),
+                selectedFlightPlan: flightPlanStore.selectedFlightPlan),
           ],
         ),
       ],

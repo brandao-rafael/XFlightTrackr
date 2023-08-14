@@ -1,40 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/flight_plan_form.dart';
 import 'package:x_flight_trackr/pages/flight_plan_result_page.dart';
-import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
-import 'package:x_flight_trackr/utils/flight_plan_database.dart';
+import 'package:x_flight_trackr/store/flight_plan_store.dart';
+import 'package:x_flight_trackr/store/form_store.dart';
 
 class SearchFlightPlan extends StatefulWidget {
-  const SearchFlightPlan({Key? key}) : super(key: key);
+  final FlightPlanStore store;
+  const SearchFlightPlan({Key? key, required this.store}) : super(key: key);
 
   @override
   _SearchFlightPlanState createState() => _SearchFlightPlanState();
 }
 
 class _SearchFlightPlanState extends State<SearchFlightPlan> {
-  final TextEditingController _fromController = TextEditingController();
-  final TextEditingController _toController = TextEditingController();
-  final FlightPlanDatabase _flightPlanDatabase = FlightPlanDatabase();
   final _formKey = GlobalKey<FormState>();
-  int _quantity = 1;
-
-  @override
-  void dispose() {
-    _fromController.dispose();
-    _toController.dispose();
-    super.dispose();
-  }
+  final FormStore _formStore = FormStore();
 
   Future<void> _submit(
       BuildContext context, ValueNotifier<bool> isLoadingNotifier) async {
     if (_formKey.currentState?.validate() ?? false) {
       isLoadingNotifier.value = true;
       try {
-        var result = await _searchFlightPlans();
-        _handleSearchResults(context, result);
+        await _searchFlightPlans();
+        if (mounted) {
+          _handleSearchResults(context);
+        }
       } catch (e) {
-        _showError(context);
+        if (mounted) {
+          _showError(context);
+        }
       } finally {
         isLoadingNotifier.value = false;
       }
@@ -42,8 +36,8 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
   }
 
   Future<List<dynamic>> _searchFlightPlans() async {
-    var result = await _flightPlanDatabase.searchFlightPlan(
-        _fromController.text, _toController.text, _quantity.toString());
+    var result = await widget.store.searchFlightPlans(
+        _formStore.from, _formStore.to, _formStore.quantity.toString());
 
     if (result.isNotEmpty && result[0].containsKey('error')) {
       throw Exception('Error in searchFlightPlan');
@@ -52,16 +46,14 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
     return result;
   }
 
-  void _handleSearchResults(BuildContext context, List<dynamic> result) {
-    if (result.isNotEmpty) {
-      final flightPlanProvider =
-          Provider.of<FlightPlanProvider>(context, listen: false);
-      flightPlanProvider.setFlightPlans(result);
+  void _handleSearchResults(BuildContext context) {
+    if (widget.store.flightPlans.isNotEmpty) {
       Navigator.pop(context);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const FlightPlanResultPage(),
+          builder: (context) =>
+              FlightPlanResultPage(flightPlanStore: widget.store),
         ),
       );
     }
@@ -111,24 +103,8 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
                         child: const Center(child: CircularProgressIndicator()),
                       )
                     : FlightPlanForm(
+                        formStore: _formStore,
                         formKey: _formKey,
-                        fromController: _fromController,
-                        toController: _toController,
-                        quantity: _quantity,
-                        onQuantityDecrease: _quantity > 1
-                            ? () {
-                                modalState(() {
-                                  _quantity--;
-                                });
-                              }
-                            : null,
-                        onQuantityIncrease: _quantity < 3
-                            ? () {
-                                modalState(() {
-                                  _quantity++;
-                                });
-                              }
-                            : null,
                         onSubmit: () => _submit(context, isLoadingNotifier),
                       ),
               );

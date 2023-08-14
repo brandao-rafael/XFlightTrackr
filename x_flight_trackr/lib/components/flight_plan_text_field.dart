@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 class FlightPlanTextField extends StatelessWidget {
   const FlightPlanTextField({
     Key? key,
-    required this.controller,
+    required this.onChanged,
     required this.labelText,
     required this.hintText,
   }) : super(key: key);
 
-  final TextEditingController controller;
+  final void Function(String) onChanged;
   final String labelText;
   final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      onChanged: onChanged,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         labelText: labelText,

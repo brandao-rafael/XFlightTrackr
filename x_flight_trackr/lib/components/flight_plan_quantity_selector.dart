@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/components/black_text.dart';
+import 'package:x_flight_trackr/store/form_store.dart';
 
 class FlightPlanQuantitySelector extends StatelessWidget {
   const FlightPlanQuantitySelector({
     Key? key,
-    required this.quantity,
-    required this.onDecrease,
-    required this.onIncrease,
+    required this.formStore,
   }) : super(key: key);
 
-  final int quantity;
-  final VoidCallback? onDecrease;
-  final VoidCallback? onIncrease;
+  final FormStore formStore;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +23,21 @@ class FlightPlanQuantitySelector extends StatelessWidget {
           children: [
             IconButton(
               color: Colors.red,
-              onPressed: onDecrease,
+              onPressed: formStore.decreaseQuantity,
               icon: const Icon(Icons.arrow_downward),
             ),
-            Text(
-              '$quantity',
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-              ),
-            ),
+            Observer(builder: (_) {
+              return Text(
+                '${formStore.quantity}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              );
+            }),
             IconButton(
               color: Colors.green,
-              onPressed: onIncrease,
+              onPressed: formStore.increaseQuantity,
               icon: const Icon(Icons.arrow_upward),
             ),
           ],

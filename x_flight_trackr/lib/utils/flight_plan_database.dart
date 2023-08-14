@@ -7,7 +7,7 @@ class FlightPlanDatabase {
       String from, String to, String quantity) async {
     try {
       final result = await http.get(Uri.parse(
-          'https://api.flightplandatabase.com/search/plans?from=$from&to=$to&limit=$quantity'));
+          'https://api.flightplandatabase.com/search/plans?from=${from.trim()}&to=${to.trim()}&limit=$quantity'));
 
       if (result.statusCode == 429) {
         return [
@@ -39,6 +39,7 @@ class FlightPlanDatabase {
     return http
         .get(Uri.parse('https://api.flightplandatabase.com/plan/$id'))
         .then((response) {
+      print(response.body);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {

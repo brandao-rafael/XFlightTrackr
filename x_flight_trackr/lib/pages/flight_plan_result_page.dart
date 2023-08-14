@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/black_text.dart';
 import 'package:x_flight_trackr/components/horizontal_line.dart';
-import 'package:x_flight_trackr/providers/flight_plan_provider.dart';
+import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
 class FlightPlanResultPage extends StatelessWidget {
-  const FlightPlanResultPage({Key? key}) : super(key: key);
+  final FlightPlanStore flightPlanStore;
+
+  FlightPlanResultPage({Key? key, required this.flightPlanStore})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final flightPlanProvider =
-        Provider.of<FlightPlanProvider>(context, listen: true);
-
-    List<dynamic> flightPlans = flightPlanProvider.flightPlans;
+    List<dynamic> flightPlans = flightPlanStore.flightPlans;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,7 +68,7 @@ class FlightPlanResultPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        flightPlanProvider
+                        flightPlanStore
                             .setSelectedFlightPlan(flightPlans[index]);
                         Navigator.pop(context);
                       },
@@ -84,8 +83,6 @@ class FlightPlanResultPage extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Add more details from the results map as needed.
           );
         },
       ),
