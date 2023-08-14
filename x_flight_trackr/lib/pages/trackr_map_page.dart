@@ -18,17 +18,14 @@ class TrackrMapPage extends StatefulWidget {
   final double lng;
   final double mag;
   final FlightPlanStore flightPlanStore;
-  final List<double> data;
 
   const TrackrMapPage({
     Key? key,
     required this.lat,
     required this.lng,
     required this.mag,
-    required this.data,
     required this.flightPlanStore,
   }) : super(key: key);
-
   @override
   _TrackrMapPageState createState() => _TrackrMapPageState();
 }
@@ -157,8 +154,8 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
   }
 
   Widget _buildFlightDataOrEmptyState() {
-    return widget.data.isNotEmpty
-        ? FlightData(data: widget.data)
+    return widget.flightPlanStore.xPlaneData.isNotEmpty
+        ? FlightData(data: widget.flightPlanStore.xPlaneData)
         : Positioned(
             bottom: 0,
             child: _buildEmptyStateContainer(),
@@ -169,7 +166,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
     for (var interface in await NetworkInterface.list()) {
       if (interface.name.contains('wlan')) {
         setState(() {
-          _ip = '${interface.addresses.map((addr) => addr.address)}';
+          _ip = interface.addresses.map((addr) => addr.address).toList()[0];
         });
         return;
       }

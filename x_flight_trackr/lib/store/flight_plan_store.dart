@@ -9,10 +9,18 @@ abstract class _FlightPlanStore with Store {
   final FlightPlanDatabase _fpdb = FlightPlanDatabase();
 
   @observable
+  List<double> xPlaneData = [];
+
+  @observable
   List<dynamic> flightPlans = [];
 
   @observable
   Map selectedFlightPlan = {};
+
+  @action
+  void setXPlaneData(List<double> data) {
+    xPlaneData = data;
+  }
 
   @action
   void setFlightPlans(List<dynamic> plans) {

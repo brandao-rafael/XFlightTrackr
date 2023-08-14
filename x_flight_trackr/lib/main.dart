@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         Provider(create: (_) => FormStore()),
         Provider(create: (_) => FlightPlanStore()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: _title,
         home: HomePage(),
       ),

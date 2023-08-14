@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/pages/trackr_map_page.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 import 'package:x_flight_trackr/utils/udp_utils.dart';
@@ -14,16 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<double> _allData = [];
-  final flightPlanStore = FlightPlanStore();
+  final FlightPlanStore _flightPlanStore = FlightPlanStore();
 
   void _init(Datagram datagram) {
+    print('INIT');
     var xpc = XPlaneDataParser(datagram.data);
     List<double> parsedData;
     parsedData = xpc.parseDATA();
-    setState(() {
-      _allData = parsedData;
-    });
+    _flightPlanStore.setXPlaneData(parsedData);
   }
 
   @override
@@ -69,12 +68,17 @@ class _HomePageState extends State<HomePage> {
       return const Center(child: CircularProgressIndicator());
     }
     snapshot.data!.listen(_init);
-    return TrackrMapPage(
-      lat: _allData.isNotEmpty ? _allData[171] : 0.0,
-      lng: _allData.isNotEmpty ? _allData[172] : 0.0,
-      mag: _allData.isNotEmpty ? _allData[147] : 0.0,
-      flightPlanStore: flightPlanStore,
-      data: _allData,
-    );
+    return Observer(builder: (_) {
+      List<double> data = _flightPlanStore.xPlaneData;
+      double lat = data.isNotEmpty ? data[171] : 0.0;
+      double lng = data.isNotEmpty ? data[172] : 0.0;
+      double mag = data.isNotEmpty ? data[147] : 0.0;
+      return TrackrMapPage(
+        lat: lat,
+        lng: lng,
+        mag: mag,
+        flightPlanStore: _flightPlanStore,
+      );
+    });
   }
 }
