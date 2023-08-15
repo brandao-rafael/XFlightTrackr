@@ -2,15 +2,13 @@
 <a href="https://flightplandatabase.com"><img src="https://static.flightplandatabase.com/images/data-banner/dark.min.png" alt="Data from the Flight Plan Database"></a>
 
 <div>
-    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786.jpeg?raw=true" height="200px" />
-    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786%20(1).jpeg?raw=true" height="200px" />
-    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786%20(2).jpeg?raw=true" height="200px" />
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/brandao-rafael-readme/screenshots/shot2V1-1-0.jpeg?raw=true" height="200px" />
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/brandao-rafael-readme/screenshots/shot3V1-1-0.jpeg?raw=true" height="200px" />
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/brandao-rafael-readme/screenshots/shot4V1-1-0.jpeg?raw=true" height="200px" />
+    <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/brandao-rafael-readme/screenshots/shotV1-1-0.jpeg?raw=true" height="200px" />
 </div>
 
-
 https://github.com/brandao-rafael/XFlightTrackr/assets/101598059/69524fd6-b762-46a1-9eed-ec9d99ff4e20
-
-
 
 <details>
     <summary>🇺🇸 English</summary>
