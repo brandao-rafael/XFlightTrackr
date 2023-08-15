@@ -8,6 +8,10 @@
 </div>
 
 
+https://github.com/brandao-rafael/XFlightTrackr/assets/101598059/69524fd6-b762-46a1-9eed-ec9d99ff4e20
+
+
+
 <details>
     <summary>🇺🇸 English</summary>
     
