@@ -26,7 +26,7 @@ XFlight Trackr is an application developed in Flutter that aims to provide an im
 - More features coming soon!
 
 ## Installation
-You can download apk in <a href="https://docs.google.com/uc?export=download&id=1MFv8FWUqmY8D7Bu2cvXf9ZX6rYt1noyK" target="_blank">this link</a> or download the xftrackr in the root of this repository and install it on your Android device.
+You can download apk in <a href="https://docs.google.com/uc?export=download&id=12M8PdGbrN2fq0o9z5gtmaWX5tCzsSFZX" target="_blank">this link</a> or download the xftrackr in the root of this repository and install it on your Android device.
 
 ## Feedback and Support
 Thank you for your interest in our application! If you have any questions, feedback or find any problems, feel free to open an issue in this repository. We will do our best to respond and resolve any issues as quickly as possible.
@@ -43,6 +43,7 @@ You will also need to configure the Xplane-11 network to allow external connecti
     - **Note: if you do not check all the options, Xplane-11 will not send all the data necessary for the operation of XFlight Trackr and may generate errors in the application.**
 - In the Network Configuration tab, check the Send network data output option.
 - In the IP Address field, enter the IP of your device.
+    - The application is designed to display the IP. However, if it doesn't appear, please refer to the note below.
     - Note: to find out the IP of your device, open the configuration > wifi > network details > IP Address (ipv4).
     - Make sure your device is connected to the same wifi network as your computer
 - In the Port field, enter the number 51000.
@@ -74,7 +75,7 @@ O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetiv
 
 
 ## Instalação
-Você pode baixar o apk <a href="https://docs.google.com/uc?export=download&id=1MFv8FWUqmY8D7Bu2cvXf9ZX6rYt1noyK" target="_blank">neste link</a> ou fazer o download do xftrackr na raiz desse repositório e instale em seu dispositivo Android.
+Você pode baixar o apk <a href="https://docs.google.com/uc?export=download&id=12M8PdGbrN2fq0o9z5gtmaWX5tCzsSFZX" target="_blank">neste link</a> ou fazer o download do xftrackr na raiz desse repositório e instale em seu dispositivo Android.
 
 ## Feedback e Suporte
 Agradecemos o interesse em nossa aplicação! Se você tiver alguma dúvida, feedback ou encontrar algum problema, sinta-se à vontade para abrir uma issue neste repositório. Faremos o possível para responder e resolver qualquer questão o mais rápido possível.
@@ -90,7 +91,8 @@ Será preciso também configurar a rede do Xplane-11 para permitir conexões ext
 - Na aba General Data Output, marque todas as opções Network via UDP
     - **Observação: se você não marcar todas as opções, o Xplane-11 não enviará todos os dados necessários para o funcionamento do XFlight Trackr podendo gerar erros na aplicação.**
 - Na aba Network Configuration, marque a opção Send network data output.
-- No campo IP Address, coloque o IP da sua máquina local.
+- No campo IP Address, coloque o IP do seu dispositivo móvel.
+    - A aplicação deve te mostrar seu ip, caso não siga a observação abaixo.
     - Observação: para saber o IP do seu dispositivo android vá em configurações > wifi > detalhes da rede > endereço ip (ipv4).
     - Tenha certeza que seu dispositivo está conectado a mesma rede do computador
 - No campo Port, coloque o número 51000.
