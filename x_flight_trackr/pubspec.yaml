@@ -13,12 +13,21 @@ dependencies:
   google_maps_flutter: ^2.3.1
   flutter_dotenv: ^5.1.0
   udp: ^5.0.3
+  http: ^1.1.0
+  url_launcher: ^6.1.12
+  provider: ^6.0.5
+  google_polyline_algorithm: ^3.1.0
+  mobx: ^2.2.0
+  flutter_mobx: ^2.0.6+5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   flutter_launcher_icons: "^0.13.1"
+  build_runner: ^2.4.6
+  mobx_codegen: ^2.3.0
+
 
 flutter:
   uses-material-design: true
@@ -27,6 +36,9 @@ flutter:
     - .env
     - lib/assets/icons/airplane_icon.png
     - lib/assets/icons/logo.png
+    - lib/assets/icons/box_red.png
+    - lib/assets/icons/box_green.png
+    - lib/assets/icons/box_yellow.png
   #   - images/a_dot_ham.jpeg
 
   # fonts:

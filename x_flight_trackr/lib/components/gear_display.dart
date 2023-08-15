@@ -8,13 +8,13 @@ class GearDisplay extends StatelessWidget {
     required this.gearPosition,
   }) : super(key: key);
 
-  MaterialColor get _gearColor {
+  String get _gearColor {
     if (gearPosition == 1) {
-      return Colors.green;
+      return 'lib/assets/icons/box_green.png';
     } else if (gearPosition == 0) {
-      return Colors.red;
+      return 'lib/assets/icons/box_red.png';
     } else {
-      return Colors.yellow;
+      return 'lib/assets/icons/box_yellow.png';
     }
   }
 
@@ -38,9 +38,13 @@ class GearDisplay extends StatelessWidget {
       height: 22,
       margin: const EdgeInsets.all(2),
       width: 20,
-      decoration: BoxDecoration(
-        color: _gearColor,
-        shape: BoxShape.circle,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 500),
+        child: Image.asset(
+          _gearColor,
+          key: ValueKey<String>(_gearColor),
+          width: 20,
+        ),
       ),
     );
   }
