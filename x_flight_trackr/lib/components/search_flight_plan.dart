@@ -60,9 +60,12 @@ class _SearchFlightPlanState extends State<SearchFlightPlan> {
   }
 
   void _showError(BuildContext context) {
+    Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('An error occurred while searching flight plan'),
+      SnackBar(
+        backgroundColor: Colors.red[600]!,
+        content: const Text('An error occurred while searching flight plan'),
+        duration: const Duration(seconds: 4),
       ),
     );
   }

@@ -15,12 +15,6 @@ class FlightPlanDatabase {
         ];
       }
 
-      if (result.statusCode != 200) {
-        return [
-          {'error': 'something went wrong != 200'}
-        ];
-      }
-
       if (result.statusCode == 200) {
         return json.decode(result.body);
       }
@@ -30,7 +24,7 @@ class FlightPlanDatabase {
       ];
     } catch (e) {
       return [
-        {'error': 'something went wrong $e'}
+        {'error': 'something went wrong'}
       ];
     }
   }
