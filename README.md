@@ -14,7 +14,7 @@ https://github.com/brandao-rafael/XFlightTrackr/assets/101598059/69524fd6-b762-4
     <summary>🇺🇸 English</summary>
     
 ## Overview
-XFlight Trackr is an application developed in Flutter that aims to provide an improved experience for aviation enthusiasts who use the Xplane-11 flight simulator. This is the first version of the application, in which you can connect to Xplane-11 and track crucial flight information, details of some aircraft systems and your real-time location on the map.
+XFlight Trackr is an application developed in Flutter that aims to provide an improved experience for aviation enthusiasts who use the Xplane-11 flight simulator. This is the second version of the application, in which you can connect to Xplane-11 and track crucial flight information, details of some aircraft systems, your real-time location on the map, search flight plans and select one.
 
 ## Main Features
 - Connection to the Xplane-11 flight simulator to obtain real-time flight data.
@@ -26,7 +26,7 @@ XFlight Trackr is an application developed in Flutter that aims to provide an im
 - More features coming soon!
 
 ## Installation
-You can download apk in <a href="https://docs.google.com/uc?export=download&id=18q-MT-Oxd3SU-uivW1lcRm-CDSzMXhYJ" target="_blank">this link</a> or download the xftrackr in the root of this repository and install it on your Android device.
+You can download apk in <a href="https://docs.google.com/uc?export=download&id=1MFv8FWUqmY8D7Bu2cvXf9ZX6rYt1noyK" target="_blank">this link</a> or download the xftrackr in the root of this repository and install it on your Android device.
 
 ## Feedback and Support
 Thank you for your interest in our application! If you have any questions, feedback or find any problems, feel free to open an issue in this repository. We will do our best to respond and resolve any issues as quickly as possible.
@@ -60,7 +60,7 @@ We hope you enjoy this first version of XFlight Trackr, apk available in root of
 </details>
 
 ## Visão Geral
-O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetivo fornecer uma experiência aprimorada para os entusiastas da aviação que utilizam o simulador de voo Xplane-11. Esta é a primeira versão da aplicação, na qual você poderá se conectar ao Xplane-11 e acompanhar informações cruciais do voo em andamento, detalhes de alguns sistemas da aeronave e sua localização em tempo real no mapa.
+O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetivo fornecer uma experiência aprimorada para os entusiastas da aviação que utilizam o simulador de voo Xplane-11. Esta é a segunda versão da aplicação, na qual você poderá se conectar ao Xplane-11 e acompanhar informações cruciais do voo em andamento, detalhes de alguns sistemas da aeronave, sua localização em tempo real no mapa, pesquisar planos de vôo e adicioná-los.
 
 ## Funcionalidades Principais
 - Conexão com o simulador de voo Xplane-11 para obter dados em tempo real do voo.
@@ -74,7 +74,7 @@ O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetiv
 
 
 ## Instalação
-Você pode baixar o apk <a href="https://docs.google.com/uc?export=download&id=18q-MT-Oxd3SU-uivW1lcRm-CDSzMXhYJ" target="_blank">neste link</a> ou fazer o download do xftrackr na raiz desse repositório e instale em seu dispositivo Android.
+Você pode baixar o apk <a href="https://docs.google.com/uc?export=download&id=1MFv8FWUqmY8D7Bu2cvXf9ZX6rYt1noyK" target="_blank">neste link</a> ou fazer o download do xftrackr na raiz desse repositório e instale em seu dispositivo Android.
 
 ## Feedback e Suporte
 Agradecemos o interesse em nossa aplicação! Se você tiver alguma dúvida, feedback ou encontrar algum problema, sinta-se à vontade para abrir uma issue neste repositório. Faremos o possível para responder e resolver qualquer questão o mais rápido possível.
