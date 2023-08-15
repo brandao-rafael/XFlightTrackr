@@ -1,4 +1,5 @@
-# XFlight Trackr - V1.0.0
+# XFlight Trackr - V1.1.0  
+<a href="https://flightplandatabase.com"><img src="https://static.flightplandatabase.com/images/data-banner/dark.min.png" alt="Data from the Flight Plan Database"></a>
 
 <div>
     <img src="https://github.com/brandao-rafael/XFlightTrackr/blob/main/screenshots/photo1691009786.jpeg?raw=true" height="200px" />
@@ -17,6 +18,9 @@ XFlight Trackr is an application developed in Flutter that aims to provide an im
 - Connection to the Xplane-11 flight simulator to obtain real-time flight data.
 - Display of the main flight information, such as altitude, speed, direction, among others.
 - Tracking the location of the aircraft on the map in real time, with options to choose the desired map style.
+- Search for flight plans on <a href="https://flightplandatabase.com">Flight Plan Database</a>.
+- View the flight plan route on the map.
+- View the details of flight plan on the details modal.
 - More features coming soon!
 
 ## Installation
@@ -60,6 +64,10 @@ O XFlight Trackr é uma aplicação desenvolvida em Flutter que tem como objetiv
 - Conexão com o simulador de voo Xplane-11 para obter dados em tempo real do voo.
 - Exibição das informações principais do voo, como altitude, velocidade, direção, entre outras.
 - Acompanhamento da localização da aeronave no mapa em tempo real, com opções para escolher o estilo do mapa desejado.
+- Busca de planos de voo no <a href="https://flightplandatabase.com">Flight Plan Database</a>.
+- Visualização da rota do plano de voo no mapa.
+- Visualização dos detalhes do plano de voo no modal de detalhes.
+
 - Em breve mais funcionalidades!
 
 
