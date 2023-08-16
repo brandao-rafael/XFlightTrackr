@@ -102,6 +102,7 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
       initialCameraPosition: CameraPosition(
         target: LatLng(widget.lat, widget.lng),
       ),
+      rotateGesturesEnabled: false,
       markers: _buildMarkers(),
       polylines: _buildPolylines(flightPlanStore),
     );
