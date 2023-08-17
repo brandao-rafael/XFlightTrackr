@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
   final FlightPlanStore _flightPlanStore = FlightPlanStore();
 
   void _init(Datagram datagram) {
-    print('INIT');
     var xpc = XPlaneDataParser(datagram.data);
     List<double> parsedData;
     parsedData = xpc.parseDATA();
