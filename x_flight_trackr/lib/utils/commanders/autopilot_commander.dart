@@ -27,7 +27,7 @@ enum AutoPilotHeadingMode { ROLL, HDGSEL, NAV }
 class AutoPilotCommander {
   final XPlaneCommander commander;
 
-  AutoPilotCommander(this.commander);
+  AutoPilotCommander({required this.commander});
 
   double _getAltitudeModeValue(AutoPilotAltitudeMode mode) {
     switch (mode) {
