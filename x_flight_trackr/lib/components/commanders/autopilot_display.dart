@@ -68,6 +68,14 @@ class AutopilotDisplay extends StatelessWidget {
                   color: Colors.red,
                   fontFamily: GoogleFonts.vt323().fontFamily,
                   fontWeight: FontWeight.w100,
+                  shadows: List.generate(
+                    3,
+                    (index) => const Shadow(
+                      color: Colors.red,
+                      blurRadius: 30,
+                      offset: Offset(0, 1),
+                    ),
+                  ),
                 ),
               ),
               Text(
@@ -76,6 +84,14 @@ class AutopilotDisplay extends StatelessWidget {
                   fontSize: 30,
                   color: Colors.red,
                   fontFamily: GoogleFonts.vt323().fontFamily,
+                  shadows: List.generate(
+                    3,
+                    (index) => const Shadow(
+                      color: Colors.red,
+                      blurRadius: 70,
+                      offset: Offset(0, 1),
+                    ),
+                  ),
                 ),
               ),
             ],

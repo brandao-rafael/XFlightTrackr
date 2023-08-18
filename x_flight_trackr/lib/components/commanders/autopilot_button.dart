@@ -57,6 +57,16 @@ class AutopilotButton extends StatelessWidget {
                   color: isOn
                       ? const Color.fromARGB(255, 19, 255, 117)
                       : Colors.white24,
+                  boxShadow: [
+                    BoxShadow(
+                      color: isOn
+                          ? const Color.fromARGB(255, 19, 255, 117)
+                          : Colors.transparent,
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    )
+                  ],
                 ),
               ),
               const SizedBox(height: 3),
@@ -69,6 +79,16 @@ class AutopilotButton extends StatelessWidget {
                   color: isOn
                       ? const Color.fromARGB(255, 19, 255, 117)
                       : Colors.white,
+                  shadows: List<Shadow>.generate(
+                    2,
+                    (int index) => Shadow(
+                      color: isOn
+                          ? const Color.fromARGB(255, 19, 255, 117)
+                          : Colors.transparent,
+                      blurRadius: 10,
+                      offset: const Offset(0, 1),
+                    ),
+                  ),
                 ),
               ),
             ],
