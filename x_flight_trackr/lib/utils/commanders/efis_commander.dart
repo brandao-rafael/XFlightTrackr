@@ -55,7 +55,7 @@ class EFISCommander {
   }
 
   // not work in 737-800
-  Future<void> ecamMode(ECAMMode mode) async {
+  Future<void> setEcamMode(ECAMMode mode) async {
     return await commander.sendDref(
         'sim/cockpit2/EFIS/ecam_mode', mode.index.toDouble());
   }
