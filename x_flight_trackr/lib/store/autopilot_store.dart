@@ -1,18 +1,15 @@
 import 'package:mobx/mobx.dart';
+import 'package:x_flight_trackr/store/base_commander_store.dart';
 import 'package:x_flight_trackr/utils/commanders/autopilot_commander.dart';
-import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
 
 part 'autopilot_store.g.dart';
 
 class AutopilotStore = _AutopilotStore with _$AutopilotStore;
 
-abstract class _AutopilotStore with Store {
-  XPlaneCommander command =
-      XPlaneCommander(xplaneAddress: '192.168.50.157', xplanePort: 49000);
-
+abstract class _AutopilotStore extends BaseCommanderStore with Store {
   late AutoPilotCommander autopilotCommander;
 
-  _AutopilotStore() {
+  _AutopilotStore() : super() {
     autopilotCommander = AutoPilotCommander(commander: command);
   }
   @observable

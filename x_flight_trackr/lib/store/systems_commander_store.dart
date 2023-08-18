@@ -1,19 +1,16 @@
 import 'package:mobx/mobx.dart';
+import 'package:x_flight_trackr/store/base_commander_store.dart';
 import 'package:x_flight_trackr/utils/commanders/system_commander.dart';
-import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
 
 part 'systems_commander_store.g.dart';
 
 class SystemsCommanderStore = _SystemsCommanderStore
     with _$SystemsCommanderStore;
 
-abstract class _SystemsCommanderStore with Store {
-  XPlaneCommander command =
-      XPlaneCommander(xplaneAddress: '192.168.50.157', xplanePort: 49000);
-
+abstract class _SystemsCommanderStore extends BaseCommanderStore with Store {
   late SystemCommander systemCommander;
 
-  _SystemsCommanderStore() {
+  _SystemsCommanderStore() : super() {
     systemCommander = SystemCommander(commander: command);
   }
 

@@ -1,19 +1,16 @@
 import 'package:mobx/mobx.dart';
+import 'package:x_flight_trackr/store/base_commander_store.dart';
 import 'package:x_flight_trackr/utils/commanders/efis_commander.dart';
-import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
 
 part 'efis_commander_store.g.dart';
 
 class EFISCommanderStore = _EFISCommanderStore with _$EFISCommanderStore;
 
-abstract class _EFISCommanderStore with Store {
-  XPlaneCommander commander =
-      XPlaneCommander(xplaneAddress: '192.168.50.157', xplanePort: 49000);
-
+abstract class _EFISCommanderStore extends BaseCommanderStore with Store {
   late EFISCommander efisCommander;
 
-  _EFISCommanderStore() {
-    efisCommander = EFISCommander(commander: commander);
+  _EFISCommanderStore() : super() {
+    efisCommander = EFISCommander(commander: command);
   }
 
   @observable
