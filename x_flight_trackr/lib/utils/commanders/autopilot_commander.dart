@@ -92,6 +92,11 @@ class AutoPilotCommander {
         'sim/cockpit/autopilot/heading_roll_mode', angle.index.toDouble());
   }
 
+  Future<void> setAutoPilotCourse(double course) async {
+    await commander.sendDref(
+        'sim/cockpit2/radios/actuators/nav_course_deg_mag_pilot', course);
+  }
+
   // Review: See about overriding the default values for the autopilot
   Future<void> setAutopilotAltitudeMode(AutoPilotAltitudeMode mode) async {
     await commander.sendDref(

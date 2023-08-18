@@ -152,6 +152,22 @@ mixin _$AutopilotStore on _AutopilotStore, Store {
     });
   }
 
+  late final _$courseAtom =
+      Atom(name: '_AutopilotStore.course', context: context);
+
+  @override
+  double get course {
+    _$courseAtom.reportRead();
+    return super.course;
+  }
+
+  @override
+  set course(double value) {
+    _$courseAtom.reportWrite(value, super.course, () {
+      super.course = value;
+    });
+  }
+
   late final _$setModeAsyncAction =
       AsyncAction('_AutopilotStore.setMode', context: context);
 
@@ -229,6 +245,14 @@ mixin _$AutopilotStore on _AutopilotStore, Store {
         .run(() => super.setAutoThrottle(newAutoThrottle));
   }
 
+  late final _$setCourseAsyncAction =
+      AsyncAction('_AutopilotStore.setCourse', context: context);
+
+  @override
+  Future<void> setCourse(double newCourse) {
+    return _$setCourseAsyncAction.run(() => super.setCourse(newCourse));
+  }
+
   @override
   String toString() {
     return '''
@@ -240,7 +264,8 @@ altitude: ${altitude},
 heading: ${heading},
 verticalSpeed: ${verticalSpeed},
 airspeed: ${airspeed},
-autoThrottle: ${autoThrottle}
+autoThrottle: ${autoThrottle},
+course: ${course}
     ''';
   }
 }
