@@ -1,13 +1,13 @@
 import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
 
-enum gearPosition { UP, DOWN }
+enum GearPosition { UP, DOWN }
 
 class SystemCommander {
   final XPlaneCommander commander;
 
   SystemCommander({required this.commander});
 
-  Future<void> setGearUpDown(gearPosition position) async {
+  Future<void> setGearUpDown(GearPosition position) async {
     return await commander.sendDref(
         'sim/cockpit2/controls/gear_handle_down', position.index.toDouble());
   }
