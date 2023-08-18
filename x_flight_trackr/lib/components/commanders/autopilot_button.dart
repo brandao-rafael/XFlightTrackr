@@ -14,9 +14,24 @@ class AutopilotButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 35,
       width: 35,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 1),
+          )
+        ],
+      ),
       child: ElevatedButton(
           onPressed: onPressed,
           style: ButtonStyle(
@@ -44,13 +59,16 @@ class AutopilotButton extends StatelessWidget {
                       : Colors.white24,
                 ),
               ),
+              const SizedBox(height: 3),
               Text(
                 text,
                 maxLines: 1,
                 softWrap: false,
                 style: TextStyle(
                   fontSize: 8,
-                  color: Colors.amberAccent[100],
+                  color: isOn
+                      ? const Color.fromARGB(255, 19, 255, 117)
+                      : Colors.white,
                 ),
               ),
             ],
