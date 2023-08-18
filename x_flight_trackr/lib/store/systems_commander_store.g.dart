@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'commander_systems_store.dart';
+part of 'systems_commander_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'commander_systems_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
+mixin _$SystemsCommanderStore on _SystemsCommanderStore, Store {
   late final _$gearPositionAtom =
-      Atom(name: '_CommanderSystemsStore.gearPosition', context: context);
+      Atom(name: '_SystemsCommanderStore.gearPosition', context: context);
 
   @override
   GearPosition get gearPosition {
@@ -26,7 +26,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$flapsPositionAtom =
-      Atom(name: '_CommanderSystemsStore.flapsPosition', context: context);
+      Atom(name: '_SystemsCommanderStore.flapsPosition', context: context);
 
   @override
   double get flapsPosition {
@@ -42,7 +42,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$speedBrakePositionAtom =
-      Atom(name: '_CommanderSystemsStore.speedBrakePosition', context: context);
+      Atom(name: '_SystemsCommanderStore.speedBrakePosition', context: context);
 
   @override
   double get speedBrakePosition {
@@ -58,7 +58,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$parkingBrakePositionAtom = Atom(
-      name: '_CommanderSystemsStore.parkingBrakePosition', context: context);
+      name: '_SystemsCommanderStore.parkingBrakePosition', context: context);
 
   @override
   double get parkingBrakePosition {
@@ -75,7 +75,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$throttlePositionAtom =
-      Atom(name: '_CommanderSystemsStore.throttlePosition', context: context);
+      Atom(name: '_SystemsCommanderStore.throttlePosition', context: context);
 
   @override
   double get throttlePosition {
@@ -91,7 +91,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$reversePositionAtom =
-      Atom(name: '_CommanderSystemsStore.reversePosition', context: context);
+      Atom(name: '_SystemsCommanderStore.reversePosition', context: context);
 
   @override
   double get reversePosition {
@@ -107,7 +107,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$autoBrakePositionAtom =
-      Atom(name: '_CommanderSystemsStore.autoBrakePosition', context: context);
+      Atom(name: '_SystemsCommanderStore.autoBrakePosition', context: context);
 
   @override
   double get autoBrakePosition {
@@ -123,7 +123,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setGearPositionAsyncAction =
-      AsyncAction('_CommanderSystemsStore.setGearPosition', context: context);
+      AsyncAction('_SystemsCommanderStore.setGearPosition', context: context);
 
   @override
   Future<void> setGearPosition(GearPosition newGearPosition) {
@@ -132,7 +132,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setFlapsPositionAsyncAction =
-      AsyncAction('_CommanderSystemsStore.setFlapsPosition', context: context);
+      AsyncAction('_SystemsCommanderStore.setFlapsPosition', context: context);
 
   @override
   Future<void> setFlapsPosition(double newFlapsPosition) {
@@ -141,7 +141,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setSpeedBrakePositionAsyncAction = AsyncAction(
-      '_CommanderSystemsStore.setSpeedBrakePosition',
+      '_SystemsCommanderStore.setSpeedBrakePosition',
       context: context);
 
   @override
@@ -151,7 +151,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setParkingBrakePositionAsyncAction = AsyncAction(
-      '_CommanderSystemsStore.setParkingBrakePosition',
+      '_SystemsCommanderStore.setParkingBrakePosition',
       context: context);
 
   @override
@@ -161,7 +161,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setAutoBrakePositionAsyncAction = AsyncAction(
-      '_CommanderSystemsStore.setAutoBrakePosition',
+      '_SystemsCommanderStore.setAutoBrakePosition',
       context: context);
 
   @override
@@ -171,7 +171,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setThrottlePositionAsyncAction = AsyncAction(
-      '_CommanderSystemsStore.setThrottlePosition',
+      '_SystemsCommanderStore.setThrottlePosition',
       context: context);
 
   @override
@@ -181,7 +181,7 @@ mixin _$CommanderSystemsStore on _CommanderSystemsStore, Store {
   }
 
   late final _$setReversePositionAsyncAction = AsyncAction(
-      '_CommanderSystemsStore.setReversePosition',
+      '_SystemsCommanderStore.setReversePosition',
       context: context);
 
   @override
