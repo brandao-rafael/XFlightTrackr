@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/pages/home_page.dart';
+import 'package:x_flight_trackr/store/autopilot_store.dart';
+import 'package:x_flight_trackr/store/efis_commander_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 import 'package:x_flight_trackr/store/form_store.dart';
+import 'package:x_flight_trackr/store/systems_commander_store.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -21,8 +24,11 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(create: (_) => FormStore()),
         Provider(create: (_) => FlightPlanStore()),
+        Provider(create: (_) => AutopilotStore()),
+        Provider(create: (_) => EFISCommanderStore()),
+        Provider(create: (_) => SystemsCommanderStore()),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         title: _title,
         home: HomePage(),
       ),
