@@ -5,16 +5,22 @@ import 'package:x_flight_trackr/components/commanders/radial_button.dart';
 class AutopilotDisplay extends StatelessWidget {
   final double value;
   final String text;
+  final void Function(DragUpdateDetails) onPanUpdate;
 
-  const AutopilotDisplay({super.key, required this.value, required this.text});
+  const AutopilotDisplay(
+      {super.key,
+      required this.value,
+      required this.text,
+      required this.onPanUpdate});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const RadialButton(
+        RadialButton(
           icon: Icons.sync_outlined,
           radius: 30,
+          onPanUpdate: onPanUpdate,
         ),
         const SizedBox(width: 5),
         Container(
