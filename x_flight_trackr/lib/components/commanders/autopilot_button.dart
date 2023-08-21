@@ -78,7 +78,7 @@ class AutopilotButton extends StatelessWidget {
                   fontSize: 8,
                   color: isOn
                       ? const Color.fromARGB(255, 19, 255, 117)
-                      : Colors.white,
+                      : Colors.grey[400],
                   shadows: List<Shadow>.generate(
                     2,
                     (int index) => Shadow(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/pages/commander_page.dart';
-import 'package:x_flight_trackr/pages/home_page.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 import 'package:x_flight_trackr/store/efis_commander_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';

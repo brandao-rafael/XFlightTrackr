@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:x_flight_trackr/pages/trackr_map_page.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 import 'package:x_flight_trackr/utils/udp_utils.dart';
@@ -50,10 +51,17 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blueAccent[700] ?? Colors.blueAccent,
         foregroundColor: Colors.white,
       ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: Colors.white),
-        bodyMedium: TextStyle(color: Colors.white),
-        bodySmall: TextStyle(color: Colors.white),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(
+            color: Colors.white,
+            fontFamily: GoogleFonts.montserrat().fontFamily),
+        bodyMedium: TextStyle(
+          color: Colors.white,
+          fontFamily: GoogleFonts.montserrat().fontFamily,
+        ),
+        bodySmall: TextStyle(
+            color: Colors.white,
+            fontFamily: GoogleFonts.montserrat().fontFamily),
       ),
     );
   }
