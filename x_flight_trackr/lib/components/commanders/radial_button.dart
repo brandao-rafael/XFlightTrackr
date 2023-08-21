@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 class RadialButton extends StatelessWidget {
   final String? text;
   final IconData icon;
+  final double radius;
 
-  const RadialButton({required this.icon, this.text, super.key});
+  const RadialButton(
+      {required this.icon, this.text, super.key, required this.radius});
 
-  final double radius = 20.0;
-
+  // code from https://fireship.io/snippets/circular-drag-flutter/
   void _panHandler(DragUpdateDetails d) {
     /// Pan location on the wheel
     bool onTop = d.localPosition.dy <= radius;
@@ -74,7 +75,13 @@ class RadialButton extends StatelessWidget {
                 width: 1,
               ),
             ),
-            child: Icon(icon, size: 15, color: Colors.grey[400]),
+            child: text != null
+                ? Center(
+                    child: Text(
+                    '0°',
+                    style: TextStyle(color: Colors.grey[400]!),
+                  ))
+                : Icon(icon, size: 30, color: Colors.grey[400]!),
           ),
         ),
       ],

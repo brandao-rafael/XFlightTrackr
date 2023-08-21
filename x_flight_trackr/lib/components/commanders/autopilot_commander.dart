@@ -6,6 +6,21 @@ import 'package:x_flight_trackr/components/commanders/radial_button.dart';
 class AutopilotCommander extends StatelessWidget {
   const AutopilotCommander({super.key});
 
+  bool exists(int index, List<double> list) {
+    try {
+      // ignore: unnecessary_null_comparison
+      if (list[index] != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } on RangeError {
+      return false;
+    } catch (_) {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +37,7 @@ class AutopilotCommander extends StatelessWidget {
           ],
         ),
       ),
-      height: 300,
+      height: 360,
       padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,9 +58,9 @@ class AutopilotCommander extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  AutopilotButton(isOn: true, text: 'A/T', onPressed: () {}),
+                  AutopilotButton(isOn: false, text: 'A/T', onPressed: () {}),
                   const SizedBox(width: 15),
-                  AutopilotButton(isOn: true, text: 'SPEED', onPressed: () {}),
+                  AutopilotButton(isOn: false, text: 'SPEED', onPressed: () {}),
                   const SizedBox(width: 15),
                   AutopilotButton(isOn: false, text: 'N1', onPressed: () {}),
                 ],
@@ -54,11 +69,16 @@ class AutopilotCommander extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  AutopilotButton(isOn: false, text: 'HDG', onPressed: () {}),
+                  AutopilotButton(
+                    isOn: true,
+                    text: 'HDG',
+                    onPressed: () {},
+                  ),
                   const SizedBox(width: 10),
                   const RadialButton(
                     icon: Icons.text_rotation_angleup_outlined,
                     text: 'Bank A.',
+                    radius: 25,
                   ),
                   const SizedBox(width: 10),
                   AutopilotButton(isOn: false, text: 'LNAV', onPressed: () {}),
@@ -67,7 +87,11 @@ class AutopilotCommander extends StatelessWidget {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  AutopilotButton(isOn: false, text: 'ALT', onPressed: () {}),
+                  AutopilotButton(
+                    isOn: true,
+                    text: 'ALT',
+                    onPressed: () {},
+                  ),
                   const SizedBox(width: 10),
                   AutopilotButton(isOn: false, text: 'VNAV', onPressed: () {}),
                   const SizedBox(width: 10),
@@ -79,7 +103,11 @@ class AutopilotCommander extends StatelessWidget {
                 children: [
                   AutopilotButton(isOn: false, text: 'AP', onPressed: () {}),
                   const SizedBox(width: 10),
-                  AutopilotButton(isOn: false, text: 'APP', onPressed: () {}),
+                  AutopilotButton(
+                    isOn: false,
+                    text: 'APP',
+                    onPressed: () {},
+                  ),
                   const SizedBox(width: 10),
                   AutopilotButton(isOn: false, text: 'F/D', onPressed: () {}),
                 ],

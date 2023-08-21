@@ -12,7 +12,10 @@ class AutopilotDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const RadialButton(icon: Icons.sync_outlined),
+        const RadialButton(
+          icon: Icons.sync_outlined,
+          radius: 30,
+        ),
         const SizedBox(width: 5),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 2.0),

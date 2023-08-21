@@ -46,52 +46,55 @@ class AutopilotButton extends StatelessWidget {
               ),
             ),
           ),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                width: 25,
-                height: 5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: isOn
-                      ? const Color.fromARGB(255, 19, 255, 117)
-                      : Colors.white24,
-                  boxShadow: [
-                    BoxShadow(
-                      color: isOn
-                          ? const Color.fromARGB(255, 19, 255, 117)
-                          : Colors.transparent,
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      offset: const Offset(0, 1),
-                    )
-                  ],
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  width: 25,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: isOn
+                        ? const Color.fromARGB(255, 19, 255, 117)
+                        : Colors.white24,
+                    boxShadow: [
+                      BoxShadow(
+                        color: isOn
+                            ? const Color.fromARGB(255, 19, 255, 117)
+                            : Colors.transparent,
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 3),
-              Text(
-                text,
-                maxLines: 1,
-                softWrap: false,
-                style: TextStyle(
-                  fontSize: 8,
-                  color: isOn
-                      ? const Color.fromARGB(255, 19, 255, 117)
-                      : Colors.grey[400],
-                  shadows: List<Shadow>.generate(
-                    2,
-                    (int index) => Shadow(
-                      color: isOn
-                          ? const Color.fromARGB(255, 19, 255, 117)
-                          : Colors.transparent,
-                      blurRadius: 10,
-                      offset: const Offset(0, 1),
+                const SizedBox(height: 3),
+                Text(
+                  text,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: TextStyle(
+                    fontSize: 8,
+                    color: isOn
+                        ? const Color.fromARGB(255, 19, 255, 117)
+                        : Colors.grey[400],
+                    shadows: List<Shadow>.generate(
+                      2,
+                      (int index) => Shadow(
+                        color: isOn
+                            ? const Color.fromARGB(255, 19, 255, 117)
+                            : Colors.transparent,
+                        blurRadius: 10,
+                        offset: const Offset(0, 1),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )),
     );
   }
