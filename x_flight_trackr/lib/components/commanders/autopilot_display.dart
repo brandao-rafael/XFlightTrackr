@@ -3,27 +3,30 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:x_flight_trackr/components/commanders/radial_button.dart';
 
 class AutopilotDisplay extends StatelessWidget {
-  final double value;
+  final dynamic value;
   final String text;
-  final void Function(DragUpdateDetails) onPanUpdate;
+  final void Function(DragUpdateDetails)? onPanUpdate;
+  final bool? withButton;
 
   const AutopilotDisplay({
     super.key,
+    this.withButton = true,
     required this.value,
     required this.text,
-    required this.onPanUpdate,
+    this.onPanUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        RadialButton(
-          icon: Icons.sync_outlined,
-          radius: 30,
-          onPanUpdate: onPanUpdate,
-        ),
-        const SizedBox(width: 5),
+        if (withButton!)
+          RadialButton(
+            icon: Icons.sync_outlined,
+            radius: 30,
+            onPanUpdate: onPanUpdate!,
+          ),
+        if (withButton!) const SizedBox(width: 5),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 2.0),
           height: 50,
@@ -72,7 +75,7 @@ class AutopilotDisplay extends StatelessWidget {
                 ],
               ),
               Text(
-                value.toInt().toString(),
+                value.toString(),
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.red,

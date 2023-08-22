@@ -91,7 +91,13 @@ class AutopilotCommander extends StatelessWidget {
     autopilotStore.setCourse(courseValue);
   }
 
-  void _setBankAngle(double value) {}
+  void _setBankAngle(double value) {
+    if (value > 0) {
+      autopilotStore.setBankAngle(autopilotStore.bankAngle + 1);
+    } else {
+      autopilotStore.setBankAngle(autopilotStore.bankAngle - 1);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,31 +126,31 @@ class AutopilotCommander extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AutopilotDisplay(
-                  value: autopilotStore.airspeed,
+                  value: autopilotStore.airspeed.toInt(),
                   text: 'spd',
                   onPanUpdate: (d) =>
                       _panHandler(d, 30, autopilotStore, _setAirspeed),
                 ),
                 AutopilotDisplay(
-                  value: autopilotStore.heading,
+                  value: autopilotStore.heading.toInt(),
                   text: 'hdg',
                   onPanUpdate: (d) =>
                       _panHandler(d, 30, autopilotStore, _setHeading),
                 ),
                 AutopilotDisplay(
-                  value: autopilotStore.altitude,
+                  value: autopilotStore.altitude.toInt(),
                   text: 'alt',
                   onPanUpdate: (d) =>
                       _panHandler(d, 30, autopilotStore, _setAltitude),
                 ),
                 AutopilotDisplay(
-                  value: autopilotStore.verticalSpeed,
+                  value: autopilotStore.verticalSpeed.toInt(),
                   text: 'vs',
                   onPanUpdate: (d) =>
                       _panHandler(d, 30, autopilotStore, _setVerticalSpeed),
                 ),
                 AutopilotDisplay(
-                  value: autopilotStore.course,
+                  value: autopilotStore.course.toInt(),
                   text: 'crs',
                   onPanUpdate: (d) =>
                       _panHandler(d, 30, autopilotStore, _setCourse),
@@ -152,69 +158,80 @@ class AutopilotCommander extends StatelessWidget {
               ],
             );
           }),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                children: [
-                  AutopilotButton(isOn: false, text: 'A/T', onPressed: () {}),
-                  const SizedBox(width: 15),
-                  AutopilotButton(isOn: false, text: 'SPEED', onPressed: () {}),
-                  const SizedBox(width: 15),
-                  AutopilotButton(isOn: false, text: 'N1', onPressed: () {}),
-                ],
-              ),
-              const SizedBox(height: 5),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  AutopilotButton(
-                    isOn: true,
-                    text: 'HDG',
-                    onPressed: () {},
-                  ),
-                  const SizedBox(width: 10),
-                  RadialButton(
-                    icon: Icons.text_rotation_angleup_outlined,
-                    text: 'Bank A.',
-                    radius: 25,
-                    onPanUpdate: (d) =>
-                        _panHandler(d, 25, autopilotStore, _setBankAngle),
-                  ),
-                  const SizedBox(width: 10),
-                  AutopilotButton(isOn: false, text: 'LNAV', onPressed: () {}),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  AutopilotButton(
-                    isOn: true,
-                    text: 'ALT',
-                    onPressed: () {},
-                  ),
-                  const SizedBox(width: 10),
-                  AutopilotButton(isOn: false, text: 'VNAV', onPressed: () {}),
-                  const SizedBox(width: 10),
-                  AutopilotButton(isOn: true, text: 'V/S', onPressed: () {}),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  AutopilotButton(isOn: false, text: 'AP', onPressed: () {}),
-                  const SizedBox(width: 10),
-                  AutopilotButton(
-                    isOn: false,
-                    text: 'APP',
-                    onPressed: () {},
-                  ),
-                  const SizedBox(width: 10),
-                  AutopilotButton(isOn: false, text: 'F/D', onPressed: () {}),
-                ],
-              ),
-            ],
-          ),
+          Observer(builder: (context) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    AutopilotButton(isOn: false, text: 'A/T', onPressed: () {}),
+                    const SizedBox(width: 15),
+                    AutopilotButton(
+                        isOn: false, text: 'SPEED', onPressed: () {}),
+                    const SizedBox(width: 15),
+                    AutopilotButton(isOn: false, text: 'N1', onPressed: () {}),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                AutopilotDisplay(
+                  withButton: false,
+                  value: autopilotStore.bankAngle == 0
+                      ? 'Auto'
+                      : '${(autopilotStore.bankAngle.toDouble() * 5).toInt()}°',
+                  text: 'bank',
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AutopilotButton(
+                      isOn: true,
+                      text: 'HDG',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(width: 10),
+                    RadialButton(
+                      icon: Icons.text_rotation_angleup,
+                      radius: 25,
+                      onPanUpdate: (d) =>
+                          _panHandler(d, 25, autopilotStore, _setBankAngle),
+                    ),
+                    const SizedBox(width: 10),
+                    AutopilotButton(
+                        isOn: false, text: 'LNAV', onPressed: () {}),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    AutopilotButton(
+                      isOn: true,
+                      text: 'ALT',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(width: 10),
+                    AutopilotButton(
+                        isOn: false, text: 'VNAV', onPressed: () {}),
+                    const SizedBox(width: 10),
+                    AutopilotButton(isOn: true, text: 'V/S', onPressed: () {}),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    AutopilotButton(isOn: false, text: 'AP', onPressed: () {}),
+                    const SizedBox(width: 10),
+                    AutopilotButton(
+                      isOn: false,
+                      text: 'APP',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(width: 10),
+                    AutopilotButton(isOn: false, text: 'F/D', onPressed: () {}),
+                  ],
+                ),
+              ],
+            );
+          }),
         ],
       ),
     );

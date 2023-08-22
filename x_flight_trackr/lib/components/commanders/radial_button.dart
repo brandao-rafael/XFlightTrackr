@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 class RadialButton extends StatelessWidget {
   final String? text;
-  final IconData icon;
+  final String? value;
+  final IconData? icon;
   final double radius;
   final void Function(DragUpdateDetails) onPanUpdate;
 
   const RadialButton({
-    required this.icon,
+    this.icon,
     this.text,
     super.key,
     required this.radius,
     required this.onPanUpdate,
+    this.value,
   });
 
   @override
@@ -42,11 +44,11 @@ class RadialButton extends StatelessWidget {
                 width: 1,
               ),
             ),
-            child: text != null
+            child: text != null && value != null
                 ? Center(
                     child: Text(
-                    '0°',
-                    style: TextStyle(color: Colors.grey[400]!),
+                    value!,
+                    style: TextStyle(color: Colors.grey[400]!, fontSize: 12),
                   ))
                 : Icon(icon, size: 30, color: Colors.grey[400]!),
           ),

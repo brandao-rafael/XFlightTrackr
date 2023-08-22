@@ -28,13 +28,13 @@ mixin _$AutopilotStore on _AutopilotStore, Store {
       Atom(name: '_AutopilotStore.bankAngle', context: context);
 
   @override
-  AutoPilotBankAngle get bankAngle {
+  int get bankAngle {
     _$bankAngleAtom.reportRead();
     return super.bankAngle;
   }
 
   @override
-  set bankAngle(AutoPilotBankAngle value) {
+  set bankAngle(int value) {
     _$bankAngleAtom.reportWrite(value, super.bankAngle, () {
       super.bankAngle = value;
     });
@@ -180,7 +180,7 @@ mixin _$AutopilotStore on _AutopilotStore, Store {
       AsyncAction('_AutopilotStore.setBankAngle', context: context);
 
   @override
-  Future<void> setBankAngle(AutoPilotBankAngle newBankAngle) {
+  Future<void> setBankAngle(int newBankAngle) {
     return _$setBankAngleAsyncAction
         .run(() => super.setBankAngle(newBankAngle));
   }

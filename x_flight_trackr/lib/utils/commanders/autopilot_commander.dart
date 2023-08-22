@@ -4,8 +4,6 @@ import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
 
 enum AutoPilotMode { OFF, FD, ON }
 
-enum AutoPilotBankAngle { AUTO, FIVE, TEN, FIFTEEN, TWENTY, TWENTYFIVE, THIRTY }
-
 enum AutoPilotAltitudeMode {
   PITCH,
   VS,
@@ -87,14 +85,15 @@ class AutoPilotCommander {
         'sim/cockpit/autopilot/autopilot_mode', mode.index.toDouble());
   }
 
-  Future<void> setAutoPilotBankAngle(AutoPilotBankAngle angle) async {
+  Future<void> setAutoPilotBankAngle(int angle) async {
+    // sim/cockpit2/autopilot/bank_angle_mode
     await commander.sendDref(
-        'sim/cockpit/autopilot/heading_roll_mode', angle.index.toDouble());
+        'sim/cockpit/autopilot/heading_roll_mode', angle.toDouble());
   }
 
   Future<void> setAutoPilotCourse(double course) async {
     await commander.sendDref(
-        'sim/cockpit2/radios/actuators/nav_course_deg_mag_pilot', course);
+        'sim/cockpit2/radios/actuators/hsi_obs_deg_mag_pilot', course);
   }
 
   // Review: See about overriding the default values for the autopilot

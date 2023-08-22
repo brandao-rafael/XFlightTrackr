@@ -16,7 +16,7 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   AutoPilotMode mode = AutoPilotMode.OFF;
 
   @observable
-  AutoPilotBankAngle bankAngle = AutoPilotBankAngle.AUTO;
+  int bankAngle = 0;
 
   @observable
   AutoPilotAltitudeMode altitudeMode = AutoPilotAltitudeMode.PITCH;
@@ -48,12 +48,18 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   }
 
   @action
-  Future<void> setBankAngle(AutoPilotBankAngle newBankAngle) async {
+  Future<void> setBankAngle(int newBankAngle) async {
     try {
-      bankAngle = newBankAngle;
+      if (newBankAngle < 0) {
+        bankAngle = 0;
+      } else if (newBankAngle >= 6) {
+        bankAngle = 6;
+      } else {
+        bankAngle = newBankAngle;
+      }
       await autopilotCommander.setAutoPilotBankAngle(bankAngle);
     } catch (_) {
-      bankAngle = AutoPilotBankAngle.AUTO;
+      bankAngle = 0;
     }
   }
 
@@ -160,8 +166,8 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
         course = 0;
       } else {
         course = newCourse;
-        await autopilotCommander.setAutoPilotCourse(course);
       }
+      await autopilotCommander.setAutoPilotCourse(course);
     } catch (_) {
       course = 0;
     }
