@@ -1,4 +1,4 @@
-import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
+import 'package:x_flight_trackr/services/commanders/x_plane_commander.dart';
 
 enum EFISMapMode { APP, VOR, MAP, NAV, PLN }
 

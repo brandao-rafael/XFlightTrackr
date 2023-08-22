@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:x_flight_trackr/utils/commanders/x_plane_commander.dart';
+import 'package:x_flight_trackr/services/commanders/x_plane_commander.dart';
 
 enum AutoPilotMode { OFF, FD, ON }
 
