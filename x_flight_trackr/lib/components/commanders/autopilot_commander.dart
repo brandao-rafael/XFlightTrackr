@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/components/commanders/Autopilot_button.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
 import 'package:x_flight_trackr/components/commanders/radial_button.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_commander.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 
@@ -78,7 +79,12 @@ class AutopilotCommander extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    AutopilotButton(isOn: false, text: 'A/T', onPressed: () {}),
+                    AutopilotButton(
+                      isOn: autopilotStore.autoThrottle,
+                      text: 'A/T',
+                      onPressed: () => autopilotStore
+                          .setAutoThrottle(!autopilotStore.autoThrottle),
+                    ),
                     const SizedBox(width: 15),
                     AutopilotButton(
                         isOn: false, text: 'SPEED', onPressed: () {}),
@@ -98,9 +104,14 @@ class AutopilotCommander extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AutopilotButton(
-                      isOn: true,
+                      isOn: autopilotStore.headingMode ==
+                          AutoPilotHeadingMode.HDGSEL,
                       text: 'HDG',
-                      onPressed: () {},
+                      onPressed: () => autopilotStore.setHeadingMode(
+                          autopilotStore.headingMode ==
+                                  AutoPilotHeadingMode.HDGSEL
+                              ? AutoPilotHeadingMode.ROLL
+                              : AutoPilotHeadingMode.HDGSEL),
                     ),
                     const SizedBox(width: 10),
                     RadialButton(
@@ -111,28 +122,69 @@ class AutopilotCommander extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                        isOn: false, text: 'LNAV', onPressed: () {}),
+                      isOn: autopilotStore.headingMode ==
+                          AutoPilotHeadingMode.NAV,
+                      text: 'LNAV',
+                      onPressed: () => autopilotStore.setHeadingMode(
+                        autopilotStore.headingMode == AutoPilotHeadingMode.NAV
+                            ? AutoPilotHeadingMode.ROLL
+                            : AutoPilotHeadingMode.NAV,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
                     AutopilotButton(
-                      isOn: true,
+                      isOn: autopilotStore.altitudeMode ==
+                          AutoPilotAltitudeMode.PITCH,
                       text: 'ALT',
-                      onPressed: () {},
+                      onPressed: () => autopilotStore.setAltitudeMode(
+                        autopilotStore.altitudeMode ==
+                                AutoPilotAltitudeMode.PITCH
+                            ? AutoPilotAltitudeMode.LEVEL
+                            : AutoPilotAltitudeMode.PITCH,
+                      ),
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                        isOn: false, text: 'VNAV', onPressed: () {}),
+                      isOn: autopilotStore.altitudeMode ==
+                          AutoPilotAltitudeMode.VNAV,
+                      text: 'VNAV',
+                      onPressed: () => autopilotStore.setAltitudeMode(
+                        autopilotStore.altitudeMode ==
+                                AutoPilotAltitudeMode.VNAV
+                            ? AutoPilotAltitudeMode.LEVEL
+                            : AutoPilotAltitudeMode.VNAV,
+                      ),
+                    ),
                     const SizedBox(width: 10),
-                    AutopilotButton(isOn: true, text: 'V/S', onPressed: () {}),
+                    AutopilotButton(
+                      isOn: autopilotStore.altitudeMode ==
+                          AutoPilotAltitudeMode.VS,
+                      text: 'V/S',
+                      onPressed: () => autopilotStore.setAltitudeMode(
+                        autopilotStore.altitudeMode == AutoPilotAltitudeMode.VS
+                            ? AutoPilotAltitudeMode.LEVEL
+                            : AutoPilotAltitudeMode.VS,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    AutopilotButton(isOn: false, text: 'AP', onPressed: () {}),
+                    AutopilotButton(
+                        isOn: autopilotStore.mode == AutoPilotMode.ON,
+                        text: 'AP',
+                        onPressed: () {
+                          autopilotStore.setMode(
+                            autopilotStore.mode == AutoPilotMode.ON
+                                ? AutoPilotMode.OFF
+                                : AutoPilotMode.ON,
+                          );
+                        }),
                     const SizedBox(width: 10),
                     AutopilotButton(
                       isOn: false,
@@ -140,7 +192,15 @@ class AutopilotCommander extends StatelessWidget {
                       onPressed: () {},
                     ),
                     const SizedBox(width: 10),
-                    AutopilotButton(isOn: false, text: 'F/D', onPressed: () {}),
+                    AutopilotButton(
+                      isOn: autopilotStore.mode == AutoPilotMode.FD,
+                      text: 'F/D',
+                      onPressed: () => autopilotStore.setMode(
+                        autopilotStore.mode == AutoPilotMode.FD
+                            ? AutoPilotMode.OFF
+                            : AutoPilotMode.FD,
+                      ),
+                    ),
                   ],
                 ),
               ],
