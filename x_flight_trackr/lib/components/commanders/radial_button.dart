@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 
 class RadialButton extends StatelessWidget {
-  final String? text;
-  final String? value;
   final IconData? icon;
   final double radius;
   final void Function(DragUpdateDetails) onPanUpdate;
 
   const RadialButton({
     this.icon,
-    this.text,
     super.key,
     required this.radius,
     required this.onPanUpdate,
-    this.value,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (text != null)
-          Text(text!, style: TextStyle(fontSize: 10, color: Colors.grey[300]!)),
-        const SizedBox(height: 5),
         GestureDetector(
           onPanUpdate: onPanUpdate,
           child: Container(
@@ -44,13 +37,7 @@ class RadialButton extends StatelessWidget {
                 width: 1,
               ),
             ),
-            child: text != null && value != null
-                ? Center(
-                    child: Text(
-                    value!,
-                    style: TextStyle(color: Colors.grey[400]!, fontSize: 12),
-                  ))
-                : Icon(icon, size: 30, color: Colors.grey[400]!),
+            child: Icon(icon, size: 30, color: Colors.grey[400]!),
           ),
         ),
       ],

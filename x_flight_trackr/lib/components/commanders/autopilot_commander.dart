@@ -3,101 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/components/commanders/Autopilot_button.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
 import 'package:x_flight_trackr/components/commanders/radial_button.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 
 class AutopilotCommander extends StatelessWidget {
   final AutopilotStore autopilotStore;
+  final AutopilotService autopilotService;
 
-  const AutopilotCommander({super.key, required this.autopilotStore});
-
-  bool exists(int index, List<double> list) {
-    try {
-      // ignore: unnecessary_null_comparison
-      if (list[index] != null) {
-        return true;
-      } else {
-        return false;
-      }
-    } on RangeError {
-      return false;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  // code from https://fireship.io/snippets/circular-drag-flutter/
-  void _panHandler(DragUpdateDetails d, int radius, AutopilotStore store,
-      void Function(double) set) {
-    /// Pan location on the wheel
-    bool onTop = d.localPosition.dy <= radius;
-    bool onLeftSide = d.localPosition.dx <= radius;
-    bool onRightSide = !onLeftSide;
-    bool onBottom = !onTop;
-
-    /// Pan movements
-    bool panUp = d.delta.dy <= 0.0;
-    bool panLeft = d.delta.dx <= 0.0;
-    bool panRight = !panLeft;
-    bool panDown = !panUp;
-
-    /// Absoulte change on axis
-    double yChange = d.delta.dy.abs();
-    double xChange = d.delta.dx.abs();
-
-    /// Directional change on wheel
-    double verticalRotation = (onRightSide && panDown) || (onLeftSide && panUp)
-        ? yChange
-        : yChange * -1;
-
-    double horizontalRotation =
-        (onTop && panRight) || (onBottom && panLeft) ? xChange : xChange * -1;
-
-    // Total computed change
-    double rotationalChange = verticalRotation + horizontalRotation;
-
-    if (rotationalChange > 4) {
-      set(1000);
-    } else if (rotationalChange > 0) {
-      set(100);
-    } else if (rotationalChange < -4) {
-      set(-1000);
-    } else if (rotationalChange < 0) {
-      set(-100);
-    }
-  }
-
-  void _setAltitude(double value) {
-    double altitudeValue = value + autopilotStore.altitude;
-    autopilotStore.setAltitude(altitudeValue);
-  }
-
-  void _setHeading(double value) {
-    double headingValue = (value / 100) + autopilotStore.heading;
-    autopilotStore.setHeading(headingValue);
-  }
-
-  void _setVerticalSpeed(double value) {
-    double verticalSpeedValue = value + autopilotStore.verticalSpeed;
-    autopilotStore.setVerticalSpeed(verticalSpeedValue);
-  }
-
-  void _setAirspeed(double value) {
-    double airspeedValue = (value / 100) + autopilotStore.airspeed;
-    autopilotStore.setAirspeed(airspeedValue);
-  }
-
-  void _setCourse(double value) {
-    double courseValue = (value / 100) + autopilotStore.course;
-    autopilotStore.setCourse(courseValue);
-  }
-
-  void _setBankAngle(double value) {
-    if (value > 0) {
-      autopilotStore.setBankAngle(autopilotStore.bankAngle + 1);
-    } else {
-      autopilotStore.setBankAngle(autopilotStore.bankAngle - 1);
-    }
-  }
+  AutopilotCommander({super.key, required this.autopilotStore})
+      : autopilotService = AutopilotService(autopilotStore);
 
   @override
   Widget build(BuildContext context) {
@@ -128,32 +42,32 @@ class AutopilotCommander extends StatelessWidget {
                 AutopilotDisplay(
                   value: autopilotStore.airspeed.toInt(),
                   text: 'spd',
-                  onPanUpdate: (d) =>
-                      _panHandler(d, 30, autopilotStore, _setAirspeed),
+                  onPanUpdate: (d) => autopilotService.panHandler(
+                      d, 30, autopilotService.setAirspeed),
                 ),
                 AutopilotDisplay(
                   value: autopilotStore.heading.toInt(),
                   text: 'hdg',
-                  onPanUpdate: (d) =>
-                      _panHandler(d, 30, autopilotStore, _setHeading),
+                  onPanUpdate: (d) => autopilotService.panHandler(
+                      d, 30, autopilotService.setHeading),
                 ),
                 AutopilotDisplay(
                   value: autopilotStore.altitude.toInt(),
                   text: 'alt',
-                  onPanUpdate: (d) =>
-                      _panHandler(d, 30, autopilotStore, _setAltitude),
+                  onPanUpdate: (d) => autopilotService.panHandler(
+                      d, 30, autopilotService.setAltitude),
                 ),
                 AutopilotDisplay(
                   value: autopilotStore.verticalSpeed.toInt(),
                   text: 'vs',
-                  onPanUpdate: (d) =>
-                      _panHandler(d, 30, autopilotStore, _setVerticalSpeed),
+                  onPanUpdate: (d) => autopilotService.panHandler(
+                      d, 30, autopilotService.setVerticalSpeed),
                 ),
                 AutopilotDisplay(
                   value: autopilotStore.course.toInt(),
                   text: 'crs',
-                  onPanUpdate: (d) =>
-                      _panHandler(d, 30, autopilotStore, _setCourse),
+                  onPanUpdate: (d) => autopilotService.panHandler(
+                      d, 30, autopilotService.setCourse),
                 ),
               ],
             );
@@ -192,8 +106,8 @@ class AutopilotCommander extends StatelessWidget {
                     RadialButton(
                       icon: Icons.text_rotation_angleup,
                       radius: 25,
-                      onPanUpdate: (d) =>
-                          _panHandler(d, 25, autopilotStore, _setBankAngle),
+                      onPanUpdate: (d) => autopilotService.panHandler(
+                          d, 25, autopilotService.setBankAngle),
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
