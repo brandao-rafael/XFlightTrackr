@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/pages/trackr_map_page.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
-import 'package:x_flight_trackr/utils/udp_utils.dart';
-import 'package:x_flight_trackr/utils/xplane_data_parser.dart';
+import 'package:x_flight_trackr/services/udp_utils.dart';
+import 'package:x_flight_trackr/services/xplane_data_parser.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:x_flight_trackr/store/base_commander_store.dart';
-import 'package:x_flight_trackr/utils/commanders/autopilot_commander.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot_commander.dart';
 
 part 'autopilot_store.g.dart';
 

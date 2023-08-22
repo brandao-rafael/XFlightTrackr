@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:x_flight_trackr/utils/flight_plan_database.dart';
+import 'package:x_flight_trackr/services/flight_plan_database.dart';
 
 part 'flight_plan_store.g.dart';
 
