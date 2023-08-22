@@ -80,7 +80,13 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   @action
   Future<void> setAltitude(double newAltitude) async {
     try {
-      altitude = newAltitude;
+      if (newAltitude < 0) {
+        altitude = 0;
+      } else if (newAltitude > 50000) {
+        altitude = 50000;
+      } else {
+        altitude = newAltitude;
+      }
       await autopilotCommander.setAutopilotAltitude(altitude);
     } catch (_) {
       altitude = 0;
@@ -90,7 +96,13 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   @action
   Future<void> setHeading(double newHeading) async {
     try {
-      heading = newHeading;
+      if (newHeading < 0) {
+        heading = 359;
+      } else if (newHeading >= 360) {
+        heading = 0;
+      } else {
+        heading = newHeading;
+      }
       await autopilotCommander.setAutopilotHeading(heading);
     } catch (_) {
       heading = 0;
@@ -100,7 +112,13 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   @action
   Future<void> setVerticalSpeed(double newVerticalSpeed) async {
     try {
-      verticalSpeed = newVerticalSpeed;
+      if (newVerticalSpeed < -5000) {
+        verticalSpeed = -5000;
+      } else if (newVerticalSpeed > 5000) {
+        verticalSpeed = 5000;
+      } else {
+        verticalSpeed = newVerticalSpeed;
+      }
       await autopilotCommander.setAutopilotVerticalSpeed(verticalSpeed);
     } catch (_) {
       verticalSpeed = 0;
@@ -110,7 +128,13 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   @action
   Future<void> setAirspeed(double newAirspeed) async {
     try {
-      airspeed = newAirspeed;
+      if (newAirspeed < 0) {
+        airspeed = 0;
+      } else if (newAirspeed > 500) {
+        airspeed = 500;
+      } else {
+        airspeed = newAirspeed;
+      }
       await autopilotCommander.setAutopilotAirspeed(airspeed);
     } catch (_) {
       airspeed = 0;
@@ -130,8 +154,14 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   @action
   Future<void> setCourse(double newCourse) async {
     try {
-      course = newCourse;
-      await autopilotCommander.setAutoPilotCourse(course);
+      if (newCourse < 0) {
+        course = 359;
+      } else if (newCourse >= 360) {
+        course = 0;
+      } else {
+        course = newCourse;
+        await autopilotCommander.setAutoPilotCourse(course);
+      }
     } catch (_) {
       course = 0;
     }

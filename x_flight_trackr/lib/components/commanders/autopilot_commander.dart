@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/commanders/Autopilot_button.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
 import 'package:x_flight_trackr/components/commanders/radial_button.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 
 class AutopilotCommander extends StatelessWidget {
-  const AutopilotCommander({super.key});
+  final AutopilotStore autopilotStore;
+
+  const AutopilotCommander({super.key, required this.autopilotStore});
 
   bool exists(int index, List<double> list) {
     try {
@@ -54,43 +55,46 @@ class AutopilotCommander extends StatelessWidget {
     // Total computed change
     double rotationalChange = verticalRotation + horizontalRotation;
 
-    bool movingClockwise = rotationalChange > 0;
-    bool movingCounterClockwise = rotationalChange < 0;
-
-    if (rotationalChange.abs() > 2) {
+    if (rotationalChange > 4) {
       set(1000);
-    } else if (rotationalChange.abs() > 0) {
+    } else if (rotationalChange > 0) {
       set(100);
-    } else if (rotationalChange.abs() < -2) {
+    } else if (rotationalChange < -4) {
       set(-1000);
-    } else if (rotationalChange.abs() < 0) {
+    } else if (rotationalChange < 0) {
       set(-100);
     }
-
-    print(movingClockwise);
-    print(movingCounterClockwise);
-    print(rotationalChange);
-
-    // Now do something interesting with these computations!
   }
 
   void _setAltitude(double value) {
-    print(value);
+    double altitudeValue = value + autopilotStore.altitude;
+    autopilotStore.setAltitude(altitudeValue);
   }
 
-  void _setHeading(double value) {}
+  void _setHeading(double value) {
+    double headingValue = (value / 100) + autopilotStore.heading;
+    autopilotStore.setHeading(headingValue);
+  }
 
-  void _setVerticalSpeed(double value) {}
+  void _setVerticalSpeed(double value) {
+    double verticalSpeedValue = value + autopilotStore.verticalSpeed;
+    autopilotStore.setVerticalSpeed(verticalSpeedValue);
+  }
 
-  void _setAirspeed(double value) {}
+  void _setAirspeed(double value) {
+    double airspeedValue = (value / 100) + autopilotStore.airspeed;
+    autopilotStore.setAirspeed(airspeedValue);
+  }
 
-  void _setCourse(double value) {}
+  void _setCourse(double value) {
+    double courseValue = (value / 100) + autopilotStore.course;
+    autopilotStore.setCourse(courseValue);
+  }
 
   void _setBankAngle(double value) {}
 
   @override
   Widget build(BuildContext context) {
-    AutopilotStore autopilotStore = Provider.of<AutopilotStore>(context);
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -110,7 +114,7 @@ class AutopilotCommander extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Observer(builder: (_) {
+          Observer(builder: (context) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,

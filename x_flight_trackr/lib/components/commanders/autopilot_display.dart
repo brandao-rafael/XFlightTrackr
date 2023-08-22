@@ -7,11 +7,12 @@ class AutopilotDisplay extends StatelessWidget {
   final String text;
   final void Function(DragUpdateDetails) onPanUpdate;
 
-  const AutopilotDisplay(
-      {super.key,
-      required this.value,
-      required this.text,
-      required this.onPanUpdate});
+  const AutopilotDisplay({
+    super.key,
+    required this.value,
+    required this.text,
+    required this.onPanUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,6 @@ class AutopilotDisplay extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(vertical: 2.0),
           height: 50,
-          // width: 100 + (value.toString().length * 10),
           width: MediaQuery.of(context).size.width * 0.3,
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(

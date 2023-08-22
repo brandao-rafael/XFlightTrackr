@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_commander.dart';
+import 'package:x_flight_trackr/store/autopilot_store.dart';
 
 class CommanderPage extends StatelessWidget {
-  const CommanderPage({super.key});
+  CommanderPage({super.key});
+
+  final AutopilotStore autopilotStore = AutopilotStore();
 
   @override
   Widget build(BuildContext context) {
-    return const AutopilotCommander();
+    return AutopilotCommander(
+      autopilotStore: autopilotStore,
+    );
   }
 }

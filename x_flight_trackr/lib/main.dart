@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _pages = [
       {'title': 'XFlight Trackr', 'page': const HomePage()},
-      {'title': 'Commander', 'page': const CommanderPage()},
+      {'title': 'Commander', 'page': CommanderPage()},
     ];
   }
 
