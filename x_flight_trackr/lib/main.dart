@@ -37,7 +37,12 @@ class _MyAppState extends State<MyApp> {
           flightPlanStore: flightPlanStore,
         )
       },
-      {'title': 'Commander', 'page': CommanderPage()},
+      {
+        'title': 'Commander',
+        'page': CommanderPage(
+          flightPlanStore: flightPlanStore,
+        ),
+      },
     ];
   }
 
