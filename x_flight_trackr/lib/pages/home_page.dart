@@ -8,14 +8,21 @@ import 'package:x_flight_trackr/services/udp_utils.dart';
 import 'package:x_flight_trackr/services/xplane_data_parser.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final FlightPlanStore flightPlanStore;
+  const HomePage({Key? key, required this.flightPlanStore}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final FlightPlanStore _flightPlanStore = FlightPlanStore();
+  late FlightPlanStore _flightPlanStore;
+
+  @override
+  void initState() {
+    super.initState();
+    _flightPlanStore = widget.flightPlanStore;
+  }
 
   void _init(Datagram datagram) {
     var xpc = XPlaneDataParser(datagram.data);
@@ -26,6 +33,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // for (int i = 0; i < _flightPlanStore.xPlaneData.length; i++) {
+    //   print('$i: ${_flightPlanStore.xPlaneData[i]}}');
+    // }
     return FutureBuilder<Stream<Datagram>>(
       future: UdpUtils.bindUdp(),
       builder: _buildHomePage,

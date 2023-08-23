@@ -25,12 +25,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   late List<Map<String, Object>> _pages;
+  final FlightPlanStore flightPlanStore = FlightPlanStore();
 
   @override
   void initState() {
     super.initState();
     _pages = [
-      {'title': 'XFlight Trackr', 'page': const HomePage()},
+      {
+        'title': 'XFlight Trackr',
+        'page': HomePage(
+          flightPlanStore: flightPlanStore,
+        )
+      },
       {'title': 'Commander', 'page': CommanderPage()},
     ];
   }
