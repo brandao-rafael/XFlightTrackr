@@ -3,14 +3,30 @@ import 'package:flutter/material.dart';
 class AutopilotButton extends StatelessWidget {
   final bool isOn;
   final String text;
+  final bool? isArmed;
   final void Function() onPressed;
 
   const AutopilotButton({
     required this.isOn,
     required this.text,
-    super.key,
     required this.onPressed,
+    this.isArmed,
+    super.key,
   });
+
+  Color _isOn({bool isText = false}) {
+    if (isArmed != null && isArmed!) {
+      return const Color.fromARGB(255, 238, 179, 18);
+    } else {
+      if (isOn) {
+        return const Color.fromARGB(255, 19, 255, 117);
+      } else if (isText) {
+        return Colors.white30;
+      } else {
+        return Colors.transparent;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +72,10 @@ class AutopilotButton extends StatelessWidget {
                   height: 5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: isOn
-                        ? const Color.fromARGB(255, 19, 255, 117)
-                        : Colors.white24,
+                    color: _isOn(isText: true),
                     boxShadow: [
                       BoxShadow(
-                        color: isOn
-                            ? const Color.fromARGB(255, 19, 255, 117)
-                            : Colors.transparent,
+                        color: _isOn(isText: false),
                         spreadRadius: 2,
                         blurRadius: 4,
                         offset: const Offset(0, 1),
@@ -78,15 +90,11 @@ class AutopilotButton extends StatelessWidget {
                   softWrap: false,
                   style: TextStyle(
                     fontSize: 8,
-                    color: isOn
-                        ? const Color.fromARGB(255, 19, 255, 117)
-                        : Colors.grey[400],
+                    color: _isOn(isText: true),
                     shadows: List<Shadow>.generate(
                       2,
                       (int index) => Shadow(
-                        color: isOn
-                            ? const Color.fromARGB(255, 19, 255, 117)
-                            : Colors.transparent,
+                        color: _isOn(isText: false),
                         blurRadius: 10,
                         offset: const Offset(0, 1),
                       ),
