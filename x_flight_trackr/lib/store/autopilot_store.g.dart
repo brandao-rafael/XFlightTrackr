@@ -140,13 +140,13 @@ mixin _$AutopilotStore on _AutopilotStore, Store {
       Atom(name: '_AutopilotStore.autoThrottle', context: context);
 
   @override
-  bool get autoThrottle {
+  int get autoThrottle {
     _$autoThrottleAtom.reportRead();
     return super.autoThrottle;
   }
 
   @override
-  set autoThrottle(bool value) {
+  set autoThrottle(int value) {
     _$autoThrottleAtom.reportWrite(value, super.autoThrottle, () {
       super.autoThrottle = value;
     });
@@ -240,7 +240,7 @@ mixin _$AutopilotStore on _AutopilotStore, Store {
       AsyncAction('_AutopilotStore.setAutoThrottle', context: context);
 
   @override
-  Future<void> setAutoThrottle(bool newAutoThrottle) {
+  Future<void> setAutoThrottle(int newAutoThrottle) {
     return _$setAutoThrottleAsyncAction
         .run(() => super.setAutoThrottle(newAutoThrottle));
   }

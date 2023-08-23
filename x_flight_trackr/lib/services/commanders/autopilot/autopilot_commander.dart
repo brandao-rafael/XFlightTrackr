@@ -27,37 +27,6 @@ class AutoPilotCommander {
 
   AutoPilotCommander({required this.commander});
 
-  double _getAltitudeModeValue(AutoPilotAltitudeMode mode) {
-    switch (mode) {
-      case AutoPilotAltitudeMode.PITCH:
-        return 3;
-      case AutoPilotAltitudeMode.VS:
-        return 4;
-      case AutoPilotAltitudeMode.LEVEL:
-        return 5;
-      case AutoPilotAltitudeMode.ALTHOLD:
-        return 6;
-      case AutoPilotAltitudeMode.TERRAIN:
-        return 7;
-      case AutoPilotAltitudeMode.GS:
-        return 8;
-      case AutoPilotAltitudeMode.VNAV:
-        return 9;
-      case AutoPilotAltitudeMode.TOGA:
-        return 10;
-      case AutoPilotAltitudeMode.REENTRY:
-        return 11;
-      case AutoPilotAltitudeMode.FREE:
-        return 12;
-      case AutoPilotAltitudeMode.FLARE:
-        return 17;
-      case AutoPilotAltitudeMode.FLIGHTPATH:
-        return 19;
-      case AutoPilotAltitudeMode.VNAVSPD:
-        return 20;
-    }
-  }
-
   Future<void> setAutopilotAltitude(double altitude) async {
     await commander.sendDref('sim/cockpit/autopilot/altitude', altitude);
   }
@@ -75,9 +44,9 @@ class AutoPilotCommander {
         'sim/cockpit/autopilot/vertical_velocity', verticalSpeed);
   }
 
-  Future<void> setAutoThrottleEnabled(bool enabled) async {
+  Future<void> setAutoThrottleEnabled(int enabled) async {
     await commander.sendDref(
-        'sim/cockpit2/autopilot/autothrottle_enabled', enabled ? 1 : 0);
+        'sim/cockpit2/autopilot/autothrottle_enabled', enabled.toDouble());
   }
 
   Future<void> setAutopilotMode(AutoPilotMode mode) async {
@@ -96,14 +65,60 @@ class AutoPilotCommander {
         'sim/cockpit2/radios/actuators/hsi_obs_deg_mag_pilot', course);
   }
 
-  // Review: See about overriding the default values for the autopilot
+  Future<void> _overrideAutopilot() async {
+    await commander.sendDref('sim/operation/override/override_autopilot/', 1);
+  }
+
+  Future<void> _disableOverrideAutopilot() async {
+    await commander.sendDref('sim/operation/override/override_autopilot/', 0);
+  }
+
   Future<void> setAutopilotAltitudeMode(AutoPilotAltitudeMode mode) async {
-    await commander.sendDref(
-        'sim/cockpit/autopilot/altitude_mode', _getAltitudeModeValue(mode));
+    await _overrideAutopilot();
+    switch (mode) {
+      case AutoPilotAltitudeMode.PITCH:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+            128); // 128 corresponds to Pitch Hold Engage
+        break;
+      case AutoPilotAltitudeMode.VS:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+            16); // 16 corresponds to V/S Engage
+        break;
+      case AutoPilotAltitudeMode.LEVEL:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+            16384); // 16384 corresponds to Altitude Hold Engaged
+        break;
+      case AutoPilotAltitudeMode.ALTHOLD:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+            32); // 32 corresponds to Altitude Hold Arm
+        break;
+      case AutoPilotAltitudeMode.VNAV:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+            262144); // 262144 corresponds to VNAV Path Engaged
+        break;
+      case AutoPilotAltitudeMode.GS:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+            2048); // 2048 corresponds to Glide Slope Engaged
+        break;
+      default:
+        await commander.sendDref('sim/cockpit/autopilot/autopilot_state', 0);
+        break;
+    }
+    await _disableOverrideAutopilot();
   }
 
   Future<void> setAutopilotHeadingMode(AutoPilotHeadingMode mode) async {
-    await commander.sendDref(
-        'sim/cockpit/autopilot/heading_mode', mode.index.toDouble());
+    await _overrideAutopilot();
+    if (mode == AutoPilotHeadingMode.HDGSEL) {
+      await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+          2); // 2 corresponds to Heading Select Engage
+    } else if (mode == AutoPilotHeadingMode.ROLL) {
+      await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+          4); // 4 corresponds to Roll Hold Engage
+    } else if (mode == AutoPilotHeadingMode.NAV) {
+      await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+          512); // 512 corresponds to Nav Engaged
+    }
+    await _disableOverrideAutopilot();
   }
 }

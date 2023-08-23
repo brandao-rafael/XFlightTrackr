@@ -80,16 +80,34 @@ class AutopilotCommander extends StatelessWidget {
                 Row(
                   children: [
                     AutopilotButton(
-                      isOn: autopilotStore.autoThrottle,
+                      isOn: autopilotStore.autoThrottle == 1 ||
+                              autopilotStore.autoThrottle == 2
+                          ? true
+                          : false,
                       text: 'A/T',
-                      onPressed: () => autopilotStore
-                          .setAutoThrottle(!autopilotStore.autoThrottle),
+                      onPressed: () => autopilotStore.setAutoThrottle(
+                          autopilotStore.autoThrottle == 1 ? 0 : 1),
                     ),
                     const SizedBox(width: 15),
                     AutopilotButton(
-                        isOn: false, text: 'SPEED', onPressed: () {}),
+                      isOn: autopilotStore.autoThrottle == 1 ? true : false,
+                      text: 'SPEED',
+                      onPressed: () {
+                        autopilotStore.autoThrottle != 1
+                            ? autopilotStore.setAutoThrottle(1)
+                            : autopilotStore.setAutoThrottle(0);
+                      },
+                    ),
                     const SizedBox(width: 15),
-                    AutopilotButton(isOn: false, text: 'N1', onPressed: () {}),
+                    AutopilotButton(
+                      isOn: autopilotStore.autoThrottle == 2 ? true : false,
+                      text: 'N1',
+                      onPressed: () {
+                        autopilotStore.autoThrottle != 2
+                            ? autopilotStore.setAutoThrottle(2)
+                            : autopilotStore.setAutoThrottle(1);
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -138,8 +156,12 @@ class AutopilotCommander extends StatelessWidget {
                   children: [
                     AutopilotButton(
                       isOn: autopilotStore.altitudeMode ==
-                          AutoPilotAltitudeMode.PITCH,
+                              AutoPilotAltitudeMode.PITCH ||
+                          autopilotStore.altitudeMode ==
+                              AutoPilotAltitudeMode.VS,
                       text: 'ALT',
+                      isArmed: autopilotStore.altitudeMode ==
+                          AutoPilotAltitudeMode.VS,
                       onPressed: () => autopilotStore.setAltitudeMode(
                         autopilotStore.altitudeMode ==
                                 AutoPilotAltitudeMode.PITCH
@@ -176,7 +198,8 @@ class AutopilotCommander extends StatelessWidget {
                 Row(
                   children: [
                     AutopilotButton(
-                        isOn: autopilotStore.mode == AutoPilotMode.ON,
+                        isOn: autopilotStore.mode == AutoPilotMode.ON ||
+                            autopilotStore.mode == AutoPilotMode.FD,
                         text: 'AP',
                         onPressed: () {
                           autopilotStore.setMode(
@@ -187,9 +210,16 @@ class AutopilotCommander extends StatelessWidget {
                         }),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                      isOn: false,
+                      isOn: autopilotStore.altitudeMode ==
+                          AutoPilotAltitudeMode.GS,
                       text: 'APP',
-                      onPressed: () {},
+                      onPressed: () {
+                        autopilotStore.altitudeMode != AutoPilotAltitudeMode.GS
+                            ? autopilotStore
+                                .setAltitudeMode(AutoPilotAltitudeMode.GS)
+                            : autopilotStore
+                                .setAltitudeMode(AutoPilotAltitudeMode.FREE);
+                      },
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(

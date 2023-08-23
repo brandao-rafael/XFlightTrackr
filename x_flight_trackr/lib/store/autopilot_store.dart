@@ -33,7 +33,7 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   @observable
   double airspeed = 0;
   @observable
-  bool autoThrottle = false;
+  int autoThrottle = 0;
   @observable
   double course = 0;
 
@@ -148,12 +148,12 @@ abstract class _AutopilotStore extends BaseCommanderStore with Store {
   }
 
   @action
-  Future<void> setAutoThrottle(bool newAutoThrottle) async {
+  Future<void> setAutoThrottle(int newAutoThrottle) async {
     try {
       autoThrottle = newAutoThrottle;
       await autopilotCommander.setAutoThrottleEnabled(newAutoThrottle);
     } catch (e) {
-      autoThrottle = false;
+      autoThrottle = 0;
     }
   }
 
