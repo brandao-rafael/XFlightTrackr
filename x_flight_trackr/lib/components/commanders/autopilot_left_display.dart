@@ -5,12 +5,12 @@ import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
-class AutoPilotLeftDisplay extends StatelessWidget {
+class AutopilotLeftDisplay extends StatelessWidget {
   final AutopilotService autopilotService;
   final AutopilotStore autopilotStore;
   final FlightPlanStore flightPlanStore;
 
-  const AutoPilotLeftDisplay(
+  const AutopilotLeftDisplay(
       {super.key,
       required this.autopilotService,
       required this.autopilotStore,
