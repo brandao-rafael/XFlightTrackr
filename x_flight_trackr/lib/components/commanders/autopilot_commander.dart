@@ -49,11 +49,33 @@ class AutopilotCommander extends StatelessWidget {
     }
   }
 
-  // NEED REVIEW
-  bool _autoThrottleEnabled() {
+  bool _flightDirectorEnabled() {
     if (flightPlanStore.xPlaneData.isNotEmpty) {
-      if (flightPlanStore.xPlaneData[1026] > 0) {
-        autopilotStore.setAutoThrottle(1);
+      if (flightPlanStore.xPlaneData[946] >= 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return autopilotStore.mode == AutoPilotMode.FD;
+    }
+  }
+
+  bool _autopilotEngaged() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[946] == 2) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return autopilotStore.mode == AutoPilotMode.ON;
+    }
+  }
+
+  bool _autoThrottleSpeedEnabled() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[1026] == 1) {
         return true;
       } else {
         return false;
@@ -64,12 +86,21 @@ class AutopilotCommander extends StatelessWidget {
     }
   }
 
-  // TODO: speed n1
+  bool _autoThrottleN1Enabled() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[1026] == 2) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return autopilotStore.autoThrottle == 2;
+    }
+  }
 
   bool _headingModeEnabled() {
     if (flightPlanStore.xPlaneData.isNotEmpty) {
-      if (flightPlanStore.xPlaneData[1027] > 0) {
-        autopilotStore.headingMode = AutoPilotHeadingMode.HDGSEL;
+      if (flightPlanStore.xPlaneData[1027] == 1) {
         return true;
       } else {
         return false;
@@ -81,25 +112,76 @@ class AutopilotCommander extends StatelessWidget {
 
   bool _altitudeSelEnabled() {
     if (flightPlanStore.xPlaneData.isNotEmpty) {
-      if (flightPlanStore.xPlaneData[1018] > 0) {
+      if (flightPlanStore.xPlaneData[1028].toInt() == 6) {
         return true;
       } else {
         return false;
       }
     } else {
-      return autopilotStore.altitudeMode == AutoPilotAltitudeMode.PITCH;
+      return autopilotStore.altitudeMode == AutoPilotAltitudeMode.ALTHOLD;
+    }
+  }
+
+  bool _verticalSpeedEnabled() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[1028].toInt() == 4) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return autopilotStore.altitudeMode == AutoPilotAltitudeMode.VS;
+    }
+  }
+
+  bool _vnavEngaged() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[1028].toInt() == 5 ||
+          flightPlanStore.xPlaneData[1028].toInt() == 9 ||
+          flightPlanStore.xPlaneData[1028].toInt() == 10 ||
+          flightPlanStore.xPlaneData[1028].toInt() == 20) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return autopilotStore.altitudeMode == AutoPilotAltitudeMode.VNAV;
     }
   }
 
   bool _glideslopeEnabled() {
     if (flightPlanStore.xPlaneData.isNotEmpty) {
-      if (flightPlanStore.xPlaneData[1031] > 0) {
+      if (flightPlanStore.xPlaneData[1031].toInt() > 0) {
         return true;
       } else {
         return false;
       }
     } else {
       return autopilotStore.altitudeMode == AutoPilotAltitudeMode.GS;
+    }
+  }
+
+  bool _lnavEngaged() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[1027].toInt() == 13) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return autopilotStore.headingMode == AutoPilotHeadingMode.GPS;
+    }
+  }
+
+  bool _altitudeIsArmed() {
+    if (flightPlanStore.xPlaneData.isNotEmpty) {
+      if (flightPlanStore.xPlaneData[1028].toInt() == 4) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
 
@@ -169,18 +251,15 @@ class AutopilotCommander extends StatelessWidget {
                 Row(
                   children: [
                     AutopilotButton(
-                      // isOn: autopilotStore.autoThrottle == 1 ||
-                      //         autopilotStore.autoThrottle == 2
-                      //     ? true
-                      //     : false,
-                      isOn: _autoThrottleEnabled(),
+                      isOn: _autoThrottleSpeedEnabled() ||
+                          _autoThrottleN1Enabled(),
                       text: 'A/T',
                       onPressed: () => autopilotStore.setAutoThrottle(
                           autopilotStore.autoThrottle == 1 ? 0 : 1),
                     ),
                     const SizedBox(width: 15),
                     AutopilotButton(
-                      isOn: autopilotStore.autoThrottle == 1 ? true : false,
+                      isOn: _autoThrottleSpeedEnabled(),
                       text: 'SPEED',
                       onPressed: () {
                         autopilotStore.autoThrottle != 1
@@ -190,7 +269,7 @@ class AutopilotCommander extends StatelessWidget {
                     ),
                     const SizedBox(width: 15),
                     AutopilotButton(
-                      isOn: autopilotStore.autoThrottle == 2 ? true : false,
+                      isOn: _autoThrottleN1Enabled(),
                       text: 'N1',
                       onPressed: () {
                         autopilotStore.autoThrottle != 2
@@ -229,13 +308,12 @@ class AutopilotCommander extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                      isOn: autopilotStore.headingMode ==
-                          AutoPilotHeadingMode.NAV,
+                      isOn: _lnavEngaged(),
                       text: 'LNAV',
                       onPressed: () => autopilotStore.setHeadingMode(
-                        autopilotStore.headingMode == AutoPilotHeadingMode.NAV
+                        autopilotStore.headingMode == AutoPilotHeadingMode.GPS
                             ? AutoPilotHeadingMode.ROLL
-                            : AutoPilotHeadingMode.NAV,
+                            : AutoPilotHeadingMode.GPS,
                       ),
                     ),
                   ],
@@ -246,8 +324,7 @@ class AutopilotCommander extends StatelessWidget {
                     AutopilotButton(
                       isOn: _altitudeSelEnabled(),
                       text: 'ALT',
-                      isArmed: autopilotStore.altitudeMode ==
-                          AutoPilotAltitudeMode.VS,
+                      isArmed: _altitudeIsArmed(),
                       onPressed: () => autopilotStore.setAltitudeMode(
                         autopilotStore.altitudeMode ==
                                 AutoPilotAltitudeMode.PITCH
@@ -257,20 +334,18 @@ class AutopilotCommander extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                      isOn: autopilotStore.altitudeMode ==
-                          AutoPilotAltitudeMode.VNAV,
+                      isOn: _vnavEngaged(),
                       text: 'VNAV',
                       onPressed: () => autopilotStore.setAltitudeMode(
                         autopilotStore.altitudeMode ==
                                 AutoPilotAltitudeMode.VNAV
-                            ? AutoPilotAltitudeMode.LEVEL
+                            ? AutoPilotAltitudeMode.VS
                             : AutoPilotAltitudeMode.VNAV,
                       ),
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                      isOn: autopilotStore.altitudeMode ==
-                          AutoPilotAltitudeMode.VS,
+                      isOn: _verticalSpeedEnabled(),
                       text: 'V/S',
                       onPressed: () => autopilotStore.setAltitudeMode(
                         autopilotStore.altitudeMode == AutoPilotAltitudeMode.VS
@@ -284,8 +359,7 @@ class AutopilotCommander extends StatelessWidget {
                 Row(
                   children: [
                     AutopilotButton(
-                        isOn: autopilotStore.mode == AutoPilotMode.ON ||
-                            autopilotStore.mode == AutoPilotMode.FD,
+                        isOn: _autopilotEngaged(),
                         text: 'AP',
                         onPressed: () {
                           autopilotStore.setMode(
@@ -303,16 +377,16 @@ class AutopilotCommander extends StatelessWidget {
                             ? autopilotStore
                                 .setAltitudeMode(AutoPilotAltitudeMode.GS)
                             : autopilotStore
-                                .setAltitudeMode(AutoPilotAltitudeMode.FREE);
+                                .setAltitudeMode(AutoPilotAltitudeMode.PITCH);
                       },
                     ),
                     const SizedBox(width: 10),
                     AutopilotButton(
-                      isOn: autopilotStore.mode == AutoPilotMode.FD,
+                      isOn: _flightDirectorEnabled(),
                       text: 'F/D',
                       onPressed: () => autopilotStore.setMode(
                         autopilotStore.mode == AutoPilotMode.FD
-                            ? AutoPilotMode.OFF
+                            ? AutoPilotMode.ON
                             : AutoPilotMode.FD,
                       ),
                     ),

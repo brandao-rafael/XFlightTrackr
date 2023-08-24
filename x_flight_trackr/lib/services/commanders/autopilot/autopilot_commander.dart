@@ -20,7 +20,7 @@ enum AutoPilotAltitudeMode {
   VNAVSPD,
 }
 
-enum AutoPilotHeadingMode { ROLL, HDGSEL, NAV }
+enum AutoPilotHeadingMode { ROLL, HDGSEL, NAV, GPS }
 
 class AutoPilotCommander {
   final XPlaneCommander commander;
@@ -55,7 +55,6 @@ class AutoPilotCommander {
   }
 
   Future<void> setAutoPilotBankAngle(int angle) async {
-    // sim/cockpit2/autopilot/bank_angle_mode
     await commander.sendDref(
         'sim/cockpit/autopilot/heading_roll_mode', angle.toDouble());
   }
@@ -94,11 +93,11 @@ class AutoPilotCommander {
         break;
       case AutoPilotAltitudeMode.VNAV:
         await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
-            262144); // 262144 corresponds to VNAV Path Engaged
+            262143); // 262144 corresponds to VNAV Path Engaged
         break;
       case AutoPilotAltitudeMode.GS:
         await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
-            2048); // 2048 corresponds to Glide Slope Engaged
+            2046); // 2046 corresponds to Glide Slope Engaged
         break;
       default:
         await commander.sendDref('sim/cockpit/autopilot/autopilot_state', 0);
@@ -118,6 +117,9 @@ class AutoPilotCommander {
     } else if (mode == AutoPilotHeadingMode.NAV) {
       await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
           512); // 512 corresponds to Nav Engaged
+    } else if (mode == AutoPilotHeadingMode.GPS) {
+      await commander.sendDref('sim/cockpit/autopilot/autopilot_state',
+          524288); // 524288 corresponds to GPSS Engaged
     }
     await _disableOverrideAutopilot();
   }
