@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:x_flight_trackr/components/commanders/radial_button.dart';
+import 'package:x_flight_trackr/components/commanders/autopilot/radial_button.dart';
 
 class AutopilotDisplay extends StatelessWidget {
   final dynamic value;

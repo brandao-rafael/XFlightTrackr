@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:x_flight_trackr/components/commanders/autopilot_button.dart';
-import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
-import 'package:x_flight_trackr/components/commanders/radial_button.dart';
+import 'package:x_flight_trackr/components/commanders/autopilot/autopilot_button.dart';
+import 'package:x_flight_trackr/components/commanders/autopilot/autopilot_display.dart';
+import 'package:x_flight_trackr/components/commanders/autopilot/radial_button.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_status_service.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_switches_service.dart';
