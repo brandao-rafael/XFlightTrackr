@@ -3,9 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_button.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
 import 'package:x_flight_trackr/components/commanders/radial_button.dart';
-import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_commander.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_status.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_switches.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
@@ -38,37 +38,29 @@ class AutopilotRightButtons extends StatelessWidget {
                 isOn: autopilotStatus.autoThrottleSpeedEnabled() ||
                     autopilotStatus.autoThrottleN1Enabled(),
                 text: 'A/T',
-                onPressed: () => autopilotStore
-                    .setAutoThrottle(autopilotStore.autoThrottle == 1 ? 0 : 1),
+                onPressed: () =>
+                    AutopilotSwitches.toggleAutoThrottle(autopilotStore),
               ),
               const SizedBox(width: 15),
               AutopilotButton(
                 isOn: autopilotStatus.autoThrottleSpeedEnabled(),
                 text: 'SPEED',
-                onPressed: () {
-                  autopilotStore.autoThrottle != 1
-                      ? autopilotStore.setAutoThrottle(1)
-                      : autopilotStore.setAutoThrottle(0);
-                },
+                onPressed: () =>
+                    AutopilotSwitches.toggleAutoThrottleSpeed(autopilotStore),
               ),
               const SizedBox(width: 15),
               AutopilotButton(
                 isOn: autopilotStatus.autoThrottleN1Enabled(),
                 text: 'N1',
-                onPressed: () {
-                  autopilotStore.autoThrottle != 2
-                      ? autopilotStore.setAutoThrottle(2)
-                      : autopilotStore.setAutoThrottle(1);
-                },
+                onPressed: () =>
+                    AutopilotSwitches.toggleAutoThrottleSpeed(autopilotStore),
               ),
             ],
           ),
           const SizedBox(height: 5),
           AutopilotDisplay(
             withButton: false,
-            value: autopilotStore.bankAngle == 0
-                ? 'Auto'
-                : '${(autopilotStore.bankAngle.toDouble() * 5).toInt()}°',
+            value: AutopilotSwitches.getBankAngle(autopilotStore),
             text: 'bank',
           ),
           Row(
@@ -77,10 +69,8 @@ class AutopilotRightButtons extends StatelessWidget {
               AutopilotButton(
                 isOn: autopilotStatus.headingModeEnabled(),
                 text: 'HDG',
-                onPressed: () => autopilotStore.setHeadingMode(
-                    autopilotStore.headingMode == AutoPilotHeadingMode.HDGSEL
-                        ? AutoPilotHeadingMode.ROLL
-                        : AutoPilotHeadingMode.HDGSEL),
+                onPressed: () =>
+                    AutopilotSwitches.toggleHeadingMode(autopilotStore),
               ),
               const SizedBox(width: 10),
               RadialButton(
@@ -93,11 +83,7 @@ class AutopilotRightButtons extends StatelessWidget {
               AutopilotButton(
                 isOn: autopilotStatus.lnavEngaged(),
                 text: 'LNAV',
-                onPressed: () => autopilotStore.setHeadingMode(
-                  autopilotStore.headingMode == AutoPilotHeadingMode.GPS
-                      ? AutoPilotHeadingMode.ROLL
-                      : AutoPilotHeadingMode.GPS,
-                ),
+                onPressed: () => AutopilotSwitches.toggleLnav(autopilotStore),
               ),
             ],
           ),
@@ -108,31 +94,21 @@ class AutopilotRightButtons extends StatelessWidget {
                 isOn: autopilotStatus.altitudeSelEnabled(),
                 text: 'ALT',
                 isArmed: autopilotStatus.altitudeIsArmed(),
-                onPressed: () => autopilotStore.setAltitudeMode(
-                  autopilotStore.altitudeMode == AutoPilotAltitudeMode.PITCH
-                      ? AutoPilotAltitudeMode.LEVEL
-                      : AutoPilotAltitudeMode.PITCH,
-                ),
+                onPressed: () =>
+                    AutopilotSwitches.toggleAltitude(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.vnavEngaged(),
                 text: 'VNAV',
-                onPressed: () => autopilotStore.setAltitudeMode(
-                  autopilotStore.altitudeMode == AutoPilotAltitudeMode.VNAV
-                      ? AutoPilotAltitudeMode.PITCH
-                      : AutoPilotAltitudeMode.VNAV,
-                ),
+                onPressed: () => AutopilotSwitches.toggleVnav(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.verticalSpeedEnabled(),
                 text: 'V/S',
-                onPressed: () => autopilotStore.setAltitudeMode(
-                  autopilotStore.altitudeMode == AutoPilotAltitudeMode.VS
-                      ? AutoPilotAltitudeMode.LEVEL
-                      : AutoPilotAltitudeMode.VS,
-                ),
+                onPressed: () =>
+                    AutopilotSwitches.toggleVerticalSpeed(autopilotStore),
               ),
             ],
           ),
@@ -140,35 +116,24 @@ class AutopilotRightButtons extends StatelessWidget {
           Row(
             children: [
               AutopilotButton(
-                  isOn: autopilotStatus.autopilotEngaged(),
-                  text: 'AP',
-                  onPressed: () {
-                    autopilotStore.setMode(
-                      autopilotStore.mode == AutoPilotMode.ON
-                          ? AutoPilotMode.OFF
-                          : AutoPilotMode.ON,
-                    );
-                  }),
+                isOn: autopilotStatus.autopilotEngaged(),
+                text: 'AP',
+                onPressed: () =>
+                    AutopilotSwitches.toggleAutopilot(autopilotStore),
+              ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.glideslopeEnabled(),
                 text: 'APP',
-                onPressed: () {
-                  autopilotStore.altitudeMode != AutoPilotAltitudeMode.GS
-                      ? autopilotStore.setAltitudeMode(AutoPilotAltitudeMode.GS)
-                      : autopilotStore
-                          .setAltitudeMode(AutoPilotAltitudeMode.PITCH);
-                },
+                onPressed: () =>
+                    AutopilotSwitches.toggleGlideSlope(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.flightDirectorEnabled(),
                 text: 'F/D',
-                onPressed: () => autopilotStore.setMode(
-                  autopilotStore.mode == AutoPilotMode.FD
-                      ? AutoPilotMode.ON
-                      : AutoPilotMode.FD,
-                ),
+                onPressed: () =>
+                    AutopilotSwitches.toggleFlightDirector(autopilotStore),
               ),
             ],
           ),
