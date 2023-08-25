@@ -2,11 +2,11 @@ import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_commande
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
-class AutopilotStatus {
+class AutopilotStatusService {
   FlightPlanStore flightPlanStore;
   AutopilotStore autopilotStore;
 
-  AutopilotStatus(
+  AutopilotStatusService(
       {required this.flightPlanStore, required this.autopilotStore});
 
   int getAltitudeValue() {

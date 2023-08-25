@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.dart';
-import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_status.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_status_service.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
@@ -11,14 +11,14 @@ class AutopilotLeftDisplay extends StatelessWidget {
   final AutopilotStore autopilotStore;
   final FlightPlanStore flightPlanStore;
 
-  final AutopilotStatus autopilotStatus;
+  final AutopilotStatusService autopilotStatus;
 
   AutopilotLeftDisplay({
     super.key,
     required this.autopilotService,
     required this.autopilotStore,
     required this.flightPlanStore,
-  }) : autopilotStatus = AutopilotStatus(
+  }) : autopilotStatus = AutopilotStatusService(
           flightPlanStore: flightPlanStore,
           autopilotStore: autopilotStore,
         );

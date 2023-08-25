@@ -4,8 +4,8 @@ import 'package:x_flight_trackr/components/commanders/autopilot_button.dart';
 import 'package:x_flight_trackr/components/commanders/autopilot_display.dart';
 import 'package:x_flight_trackr/components/commanders/radial_button.dart';
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_service.dart';
-import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_status.dart';
-import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_switches.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_status_service.dart';
+import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_switches_service.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 
@@ -14,14 +14,14 @@ class AutopilotRightButtons extends StatelessWidget {
   final AutopilotService autopilotService;
   final FlightPlanStore flightPlanStore;
 
-  final AutopilotStatus autopilotStatus;
+  final AutopilotStatusService autopilotStatus;
 
   AutopilotRightButtons({
     super.key,
     required this.autopilotStore,
     required this.autopilotService,
     required this.flightPlanStore,
-  }) : autopilotStatus = AutopilotStatus(
+  }) : autopilotStatus = AutopilotStatusService(
           flightPlanStore: flightPlanStore,
           autopilotStore: autopilotStore,
         );
@@ -39,28 +39,30 @@ class AutopilotRightButtons extends StatelessWidget {
                     autopilotStatus.autoThrottleN1Enabled(),
                 text: 'A/T',
                 onPressed: () =>
-                    AutopilotSwitches.toggleAutoThrottle(autopilotStore),
+                    AutopilotSwitchesService.toggleAutoThrottle(autopilotStore),
               ),
               const SizedBox(width: 15),
               AutopilotButton(
                 isOn: autopilotStatus.autoThrottleSpeedEnabled(),
                 text: 'SPEED',
                 onPressed: () =>
-                    AutopilotSwitches.toggleAutoThrottleSpeed(autopilotStore),
+                    AutopilotSwitchesService.toggleAutoThrottleSpeed(
+                        autopilotStore),
               ),
               const SizedBox(width: 15),
               AutopilotButton(
                 isOn: autopilotStatus.autoThrottleN1Enabled(),
                 text: 'N1',
                 onPressed: () =>
-                    AutopilotSwitches.toggleAutoThrottleSpeed(autopilotStore),
+                    AutopilotSwitchesService.toggleAutoThrottleSpeed(
+                        autopilotStore),
               ),
             ],
           ),
           const SizedBox(height: 5),
           AutopilotDisplay(
             withButton: false,
-            value: AutopilotSwitches.getBankAngle(autopilotStore),
+            value: AutopilotSwitchesService.getBankAngle(autopilotStore),
             text: 'bank',
           ),
           Row(
@@ -70,7 +72,7 @@ class AutopilotRightButtons extends StatelessWidget {
                 isOn: autopilotStatus.headingModeEnabled(),
                 text: 'HDG',
                 onPressed: () =>
-                    AutopilotSwitches.toggleHeadingMode(autopilotStore),
+                    AutopilotSwitchesService.toggleHeadingMode(autopilotStore),
               ),
               const SizedBox(width: 10),
               RadialButton(
@@ -83,7 +85,8 @@ class AutopilotRightButtons extends StatelessWidget {
               AutopilotButton(
                 isOn: autopilotStatus.lnavEngaged(),
                 text: 'LNAV',
-                onPressed: () => AutopilotSwitches.toggleLnav(autopilotStore),
+                onPressed: () =>
+                    AutopilotSwitchesService.toggleLnav(autopilotStore),
               ),
             ],
           ),
@@ -95,20 +98,21 @@ class AutopilotRightButtons extends StatelessWidget {
                 text: 'ALT',
                 isArmed: autopilotStatus.altitudeIsArmed(),
                 onPressed: () =>
-                    AutopilotSwitches.toggleAltitude(autopilotStore),
+                    AutopilotSwitchesService.toggleAltitude(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.vnavEngaged(),
                 text: 'VNAV',
-                onPressed: () => AutopilotSwitches.toggleVnav(autopilotStore),
+                onPressed: () =>
+                    AutopilotSwitchesService.toggleVnav(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.verticalSpeedEnabled(),
                 text: 'V/S',
-                onPressed: () =>
-                    AutopilotSwitches.toggleVerticalSpeed(autopilotStore),
+                onPressed: () => AutopilotSwitchesService.toggleVerticalSpeed(
+                    autopilotStore),
               ),
             ],
           ),
@@ -119,21 +123,21 @@ class AutopilotRightButtons extends StatelessWidget {
                 isOn: autopilotStatus.autopilotEngaged(),
                 text: 'AP',
                 onPressed: () =>
-                    AutopilotSwitches.toggleAutopilot(autopilotStore),
+                    AutopilotSwitchesService.toggleAutopilot(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.glideslopeEnabled(),
                 text: 'APP',
                 onPressed: () =>
-                    AutopilotSwitches.toggleGlideSlope(autopilotStore),
+                    AutopilotSwitchesService.toggleGlideSlope(autopilotStore),
               ),
               const SizedBox(width: 10),
               AutopilotButton(
                 isOn: autopilotStatus.flightDirectorEnabled(),
                 text: 'F/D',
-                onPressed: () =>
-                    AutopilotSwitches.toggleFlightDirector(autopilotStore),
+                onPressed: () => AutopilotSwitchesService.toggleFlightDirector(
+                    autopilotStore),
               ),
             ],
           ),

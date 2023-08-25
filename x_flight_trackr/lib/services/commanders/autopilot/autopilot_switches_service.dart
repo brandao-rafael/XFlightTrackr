@@ -1,7 +1,7 @@
 import 'package:x_flight_trackr/services/commanders/autopilot/autopilot_commander.dart';
 import 'package:x_flight_trackr/store/autopilot_store.dart';
 
-class AutopilotSwitches {
+class AutopilotSwitchesService {
   static void toggleAutoThrottle(AutopilotStore autopilotStore) {
     if (autopilotStore.autoThrottle == 0) {
       autopilotStore.setAutoThrottle(1);
