@@ -12,7 +12,11 @@ class GearSwitcher extends StatelessWidget {
         GearDisplay(gearPosition: 0),
         const Text("Gear", style: TextStyle(fontSize: 10, color: Colors.grey)),
         const SizedBox(height: 10),
-        Switcher(onChanged: (value) => print(value)),
+        Switcher(
+          onChanged: (value) => print(value),
+          height: 130,
+          width: 40,
+        ),
       ],
     );
   }

@@ -11,23 +11,32 @@ class SystemCommander extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const ParkingBrakeSwitcher(),
-        AutoBrakeRotarySwitcher(
-          onChanged: (value) {
-            print(value - 1);
-          },
-        ),
-        SpeedBrakeSlider(
-          onChanged: (value) {
-            print("Speed Brake Value: $value");
-          },
-        ),
-        ThrottleSlider(onChanged: (value) => print("Throttle Value: $value")),
-        FlapSlider(onChanged: (value) => print("Flap Value: $value")),
-        const GearSwitcher(),
-      ],
+    return Container(
+      height: 250,
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.2),
+      ),
+      padding: const EdgeInsets.only(top: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const ParkingBrakeSwitcher(),
+          AutoBrakeRotarySwitcher(
+            onChanged: (value) {
+              print(value - 1);
+            },
+          ),
+          SpeedBrakeSlider(
+            onChanged: (value) {
+              print("Speed Brake Value: $value");
+            },
+          ),
+          ThrottleSlider(onChanged: (value) => print("Throttle Value: $value")),
+          FlapSlider(onChanged: (value) => print("Flap Value: $value")),
+          const GearSwitcher(),
+        ],
+      ),
     );
   }
 }

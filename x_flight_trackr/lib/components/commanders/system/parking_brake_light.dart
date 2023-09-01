@@ -9,11 +9,6 @@ class ParkingBrakeLight extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // const Text(
-        //   'Parking\n  Brake',
-        //   style: TextStyle(color: Colors.grey, fontSize: 10),
-        // ),
-        const SizedBox(height: 10),
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           child: Container(

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class GearDisplay extends StatelessWidget {
   final double gearPosition;
+  final String? text;
 
   const GearDisplay({
     Key? key,
     required this.gearPosition,
+    this.text,
   }) : super(key: key);
 
   String get _gearColor {
@@ -23,7 +25,7 @@ class GearDisplay extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text('Gear'),
+        if (text != null) Text(text!),
         _buildCircleIndicator(),
         Row(children: [
           _buildCircleIndicator(),

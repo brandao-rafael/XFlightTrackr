@@ -41,7 +41,7 @@ class _SpeedBrakeSliderState extends State<SpeedBrakeSlider> {
               )),
           const SizedBox(height: 10),
           CustomPaint(
-            size: const Size(50, 150),
+            size: const Size(50, 100),
             painter: SpeedBrakePainter(_currentValue),
           ),
         ],

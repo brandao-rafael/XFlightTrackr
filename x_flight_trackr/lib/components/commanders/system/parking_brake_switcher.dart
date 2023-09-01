@@ -7,21 +7,28 @@ class ParkingBrakeSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const ParkingBrakeLight(isOn: true),
-        const SizedBox(height: 10),
-        const Text("Parking Brake",
-            style: TextStyle(fontSize: 8, color: Colors.grey)),
-        const SizedBox(height: 10),
-        Switcher(
-          onChanged: (value) => print(value),
-          up: "OFF",
-          down: "ON",
-          height: 100,
-          width: 40,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: SizedBox(
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const ParkingBrakeLight(isOn: true),
+            const SizedBox(height: 10),
+            const Text("Parking\n  Brake",
+                style: TextStyle(fontSize: 8, color: Colors.grey)),
+            const SizedBox(height: 10),
+            Switcher(
+              onChanged: (value) => print(value),
+              up: "OFF",
+              down: "ON",
+              height: 120,
+              width: 40,
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

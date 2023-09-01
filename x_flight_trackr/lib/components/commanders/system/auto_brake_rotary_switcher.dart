@@ -43,7 +43,7 @@ class _AutoBrakeRotarySwitcherState extends State<AutoBrakeRotarySwitcher> {
               )),
           const SizedBox(height: 10),
           CustomPaint(
-            size: const Size(100, 100),
+            size: const Size(80, 80),
             painter: RotaryPainter(_currentAngle),
           ),
         ],
