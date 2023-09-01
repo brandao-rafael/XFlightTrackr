@@ -20,6 +20,16 @@ class GearDisplay extends StatelessWidget {
     }
   }
 
+  Color get _shadowColor {
+    if (gearPosition == 1) {
+      return Colors.green;
+    } else if (gearPosition == 0) {
+      return Colors.red;
+    } else {
+      return Colors.amber.shade800;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,6 +47,15 @@ class GearDisplay extends StatelessWidget {
 
   Container _buildCircleIndicator() {
     return Container(
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          blurStyle: BlurStyle.normal,
+          color: _shadowColor.withOpacity(0.5),
+          spreadRadius: 2,
+          blurRadius: 4,
+          offset: const Offset(0, 0),
+        )
+      ]),
       height: 22,
       margin: const EdgeInsets.all(2),
       width: 20,
