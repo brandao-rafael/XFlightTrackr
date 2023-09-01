@@ -14,7 +14,7 @@ class SwitcherPainter extends CustomPainter {
       ..strokeWidth = 10.0;
 
     final Paint thumbPaint = Paint()
-      ..color = const Color.fromARGB(255, 83, 83, 72)
+      ..color = const Color.fromARGB(255, 128, 128, 119)
       ..strokeWidth = 20.0;
 
     final Paint switcherRolePaint = Paint()

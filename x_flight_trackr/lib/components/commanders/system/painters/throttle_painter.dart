@@ -16,7 +16,7 @@ class ThrottlePainter extends CustomPainter {
       ..strokeWidth = 10.0;
 
     final Paint thumbPaint = Paint()
-      ..color = Colors.blue
+      ..color = const Color.fromARGB(255, 128, 128, 119)
       ..strokeWidth = 20.0;
 
     final double thumbY = size.height * (0.5 - value / 2);
@@ -35,7 +35,11 @@ class ThrottlePainter extends CustomPainter {
       width: thumbWidth,
       height: thumbHeight,
     );
-    canvas.drawRect(thumbRect, thumbPaint);
+    final RRect roundedThumbRect = RRect.fromRectAndRadius(
+      thumbRect,
+      const Radius.circular(2.0),
+    );
+    canvas.drawRRect(roundedThumbRect, thumbPaint);
 
     // Draw markers and labels
     final Map<double, String> markerValues = {

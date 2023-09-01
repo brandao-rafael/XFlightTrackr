@@ -24,8 +24,8 @@ class SystemCommander extends StatelessWidget {
             print("Speed Brake Value: $value");
           },
         ),
-        FlapSlider(onChanged: (value) => print("Flap Value: $value")),
         ThrottleSlider(onChanged: (value) => print("Throttle Value: $value")),
+        FlapSlider(onChanged: (value) => print("Flap Value: $value")),
         const GearSwitcher(),
       ],
     );

@@ -16,7 +16,7 @@ class SpeedBrakePainter extends CustomPainter {
       ..strokeWidth = 10.0;
 
     final Paint thumbPaint = Paint()
-      ..color = Colors.blue
+      ..color = const Color.fromARGB(255, 128, 128, 119)
       ..strokeWidth = 20.0;
 
     final double thumbY = (1.0 - value) * size.height;
