@@ -8,6 +8,8 @@ class WheelBrakesDisplay extends StatelessWidget {
     required this.wheelBrakes,
   }) : super(key: key);
 
+  Color get _color => _isBrakesOn ? Colors.green : Colors.red;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,6 +23,14 @@ class WheelBrakesDisplay extends StatelessWidget {
   Container _buildBrakesIndicator() {
     return Container(
       alignment: AlignmentDirectional.center,
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: _color,
+          spreadRadius: 1,
+          blurRadius: 6,
+          offset: const Offset(0, 1),
+        ),
+      ]),
       height: 50,
       margin: const EdgeInsets.all(2),
       width: 50,
