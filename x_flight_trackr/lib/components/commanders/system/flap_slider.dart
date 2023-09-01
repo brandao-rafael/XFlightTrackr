@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:x_flight_trackr/components/commanders/system/painters/flap_painter.dart';
+import 'package:x_flight_trackr/store/systems_commander_store.dart';
 
 class FlapSlider extends StatefulWidget {
   final ValueChanged<double> onChanged;
@@ -14,7 +16,14 @@ class _FlapSliderState extends State<FlapSlider> {
   double _currentValue = 0.0;
 
   @override
+  void initState() {
+    super.initState();
+    _currentValue = context.read<SystemsCommanderStore>().flapsPosition;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final systemStore = context.watch<SystemsCommanderStore>();
     return SizedBox(
       height: 175,
       child: Column(
@@ -37,6 +46,7 @@ class _FlapSliderState extends State<FlapSlider> {
                 }
                 _currentValue = newValue;
                 widget.onChanged(_currentValue);
+                systemStore.setFlapsPosition(_currentValue);
               });
             },
             child: CustomPaint(

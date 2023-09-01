@@ -9,6 +9,7 @@ import 'package:x_flight_trackr/store/efis_commander_store.dart';
 import 'package:x_flight_trackr/store/flight_plan_store.dart';
 import 'package:x_flight_trackr/store/form_store.dart';
 import 'package:x_flight_trackr/store/systems_commander_store.dart';
+import 'package:x_flight_trackr/store/udp_flight_data_store.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -89,6 +90,7 @@ class _MyAppState extends State<MyApp> {
         Provider(create: (_) => AutopilotStore()),
         Provider(create: (_) => EFISCommanderStore()),
         Provider(create: (_) => SystemsCommanderStore()),
+        Provider(create: (_) => UdpFlightDataStore()..initializeUdpListener())
       ],
       child: MaterialApp(
         theme: _buildThemeData(),
