@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class GearPainter extends CustomPainter {
+class SwitcherPainter extends CustomPainter {
   final int value;
+  final String? up;
+  final String? down;
 
-  GearPainter(this.value);
+  SwitcherPainter(this.value, {this.up = 'UP', this.down = 'DOWN'});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -56,7 +58,7 @@ class GearPainter extends CustomPainter {
         Rect.fromCenter(
           center: Offset(size.width / 2, size.height / (value == 1 ? 1.5 : 3)),
           width: size.width * 0.2,
-          height: size.height * 0.5,
+          height: size.height * 0.4,
         ),
         const Radius.circular(4.0),
       ),
@@ -65,8 +67,8 @@ class GearPainter extends CustomPainter {
 
     // Draw labels like markers
     final textPainterOff = TextPainter(
-      text: const TextSpan(
-          text: 'UP', style: TextStyle(color: Colors.black, fontSize: 10)),
+      text: TextSpan(
+          text: up, style: const TextStyle(color: Colors.black, fontSize: 10)),
       textDirection: TextDirection.ltr,
     );
     textPainterOff.layout();
@@ -74,8 +76,9 @@ class GearPainter extends CustomPainter {
         Offset((size.width - textPainterOff.width) / 2, size.height * -0.05));
 
     final textPainterOn = TextPainter(
-      text: const TextSpan(
-          text: 'DOWN', style: TextStyle(color: Colors.black, fontSize: 10)),
+      text: TextSpan(
+          text: down,
+          style: const TextStyle(color: Colors.black, fontSize: 10)),
       textDirection: TextDirection.ltr,
     );
     textPainterOn.layout();

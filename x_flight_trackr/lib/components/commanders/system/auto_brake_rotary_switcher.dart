@@ -3,16 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:x_flight_trackr/components/commanders/system/painters/rotary_painter.dart';
 
-class RotarySwitcher extends StatefulWidget {
+class AutoBrakeRotarySwitcher extends StatefulWidget {
   final ValueChanged<int> onChanged;
 
-  const RotarySwitcher({super.key, required this.onChanged});
+  const AutoBrakeRotarySwitcher({super.key, required this.onChanged});
 
   @override
-  _RotarySwitcherState createState() => _RotarySwitcherState();
+  _AutoBrakeRotarySwitcherState createState() =>
+      _AutoBrakeRotarySwitcherState();
 }
 
-class _RotarySwitcherState extends State<RotarySwitcher> {
+class _AutoBrakeRotarySwitcherState extends State<AutoBrakeRotarySwitcher> {
   double _currentAngle = 0;
 
   @override
@@ -33,9 +34,19 @@ class _RotarySwitcherState extends State<RotarySwitcher> {
         });
         widget.onChanged(position);
       },
-      child: CustomPaint(
-        size: const Size(100, 100),
-        painter: RotaryPainter(_currentAngle),
+      child: Column(
+        children: [
+          const Text('Auto Brake',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey,
+              )),
+          const SizedBox(height: 10),
+          CustomPaint(
+            size: const Size(100, 100),
+            painter: RotaryPainter(_currentAngle),
+          ),
+        ],
       ),
     );
   }
