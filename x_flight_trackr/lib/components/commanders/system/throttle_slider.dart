@@ -38,8 +38,9 @@ class _ThrottleSliderState extends State<ThrottleSlider> {
                 fontSize: 10,
                 color: Colors.grey,
               )),
+          const SizedBox(height: 10),
           CustomPaint(
-            size: Size(50, 200),
+            size: const Size(50, 150),
             painter: ThrottlePainter(_currentValue),
           ),
         ],
