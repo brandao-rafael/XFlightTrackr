@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:x_flight_trackr/components/commanders/system/speed_brake_painter.dart';
+import 'package:x_flight_trackr/components/commanders/system/painters/speed_brake_painter.dart';
 
 class SpeedBrakeSlider extends StatefulWidget {
   final ValueChanged<double> onChanged;

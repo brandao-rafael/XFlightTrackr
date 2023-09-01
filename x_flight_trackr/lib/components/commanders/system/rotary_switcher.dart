@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:x_flight_trackr/components/commanders/system/rotary_painter.dart';
+import 'package:x_flight_trackr/components/commanders/system/painters/rotary_painter.dart';
 
 class RotarySwitcher extends StatefulWidget {
   final ValueChanged<int> onChanged;

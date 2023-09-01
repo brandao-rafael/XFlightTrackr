@@ -3,6 +3,7 @@ import 'package:x_flight_trackr/components/commanders/system/flap_slider.dart';
 import 'package:x_flight_trackr/components/commanders/system/parking_brake_button.dart';
 import 'package:x_flight_trackr/components/commanders/system/rotary_switcher.dart';
 import 'package:x_flight_trackr/components/commanders/system/speed_brake_slider.dart';
+import 'package:x_flight_trackr/components/commanders/system/throttle_slider.dart';
 
 class SystemCommander extends StatelessWidget {
   const SystemCommander({super.key});
@@ -23,6 +24,7 @@ class SystemCommander extends StatelessWidget {
           },
         ),
         FlapSlider(onChanged: (value) => print("Flap Value: $value")),
+        ThrottleSlider(onChanged: (value) => print("Throttle Value: $value")),
       ],
     );
   }

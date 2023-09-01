@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:x_flight_trackr/components/commanders/system/flap_painter.dart';
+import 'package:x_flight_trackr/components/commanders/system/painters/flap_painter.dart';
 
 class FlapSlider extends StatefulWidget {
   final ValueChanged<double> onChanged;
