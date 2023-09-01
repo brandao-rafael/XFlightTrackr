@@ -15,35 +15,38 @@ class _FlapSliderState extends State<FlapSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text('Flaps',
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.grey,
-            )),
-        const SizedBox(height: 10),
-        GestureDetector(
-          onVerticalDragUpdate: (details) {
-            setState(() {
-              double newValue =
-                  1.0 - (details.localPosition.dy / context.size!.height);
-              if (newValue < 0) {
-                newValue = 0.0;
-              } else if (newValue > 1.0) {
-                newValue = 1.0;
-              }
-              _currentValue = newValue;
-              widget.onChanged(_currentValue);
-            });
-          },
-          child: CustomPaint(
-            size: const Size(
-                50, 150), // Width of 50 and height of 200, adjust as needed
-            painter: FlapPainter(_currentValue),
+    return SizedBox(
+      height: 175,
+      child: Column(
+        children: [
+          Text('Flaps',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey[100],
+              )),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onVerticalDragUpdate: (details) {
+              setState(() {
+                double newValue =
+                    1.0 - (details.localPosition.dy / context.size!.height);
+                if (newValue < 0) {
+                  newValue = 0.0;
+                } else if (newValue > 1.0) {
+                  newValue = 1.0;
+                }
+                _currentValue = newValue;
+                widget.onChanged(_currentValue);
+              });
+            },
+            child: CustomPaint(
+              size: const Size(
+                  50, 150), // Width of 50 and height of 200, adjust as needed
+              painter: FlapPainter(_currentValue),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

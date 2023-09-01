@@ -31,19 +31,22 @@ class _ThrottleSliderState extends State<ThrottleSlider> {
           widget.onChanged(_currentValue);
         });
       },
-      child: Column(
-        children: [
-          const Text('Throttle',
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.grey,
-              )),
-          const SizedBox(height: 10),
-          CustomPaint(
-            size: const Size(50, 150),
-            painter: ThrottlePainter(_currentValue),
-          ),
-        ],
+      child: SizedBox(
+        height: 175,
+        child: Column(
+          children: [
+            Text('Throttle',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey[100],
+                )),
+            const SizedBox(height: 10),
+            CustomPaint(
+              size: const Size(50, 150),
+              painter: ThrottlePainter(_currentValue),
+            ),
+          ],
+        ),
       ),
     );
   }

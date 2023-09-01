@@ -68,7 +68,7 @@ class SwitcherPainter extends CustomPainter {
     // Draw labels like markers
     final textPainterOff = TextPainter(
       text: TextSpan(
-          text: up, style: const TextStyle(color: Colors.black, fontSize: 10)),
+          text: up, style: TextStyle(color: Colors.grey[300], fontSize: 9)),
       textDirection: TextDirection.ltr,
     );
     textPainterOff.layout();
@@ -77,8 +77,7 @@ class SwitcherPainter extends CustomPainter {
 
     final textPainterOn = TextPainter(
       text: TextSpan(
-          text: down,
-          style: const TextStyle(color: Colors.black, fontSize: 10)),
+          text: down, style: TextStyle(color: Colors.grey[300], fontSize: 9)),
       textDirection: TextDirection.ltr,
     );
     textPainterOn.layout();

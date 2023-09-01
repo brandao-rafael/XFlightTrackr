@@ -14,12 +14,12 @@ class SystemCommander extends StatelessWidget {
     return Container(
       height: 250,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.black.withOpacity(0.65),
       ),
       padding: const EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const ParkingBrakeSwitcher(),
           AutoBrakeRotarySwitcher(

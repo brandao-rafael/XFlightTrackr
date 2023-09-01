@@ -10,7 +10,7 @@ class GearSwitcher extends StatelessWidget {
     return Column(
       children: [
         GearDisplay(gearPosition: 0),
-        const Text("Gear", style: TextStyle(fontSize: 10, color: Colors.grey)),
+        Text("Gear", style: TextStyle(fontSize: 10, color: Colors.grey[100])),
         const SizedBox(height: 10),
         Switcher(
           onChanged: (value) => print(value),

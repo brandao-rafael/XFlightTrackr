@@ -34,19 +34,22 @@ class _AutoBrakeRotarySwitcherState extends State<AutoBrakeRotarySwitcher> {
         });
         widget.onChanged(position);
       },
-      child: Column(
-        children: [
-          const Text('Auto Brake',
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.grey,
-              )),
-          const SizedBox(height: 10),
-          CustomPaint(
-            size: const Size(80, 80),
-            painter: RotaryPainter(_currentAngle),
-          ),
-        ],
+      child: SizedBox(
+        height: 104,
+        child: Column(
+          children: [
+            Text('Auto Brake',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey[100],
+                )),
+            const SizedBox(height: 10),
+            CustomPaint(
+              size: const Size(80, 80),
+              painter: RotaryPainter(_currentAngle),
+            ),
+          ],
+        ),
       ),
     );
   }

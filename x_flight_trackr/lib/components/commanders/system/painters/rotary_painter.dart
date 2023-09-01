@@ -18,7 +18,7 @@ class RotaryPainter extends CustomPainter {
     final double borderOuterRadius = mainRadius * 0.75;
     final double markerLength = mainRadius * 0.125;
     final double textOffset = mainRadius * 1.29;
-    final double textSize = size.width * 0.07;
+    final double textSize = size.width * 0.08;
 
     // Draw the gray circle
     canvas.drawCircle(center, mainRadius, Paint()..color = Colors.grey[600]!);
@@ -36,14 +36,20 @@ class RotaryPainter extends CustomPainter {
       final end = Offset(
           center.dx + (mainRadius + markerLength) * cos(markerAngle),
           center.dy + (mainRadius + markerLength) * sin(markerAngle));
-      canvas.drawLine(start, end, Paint()..strokeWidth = 3.0);
+      canvas.drawLine(
+        start,
+        end,
+        Paint()
+          ..color = Colors.grey[400]!
+          ..strokeWidth = 3.0,
+      );
 
       final indexPosition = Offset(center.dx + textOffset * cos(markerAngle),
           center.dy + textOffset * sin(markerAngle));
       final textPainter = TextPainter(
         text: TextSpan(
             text: positions[i],
-            style: TextStyle(color: Colors.black, fontSize: textSize)),
+            style: TextStyle(color: Colors.grey[400], fontSize: textSize)),
         textDirection: TextDirection.ltr,
       );
       textPainter.layout();

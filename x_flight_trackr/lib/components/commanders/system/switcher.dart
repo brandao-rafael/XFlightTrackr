@@ -39,9 +39,9 @@ class _SwitcherState extends State<Switcher> {
         children: [
           if (widget.name != null)
             Text(widget.name!,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey,
+                  color: Colors.grey[100],
                 )),
           const SizedBox(height: 10),
           CustomPaint(

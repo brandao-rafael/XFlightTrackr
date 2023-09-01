@@ -16,8 +16,8 @@ class ParkingBrakeSwitcher extends StatelessWidget {
           children: [
             const ParkingBrakeLight(isOn: true),
             const SizedBox(height: 10),
-            const Text("Parking\n  Brake",
-                style: TextStyle(fontSize: 8, color: Colors.grey)),
+            Text("Parking\n  Brake",
+                style: TextStyle(fontSize: 10, color: Colors.grey[100])),
             const SizedBox(height: 10),
             Switcher(
               onChanged: (value) => print(value),

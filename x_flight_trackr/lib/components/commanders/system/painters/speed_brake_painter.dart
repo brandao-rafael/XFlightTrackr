@@ -57,7 +57,7 @@ class SpeedBrakePainter extends CustomPainter {
       final textPainter = TextPainter(
         text: TextSpan(
             text: markerValues[markerValue],
-            style: const TextStyle(color: Colors.black, fontSize: 8)),
+            style: TextStyle(color: Colors.grey[400], fontSize: 8)),
         textDirection: TextDirection.ltr,
       );
       textPainter.layout();

@@ -31,20 +31,23 @@ class _SpeedBrakeSliderState extends State<SpeedBrakeSlider> {
           widget.onChanged(_currentValue);
         });
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text('Speed Brake',
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.grey,
-              )),
-          const SizedBox(height: 10),
-          CustomPaint(
-            size: const Size(50, 100),
-            painter: SpeedBrakePainter(_currentValue),
-          ),
-        ],
+      child: SizedBox(
+        height: 175,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Speed Brake',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey[100],
+                )),
+            const SizedBox(height: 10),
+            CustomPaint(
+              size: const Size(50, 100),
+              painter: SpeedBrakePainter(_currentValue),
+            ),
+          ],
+        ),
       ),
     );
   }
