@@ -8,6 +8,7 @@ class Switcher extends StatefulWidget {
   final String? down;
   final double? height;
   final double? width;
+  final int? value;
 
   const Switcher({
     Key? key,
@@ -17,6 +18,7 @@ class Switcher extends StatefulWidget {
     this.down = 'DOWN',
     this.height = 150,
     this.width = 50,
+    this.value = 0,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,13 @@ class Switcher extends StatefulWidget {
 }
 
 class _SwitcherState extends State<Switcher> {
-  int _currentValue = 0; // Off position
+  int _currentValue = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentValue = widget.value!;
+  }
 
   @override
   Widget build(BuildContext context) {

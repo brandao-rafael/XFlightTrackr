@@ -5,9 +5,20 @@ import 'package:x_flight_trackr/components/commanders/system/parking_brake_switc
 import 'package:x_flight_trackr/components/commanders/system/auto_brake_rotary_switcher.dart';
 import 'package:x_flight_trackr/components/commanders/system/speed_brake_slider.dart';
 import 'package:x_flight_trackr/components/commanders/system/throttle_slider.dart';
+import 'package:x_flight_trackr/services/commanders/system_service.dart';
+import 'package:x_flight_trackr/store/flight_plan_store.dart';
+import 'package:x_flight_trackr/store/systems_commander_store.dart';
 
 class SystemCommander extends StatelessWidget {
-  const SystemCommander({super.key});
+  final FlightPlanStore flightPlanStore;
+  final SystemsCommanderStore systemsCommanderStore;
+  final SystemService systemService;
+
+  SystemCommander({
+    super.key,
+    required this.flightPlanStore,
+    required this.systemsCommanderStore,
+  }) : systemService = SystemService(commander: systemsCommanderStore.command);
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +32,26 @@ class SystemCommander extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ParkingBrakeSwitcher(),
+          ParkingBrakeSwitcher(
+            onChanged: (value) =>
+                systemService.setParkingBrakes(value as double),
+            value: systemsCommanderStore.parkingBrakePosition.toInt(),
+          ),
           AutoBrakeRotarySwitcher(
-            onChanged: (value) {
-              print(value - 1);
-            },
+            onChanged: (value) => systemService.setAutoBrakes(value as double),
           ),
           SpeedBrakeSlider(
-            onChanged: (value) {
-              print("Speed Brake Value: $value");
-            },
+            onChanged: (value) => systemService.setSpeedBrakes(value),
           ),
-          ThrottleSlider(onChanged: (value) => print("Throttle Value: $value")),
-          FlapSlider(onChanged: (value) => print("Flap Value: $value")),
-          const GearSwitcher(),
+          ThrottleSlider(
+              onChanged: (value) =>
+                  systemService.setReverseThrustOrThrottle(value)),
+          FlapSlider(onChanged: (value) => systemService.setFlaps(value)),
+          GearSwitcher(
+            onChange: (value) => systemService.setGearUpDown(
+              value == 1 ? GearPosition.UP : GearPosition.DOWN,
+            ),
+          ),
         ],
       ),
     );

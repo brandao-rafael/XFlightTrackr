@@ -8,10 +8,10 @@ class SystemsCommanderStore = _SystemsCommanderStore
     with _$SystemsCommanderStore;
 
 abstract class _SystemsCommanderStore extends BaseCommanderStore with Store {
-  late SystemCommander systemCommander;
+  late SystemService systemCommander;
 
   _SystemsCommanderStore() : super() {
-    systemCommander = SystemCommander(commander: command);
+    systemCommander = SystemService(commander: command);
   }
 
   @observable

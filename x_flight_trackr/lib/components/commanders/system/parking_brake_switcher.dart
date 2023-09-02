@@ -3,7 +3,10 @@ import 'package:x_flight_trackr/components/commanders/system/parking_brake_light
 import 'package:x_flight_trackr/components/commanders/system/switcher.dart';
 
 class ParkingBrakeSwitcher extends StatelessWidget {
-  const ParkingBrakeSwitcher({super.key});
+  final void Function(int) onChanged;
+  final int? value;
+  const ParkingBrakeSwitcher(
+      {super.key, required this.onChanged, this.value = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +23,12 @@ class ParkingBrakeSwitcher extends StatelessWidget {
                 style: TextStyle(fontSize: 10, color: Colors.grey[100])),
             const SizedBox(height: 10),
             Switcher(
-              onChanged: (value) => print(value),
+              onChanged: onChanged,
               up: "OFF",
               down: "ON",
               height: 120,
               width: 40,
+              value: value,
             ),
           ],
         ),

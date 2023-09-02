@@ -2,10 +2,10 @@ import 'package:x_flight_trackr/services/commanders/x_plane_commander.dart';
 
 enum GearPosition { UP, DOWN }
 
-class SystemCommander {
+class SystemService {
   final XPlaneCommander commander;
 
-  SystemCommander({required this.commander});
+  SystemService({required this.commander});
 
   Future<void> setGearUpDown(GearPosition position) async {
     return await commander.sendDref(

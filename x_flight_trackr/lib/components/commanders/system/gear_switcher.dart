@@ -3,7 +3,8 @@ import 'package:x_flight_trackr/components/commanders/system/switcher.dart';
 import 'package:x_flight_trackr/components/gear_display.dart';
 
 class GearSwitcher extends StatelessWidget {
-  const GearSwitcher({super.key});
+  final Function(int) onChange;
+  const GearSwitcher({super.key, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class GearSwitcher extends StatelessWidget {
         Text("Gear", style: TextStyle(fontSize: 10, color: Colors.grey[100])),
         const SizedBox(height: 10),
         Switcher(
-          onChanged: (value) => print(value),
+          onChanged: onChange,
           height: 130,
           width: 40,
         ),
