@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 
@@ -76,22 +77,12 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: Stack(
-        children: [
-          _buildGoogleMap(widget.flightPlanStore),
-          _buildOverlays(widget.flightPlanStore),
-          _buildFlightDataOrEmptyState(),
-        ],
-      ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: const Text('XFlight Trackr'),
-      centerTitle: true,
+    return Stack(
+      children: [
+        _buildGoogleMap(widget.flightPlanStore),
+        _buildOverlays(widget.flightPlanStore),
+        _buildFlightDataOrEmptyState(),
+      ],
     );
   }
 
@@ -184,7 +175,14 @@ class _TrackrMapPageState extends State<TrackrMapPage> {
       height: 150,
       width: MediaQuery.of(context).size.width,
       child: Text(
-          "Data is currently unavailable. If you are in flight, please verify the Windows Defender rules for X-Plane and confirm that the correct ip and port is being used. Your mobile ip is $_ip. Within X-Plane, the data output should be set to UDP and the port should be configured to 51000."),
+        "Data is currently unavailable. If you are in flight, please verify the Windows Defender rules for X-Plane and confirm that the correct ip and port is being used. Your mobile ip is $_ip. Within X-Plane, the data output should be set to UDP and the port should be configured to 51000.",
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontFamily:
+                GoogleFonts.montserrat(fontWeight: FontWeight.w300).fontFamily,
+            decoration: TextDecoration.none),
+      ),
     );
   }
 }

@@ -21,7 +21,7 @@ class AirPlaneSystem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GearDisplay(gearPosition: data[585]),
+          GearDisplay(gearPosition: data[585], text: 'Gear'),
           WheelBrakesDisplay(wheelBrakes: data[118]),
           _buildBarDisplay('Flaps', data[111], data[112]),
           _buildBarDisplay('Speedbrakes', data[114], data[115]),

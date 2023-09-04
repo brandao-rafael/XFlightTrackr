@@ -33,7 +33,6 @@ class FlightPlanDatabase {
     return http
         .get(Uri.parse('https://api.flightplandatabase.com/plan/$id'))
         .then((response) {
-      print(response.body);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
